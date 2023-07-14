@@ -29,8 +29,8 @@ export const fontSizeCss = {
     line-height: 34px;
   `,
   xxl: css`
-    font-size: 48px;
-    line-height: 50px;
+    font-size: 52px;
+    line-height: 54px;
   `,
 };
 

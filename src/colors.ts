@@ -13,7 +13,11 @@ export type colorType =
   | "gray1"
   | "gray2"
   | "textBlack"
-  | "offWhite";
+  | "offWhite"
+  | "blue1"
+  | "blue2"
+  | "blue3"
+  | "blue4";
 
 export const colors = {
   purple1: "#ebe1fc",

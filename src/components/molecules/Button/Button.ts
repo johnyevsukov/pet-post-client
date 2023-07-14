@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { fontSizeCss } from "../../atoms/Text/Text";
 import { fontWeights } from "../../atoms/Text/Text";
 import { colors } from "../../../colors";
+import { Link } from "react-router-dom";
 
 const baseButtonCss = css`
   border-radius: 24px;
@@ -69,7 +70,8 @@ const buttonVariantCss = {
       color: ${colors.gray1};
     }
   `,
-  text: css`
+  textWhite: css`
+    padding: 0;
     background: none;
     color: ${colors.offWhite};
 
@@ -84,14 +86,42 @@ const buttonVariantCss = {
       color: ${colors.gray1};
     }
   `,
+  textBlue: css`
+    padding: 0;
+    background: none;
+    color: ${colors.blue3};
+
+    &:hover,
+    &:focus {
+      color: ${colors.blue2};
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background: ${colors.offWhite};
+      color: ${colors.gray1};
+    }
+  `,
 };
 
 export const Button = styled.button<{
   $size?: "sm" | "md" | "lg";
-  $variant?: "black" | "purple" | "blue" | "text";
+  $variant?: "black" | "purple" | "blue" | "textWhite" | "textBlue";
 }>`
   ${baseButtonCss}
-  ${({ $size }) => ($size ? buttonSizeCss[$size] : buttonSizeCss.lg)}
+  ${({ $size }) => ($size ? buttonSizeCss[$size] : buttonSizeCss.lg)};
   ${({ $variant }) =>
-    $variant ? buttonVariantCss[$variant] : buttonVariantCss.black}
+    $variant ? buttonVariantCss[$variant] : buttonVariantCss.black};
+`;
+
+export const LinkButton = styled(Link)<{
+  $size?: "sm" | "md" | "lg";
+  $variant?: "black" | "purple" | "blue" | "textWhite" | "textBlue";
+}>`
+  ${baseButtonCss}
+  ${({ $size }) => ($size ? buttonSizeCss[$size] : buttonSizeCss.lg)};
+  ${({ $variant }) =>
+    $variant ? buttonVariantCss[$variant] : buttonVariantCss.black};
+  text-align: center;
+  text-decoration: none;
 `;
