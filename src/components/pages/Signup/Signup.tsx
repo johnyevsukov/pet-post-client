@@ -1,15 +1,69 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import * as styles from "./styles";
 import { Text } from "../../atoms/Text/Text";
 import { Icon } from "../../atoms/Icon/Icon";
-import { Button, LinkButton } from "../../molecules/Button/Button";
+import { Button } from "../../molecules/Button/Button";
 import { VStack } from "../../atoms/VStack/VStack";
 import { TypeAnimation } from "react-type-animation";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import axios from "axios";
+import { Loader } from "../../atoms/Loader/Loader";
+import { useFormik } from "formik";
 
 interface SignupProps {}
 
 export const Signup: React.FC<SignupProps> = () => {
+  const [error, setError] = useState();
+
+  const onSubmit = () => {
+    console.log({
+      username: values.username,
+      password: values.password,
+      user_email: values.user_email,
+    });
+    axios
+      .post("https://pet-post.herokuapp.com/api/auth/register", {
+        username: values.username,
+        password: values.password,
+        user_email: values.user_email,
+      })
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user_id", res.data.user_id);
+        // navigate(`/profile/${res.data.user_id}`);
+        setSubmitting(false);
+        console.log("res: ", res);
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+        setSubmitting(false);
+        console.log("err: ", err);
+      });
+  };
+
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    isSubmitting,
+    setSubmitting,
+    isValid,
+  } = useFormik({
+    initialValues: {
+      user_email: "",
+      username: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit,
+  });
+
+  const navigate = useNavigate();
+
   return (
     <styles.Wrapper>
       <styles.ContentColumn>
@@ -34,21 +88,39 @@ export const Signup: React.FC<SignupProps> = () => {
         </styles.LeftTextWrapper>
       </styles.ContentColumn>
       <styles.ContentColumnWhite>
-        <styles.Card>
-          <VStack $spacing={16}>
-            <Text $color="offWhite" $weight="bold" $size="xl">
+        <styles.Card $error={!!error}>
+          <VStack $spacing={20}>
+            <Text $color="offWhite" $weight="bold" $size="lg">
               A little info...
             </Text>
-            <styles.Form>
-              <VStack $spacing={12}>
+
+            <styles.Form onSubmit={handleSubmit}>
+              <VStack $spacing={28}>
                 <styles.LabelInputWrapper>
                   <styles.Input
                     type="text"
-                    name="email"
-                    id="email"
+                    name="user_email"
+                    id="user_email"
+                    onChange={handleChange}
+                    value={values.user_email}
+                    onBlur={handleBlur}
+                    /* Needed for animation */
                     placeholder=" "
+                    $error={!!(errors.user_email && touched.user_email)}
                   />
-                  <styles.Label htmlFor="email">Email</styles.Label>
+                  <styles.Label htmlFor="user_email">Email</styles.Label>
+                  {errors.user_email && touched.user_email && (
+                    <styles.IconWrapper>
+                      <Icon name="warning" width={20} />
+                    </styles.IconWrapper>
+                  )}
+                  {errors.user_email && touched.user_email && (
+                    <styles.InputErrorWrapper>
+                      <Text $size="xs" $color="red4">
+                        {errors.user_email}
+                      </Text>
+                    </styles.InputErrorWrapper>
+                  )}
                 </styles.LabelInputWrapper>
 
                 <styles.LabelInputWrapper>
@@ -56,9 +128,26 @@ export const Signup: React.FC<SignupProps> = () => {
                     type="text"
                     name="username"
                     id="username"
+                    onChange={handleChange}
+                    value={values.username}
+                    onBlur={handleBlur}
+                    /* Needed for animation */
                     placeholder=" "
+                    $error={!!(errors.username && touched.username)}
                   />
                   <styles.Label htmlFor="username">Username</styles.Label>
+                  {errors.username && touched.username && (
+                    <styles.IconWrapper>
+                      <Icon name="warning" width={20} />
+                    </styles.IconWrapper>
+                  )}
+                  {errors.username && touched.username && (
+                    <styles.InputErrorWrapper>
+                      <Text $size="xs" $color="red4">
+                        {errors.username}
+                      </Text>
+                    </styles.InputErrorWrapper>
+                  )}
                 </styles.LabelInputWrapper>
 
                 <styles.LabelInputWrapper>
@@ -66,16 +155,51 @@ export const Signup: React.FC<SignupProps> = () => {
                     type="password"
                     name="password"
                     id="password"
+                    onChange={handleChange}
+                    value={values.password}
+                    onBlur={handleBlur}
+                    /* Needed for animation */
                     placeholder=" "
+                    $error={!!(errors.password && touched.password)}
                   />
                   <styles.Label htmlFor="password">Password</styles.Label>
+                  {errors.password && touched.password && (
+                    <styles.IconWrapper>
+                      <Icon name="warning" width={20} />
+                    </styles.IconWrapper>
+                  )}
+                  {errors.password && touched.password && (
+                    <styles.InputErrorWrapper>
+                      <Text $size="xs" $color="red4">
+                        {errors.password}
+                      </Text>
+                    </styles.InputErrorWrapper>
+                  )}
                 </styles.LabelInputWrapper>
               </VStack>
               <styles.SubmitButtonWrapper>
-                <Button $variant="white">Signup</Button>
+                {isSubmitting ? (
+                  <Loader />
+                ) : (
+                  <Button $variant="white" type="submit" disabled={!isValid}>
+                    Sign up
+                  </Button>
+                )}
               </styles.SubmitButtonWrapper>
             </styles.Form>
           </VStack>
+          {error && (
+            <styles.ErrorMessageHStack
+              $spacing={6}
+              $justifyContent="center"
+              style={{ bottom: 0, left: 0 }}
+            >
+              <Text $color="red3" $weight="bold" $size="sm">
+                {error}
+              </Text>
+              <Icon name="warning" width={24} />
+            </styles.ErrorMessageHStack>
+          )}
         </styles.Card>
       </styles.ContentColumnWhite>
     </styles.Wrapper>
@@ -90,9 +214,9 @@ const validationSchema = yup.object().shape({
   username: yup
     .string()
     .required("Username is required.")
-    .min(3, "Must be at least 3 characters long."),
+    .min(3, "3 character minimum."),
   password: yup
     .string()
     .required("Password is required.")
-    .min(3, "Must be at least 3 characters long."),
+    .min(3, "3 character minimum."),
 });

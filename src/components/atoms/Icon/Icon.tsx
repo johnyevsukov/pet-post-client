@@ -13,6 +13,8 @@ import { SnakeIcon } from "../icons/SnakeIcon";
 import { TurtleIcon } from "../icons/TurtleIcon";
 
 import * as styles from "./styles";
+import { RedFlagIcon } from "../icons/RedFlagIcon";
+import { WarningIcon } from "../icons/WarningIcon";
 
 type IconType =
   | "hamster"
@@ -26,7 +28,9 @@ type IconType =
   | "pig"
   | "rabbit"
   | "snake"
-  | "turtle";
+  | "turtle"
+  | "redFlag"
+  | "warning";
 
 const IconMap = {
   hamster: <HamsterIcon />,
@@ -41,6 +45,8 @@ const IconMap = {
   rabbit: <RabbitIcon />,
   snake: <SnakeIcon />,
   turtle: <TurtleIcon />,
+  redFlag: <RedFlagIcon />,
+  warning: <WarningIcon />,
 };
 
 interface IconProps {

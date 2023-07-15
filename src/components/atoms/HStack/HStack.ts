@@ -4,9 +4,12 @@ export const HStack = styled.div<{
   $spacing: number;
   $width?: string;
   $marginTop?: number;
+  $justifyContent?: string;
 }>`
   display: flex;
   align-items: center;
+  justify-content: ${({ $justifyContent }) =>
+    $justifyContent ? $justifyContent : "flex-start"};
   width: ${({ $width }) => ($width ? $width : "100%")};
   margin-top: ${({ $marginTop }) => ($marginTop ? `${$marginTop}px` : null)};
 

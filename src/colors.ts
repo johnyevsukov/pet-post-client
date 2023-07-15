@@ -9,6 +9,7 @@ export type colorType =
   | "red1"
   | "red2"
   | "red3"
+  | "red4"
   | "yellow1"
   | "gray1"
   | "gray2"
@@ -28,9 +29,10 @@ export const colors = {
   green2: "#7aff9e",
   green3: "#00f325",
   green4: "#00bd1d",
-  red1: "#ffaaa6",
-  red2: "#ff7a7a",
-  red3: "#fc4e4e",
+  red1: "#fae7e6",
+  red2: "#ffaaa6",
+  red3: "#ff7a7a",
+  red4: "#fc4e4e",
   yellow1: "#f8ff7a",
   gray1: "#a3a3a3",
   gray2: "#585858",

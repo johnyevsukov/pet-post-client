@@ -47,6 +47,7 @@ export const LeftTextWrapper = styled.div`
   @media (min-width: 768px) {
     min-height: none;
     text-align: left;
+    max-width: none;
     /* Prevent typing animation from moving content */
     min-width: 421px;
   }
@@ -59,11 +60,3 @@ export const TitleIconWrapper = styled(HStack)`
     justify-content: flex-start;
   }
 `;
-
-// export const Card = styled.div`
-//   background: rgba(255, 255, 255, 0.7);
-//   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-//   border-radius: 15px;
-//   padding: 48px 72px;
-//   margin-top: 24px;
-// `;
