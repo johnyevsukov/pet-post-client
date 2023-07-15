@@ -8,7 +8,7 @@ const baseButtonCss = css`
   border-radius: 24px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 `;
 
 const buttonSizeCss = {
@@ -70,6 +70,21 @@ const buttonVariantCss = {
       color: ${colors.gray1};
     }
   `,
+  white: css`
+    background: ${colors.offWhite};
+    color: ${colors.blue3};
+
+    &:hover,
+    &:focus {
+      color: ${colors.blue2};
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background: ${colors.offWhite};
+      color: ${colors.gray1};
+    }
+  `,
   textWhite: css`
     padding: 0;
     background: none;
@@ -106,7 +121,7 @@ const buttonVariantCss = {
 
 export const Button = styled.button<{
   $size?: "sm" | "md" | "lg";
-  $variant?: "black" | "purple" | "blue" | "textWhite" | "textBlue";
+  $variant?: "black" | "purple" | "blue" | "white" | "textWhite" | "textBlue";
 }>`
   ${baseButtonCss}
   ${({ $size }) => ($size ? buttonSizeCss[$size] : buttonSizeCss.lg)};
