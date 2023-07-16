@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: 100svh;
+  min-height: 100svh;
   background: ${colors.blue2};
 
   @media (min-width: 768px) {
@@ -92,7 +92,6 @@ export const Input = styled.input<{ $error: boolean }>`
   font-weight: ${fontWeights.bold};
   ${fontSizeCss.md};
   outline: none;
-  transition: all 0.1s ease-in-out;
   background: ${({ $error }) => ($error ? colors.red1 : "#fff")};
 
   &:hover,

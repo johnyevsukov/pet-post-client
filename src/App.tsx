@@ -4,6 +4,7 @@ import { Home } from "./components/pages/Home/Home";
 import { Login } from "./components/pages/Login/Login";
 import { Signup } from "./components/pages/Signup/Signup";
 import { NotFound } from "./components/pages/NotFound/NotFound";
+import { ProtectedRoute } from "./components/organisms/ProtectedRoute/ProtectedRoute";
 
 function App() {
   return (
@@ -11,6 +12,14 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/profile/:id"
+        element={
+          <ProtectedRoute>
+            <div>profile</div>
+          </ProtectedRoute>
+        }
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

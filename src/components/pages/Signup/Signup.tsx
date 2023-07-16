@@ -16,6 +16,8 @@ interface SignupProps {}
 export const Signup: React.FC<SignupProps> = () => {
   const [error, setError] = useState();
 
+  const navigate = useNavigate();
+
   const onSubmit = () => {
     console.log({
       username: values.username,
@@ -29,16 +31,14 @@ export const Signup: React.FC<SignupProps> = () => {
         user_email: values.user_email,
       })
       .then((res) => {
+        setSubmitting(false);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user_id", res.data.user_id);
-        // navigate(`/profile/${res.data.user_id}`);
-        setSubmitting(false);
-        console.log("res: ", res);
+        navigate(`/profile/${res.data.user_id}`);
       })
       .catch((err) => {
-        setError(err.response.data.message);
         setSubmitting(false);
-        console.log("err: ", err);
+        setError(err.response.data.message);
       });
   };
 
@@ -61,8 +61,6 @@ export const Signup: React.FC<SignupProps> = () => {
     validationSchema: validationSchema,
     onSubmit,
   });
-
-  const navigate = useNavigate();
 
   return (
     <styles.Wrapper>
