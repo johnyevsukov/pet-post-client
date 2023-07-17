@@ -16,7 +16,7 @@ import * as styles from "./styles";
 import { RedFlagIcon } from "../icons/RedFlagIcon";
 import { WarningIcon } from "../icons/WarningIcon";
 
-type IconType =
+export type IconType =
   | "hamster"
   | "cat"
   | "chicken"

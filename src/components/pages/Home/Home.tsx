@@ -1,38 +1,23 @@
-import React, { useEffect } from "react";
-import * as styles from "./styles";
-import { Text } from "../../atoms/Text/Text";
-import { Icon } from "../../atoms/Icon/Icon";
+import React from "react";
+
+import { PageWrapper } from "../../atoms/PageWrapper/PageWrapper";
+import { PageContentColumn } from "../../atoms/PageContentColumn/PageContentColumn";
+import { TitleTypedSubtext } from "../../organisms/TitleTypedSubtext/TitleTypedSubtext";
 import { LinkButton } from "../../molecules/Button/Button";
 import { VStack } from "../../atoms/VStack/VStack";
-import { TypeAnimation } from "react-type-animation";
 
-interface HomeProps {}
-
-export const Home: React.FC<HomeProps> = ({}) => {
+export const Home: React.FC = () => {
   return (
-    <styles.Wrapper>
-      <styles.ContentColumn>
-        <styles.LeftTextWrapper>
-          <styles.TitleIconWrapper $spacing={12}>
-            <Text $color="offWhite" $weight="bold" $size="xxl" as="h1">
-              PetPost
-            </Text>
-            <Icon name="hamster" width={62} />
-          </styles.TitleIconWrapper>
-          <TypeAnimation
-            sequence={["Log in or sign up to connect with your pals!", 1000]}
-            wrapper="p"
-            speed={40}
-            style={{
-              fontWeight: 500,
-              fontSize: "22px",
-              lineHeight: "24px",
-              color: "#F5F5F5",
-            }}
-          />
-        </styles.LeftTextWrapper>
-      </styles.ContentColumn>
-      <styles.ContentColumnWhite>
+    <PageWrapper>
+      <PageContentColumn $mobileAlignItems="flex-end">
+        <TitleTypedSubtext
+          title="PetPost"
+          iconName="hamster"
+          typedSubtext="Log in or sign up to connect with your pals!"
+          minMobileHeight={110}
+        />
+      </PageContentColumn>
+      <PageContentColumn $mobileAlignItems="flex-start" $background="offWhite">
         <VStack $spacing={20} $width="auto">
           <LinkButton $variant="blue" to="signup">
             Sign up
@@ -41,7 +26,7 @@ export const Home: React.FC<HomeProps> = ({}) => {
             Log in
           </LinkButton>
         </VStack>
-      </styles.ContentColumnWhite>
-    </styles.Wrapper>
+      </PageContentColumn>
+    </PageWrapper>
   );
 };
