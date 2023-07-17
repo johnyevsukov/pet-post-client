@@ -32,6 +32,7 @@ export const Input = styled.input<{ $error: boolean }>`
   ${fontSizeCss.md};
   outline: none;
   background: ${({ $error }) => ($error ? colors.red1 : "#fff")};
+  transition: outline 0.1s ease-in-out;
 
   &:hover,
   &:focus {
