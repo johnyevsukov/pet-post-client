@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Home } from "./components/pages/Home/Home";
 import { Login } from "./components/pages/Login/Login";
 import { Signup } from "./components/pages/Signup/Signup";
+import { Profile } from "./components/pages/Profile/Profile";
 import { NotFound } from "./components/pages/NotFound/NotFound";
 import { ProtectedRoute } from "./components/organisms/ProtectedRoute/ProtectedRoute";
 
@@ -16,7 +17,7 @@ function App() {
         path="/profile/:id"
         element={
           <ProtectedRoute>
-            <div>profile</div>
+            <Profile />
           </ProtectedRoute>
         }
       />

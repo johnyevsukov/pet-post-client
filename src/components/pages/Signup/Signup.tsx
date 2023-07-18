@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "axios";
 
@@ -55,6 +56,10 @@ export const Signup: React.FC = () => {
     validationSchema: signupSchema,
     onSubmit,
   });
+
+  if (localStorage.getItem("token")) {
+    return <Navigate replace to="/feed" />;
+  }
 
   return (
     <PageWrapper>
