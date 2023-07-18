@@ -14,10 +14,14 @@ import { TurtleIcon } from "../icons/TurtleIcon";
 import { ProfileIcon } from "../icons/ProfileIcon";
 import { NewsPaperIcon } from "../icons/NewspaperIcon";
 import { DoorIcon } from "../icons/DoorIcon";
+import { TagIcon } from "../icons/TagIcon";
 
 import * as styles from "./styles";
 import { RedFlagIcon } from "../icons/RedFlagIcon";
 import { WarningIcon } from "../icons/WarningIcon";
+import { BalloonIcon } from "../icons/BalloonIcon";
+import { MailIcon } from "../icons/MailIcon";
+import { LocationIcon } from "../icons/LocationIcon";
 
 export type IconType =
   | "hamster"
@@ -36,7 +40,11 @@ export type IconType =
   | "warning"
   | "door"
   | "profile"
-  | "newspaper";
+  | "newspaper"
+  | "tag"
+  | "balloon"
+  | "mail"
+  | "location";
 
 const IconMap = {
   hamster: <HamsterIcon />,
@@ -56,6 +64,10 @@ const IconMap = {
   profile: <ProfileIcon />,
   newspaper: <NewsPaperIcon />,
   door: <DoorIcon />,
+  tag: <TagIcon />,
+  balloon: <BalloonIcon />,
+  mail: <MailIcon />,
+  location: <LocationIcon />,
 };
 
 interface IconProps {

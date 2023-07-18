@@ -5,6 +5,7 @@ import { Login } from "./components/pages/Login/Login";
 import { Signup } from "./components/pages/Signup/Signup";
 import { Profile } from "./components/pages/Profile/Profile";
 import { NotFound } from "./components/pages/NotFound/NotFound";
+import { LoggedInLayout } from "./components/templates/LoggedInLayout/LoggedInLayout";
 import { ProtectedRoute } from "./components/organisms/ProtectedRoute/ProtectedRoute";
 
 function App() {
@@ -13,14 +14,16 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route
-        path="/profile/:id"
-        element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        }
-      />
+      <Route element={<LoggedInLayout />}>
+        <Route
+          path="/profile/:id"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

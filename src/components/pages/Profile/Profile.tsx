@@ -1,59 +1,37 @@
 import React from "react";
-
 import * as styles from "./styles";
-import { HStack } from "../../atoms/HStack/HStack";
-import { Text } from "../../atoms/Text/Text";
 import { Icon } from "../../atoms/Icon/Icon";
-import { Button } from "../../molecules/Button/Button";
+import { Text } from "../../atoms/Text/Text";
+import { HStack } from "../../atoms/HStack/HStack";
+import { VStack } from "../../atoms/VStack/VStack";
 
 export const Profile: React.FC = () => {
   return (
-    <styles.Wrapper>
-      <styles.SideNav>
-        <styles.IconLogoWrapper $spacing={12}>
-          <Icon name="hamster" width={32} />
-          <Text $weight="bold" $color="offWhite" $size="xl">
-            PetPost
-          </Text>
-        </styles.IconLogoWrapper>
-        <styles.NavList $spacing={6}>
-          <styles.NavListItem>
-            <styles.NavLink to="">
-              <HStack $spacing={8}>
-                <Icon name="newspaper" width={32} />
-                <Text $weight="bold" $size="lg">
-                  Feed
-                </Text>
-              </HStack>
-            </styles.NavLink>
-          </styles.NavListItem>
-          <styles.NavListItem>
-            <styles.NavLink to="">
-              <HStack $spacing={8}>
-                <Icon name="profile" width={32} />
-                <Text $weight="bold" $size="lg">
-                  Profile
-                </Text>
-              </HStack>
-            </styles.NavLink>
-          </styles.NavListItem>
-          <styles.NavListItem>
-            <styles.NavLink to="">
-              <HStack $spacing={8}>
-                <Icon name="door" width={32} />
-                <Text $weight="bold" $size="lg">
-                  Logout
-                </Text>
-              </HStack>
-            </styles.NavLink>
-          </styles.NavListItem>
-          <styles.NavListItem>
-            <styles.ButtonWrapper>
-              <Button $variant="blue">Post</Button>
-            </styles.ButtonWrapper>
-          </styles.NavListItem>
-        </styles.NavList>
-      </styles.SideNav>
-    </styles.Wrapper>
+    <styles.Content>
+      <styles.UserInfoCard>
+        <styles.ProfileAvatar>
+          <Icon name="hamster" width={100} />
+        </styles.ProfileAvatar>
+        <styles.UserInfoTopBlock />
+        <styles.UserInfo>
+          <VStack $spacing={2}>
+            <HStack $spacing={6}>
+              <Text $weight="bold" $size="lg">
+                Chonk
+              </Text>
+              <Icon name="tag" width={48} />
+            </HStack>
+            <Text $weight="medium" $size="sm" $color="gray2">
+              Hi i'm Chonk! I'm a 1y/o Syrian hamster.
+            </Text>
+            <HStack $spacing={6}>
+              <Icon name="location" width={32} />
+              <Icon name="balloon" width={32} />
+              <Icon name="mail" width={32} />
+            </HStack>
+          </VStack>
+        </styles.UserInfo>
+      </styles.UserInfoCard>
+    </styles.Content>
   );
 };

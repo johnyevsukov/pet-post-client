@@ -1,60 +1,43 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
 import { colors } from "../../../colors";
-import { VStack } from "../../atoms/VStack/VStack";
-import { HStack } from "../../atoms/HStack/HStack";
 
-export const Wrapper = styled.div`
-  display: flex;
+export const Content = styled.div`
+  justify-self: center;
+  padding: 16px;
+  max-width: 682px;
+  margin: 0 auto;
   width: 100%;
-  min-height: 100svh;
-  background: ${colors.offWhite};
+  border: 1px solid red;
+
+  @media (min-width: 768px) {
+    border: none;
+  }
 `;
 
-export const SideNav = styled.nav`
-  border-right: 1px solid ${colors.gray1};
-  width: 250px;
-  min-width: 250px;
-  overflow: hidden;
-`;
-
-export const NavList = styled(VStack).attrs({
-  as: "ul",
-  $width: "auto",
-})`
-  list-style: none;
-  padding: 0 16px;
-  margin: 32px 0;
-`;
-
-export const NavListItem = styled.li`
-  list-style: none;
-`;
-
-export const NavLink = styled(Link)`
-  text-decoration: none;
-  display: block;
-  /* padding: 6px 48px; */
-  padding: 6px 16px;
+export const UserInfoCard = styled.div`
+  position: relative;
   border-radius: 15px;
-  transition: all 0.1s ease-in-out;
-
-  &:hover {
-    background: ${colors.blue1};
-  }
-`;
-
-export const IconLogoWrapper = styled(HStack)`
-  background: ${colors.blue3};
+  overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-
-  padding: 6px 0 6px 16px;
 `;
 
-export const ButtonWrapper = styled.div`
-  width: 100%;
-  margin-top: 26px;
-  button {
-    width: 100%;
-  }
+export const UserInfoTopBlock = styled.div`
+  height: 150px;
+  background: ${colors.blue3};
+`;
+
+export const ProfileAvatar = styled.div`
+  position: absolute;
+  top: 90px;
+  left: 16px;
+  border: 4px solid white;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 50%;
+  padding: 6px;
+  background: ${colors.blue3};
+`;
+
+export const UserInfo = styled.div`
+  margin-top: 76px;
+  padding: 0 16px 16px;
 `;

@@ -122,11 +122,13 @@ const buttonVariantCss = {
 export const Button = styled.button<{
   $size?: "sm" | "md" | "lg";
   $variant?: "black" | "purple" | "blue" | "white" | "textWhite" | "textBlue";
+  $width?: string;
 }>`
   ${baseButtonCss}
   ${({ $size }) => ($size ? buttonSizeCss[$size] : buttonSizeCss.lg)};
   ${({ $variant }) =>
     $variant ? buttonVariantCss[$variant] : buttonVariantCss.black};
+  width: ${({ $width }) => ($width ? $width : "auto")};
 `;
 
 export const LinkButton = styled(Link)<{
