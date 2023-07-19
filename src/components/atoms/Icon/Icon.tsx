@@ -23,7 +23,13 @@ import { LocationIcon } from "../icons/LocationIcon";
 import { GearIcon } from "../icons/GearIcon";
 import { NavGearIcon } from "../icons/NavGearIcon";
 import { CloseIcon } from "../icons/CloseIcon";
-
+import { LizardIcon } from "../icons/LizardIcon";
+import { RodentIcon } from "../icons/RodentIcon";
+import { SpiderIcon } from "../icons/SpiderIcon";
+import { DuckIcon } from "../icons/DuckIcon";
+import { HedgehogIcon } from "../icons/HedgehogIcon";
+import { HorseIcon } from "../icons/HorseIcon";
+import { BirdIcon } from "../icons/BirdIcon";
 import * as styles from "./styles";
 
 export type IconType =
@@ -50,7 +56,16 @@ export type IconType =
   | "location"
   | "gear"
   | "navGear"
-  | "close";
+  | "close"
+  | "lizard"
+  | "bird"
+  | "rodent"
+  | "spider"
+  | "duck"
+  | "hedgehog"
+  | "horse";
+
+// need: lizard, bird, rodent, spider, duck, hedgehog, horse
 
 const IconMap = {
   hamster: <HamsterIcon />,
@@ -77,6 +92,13 @@ const IconMap = {
   gear: <GearIcon />,
   navGear: <NavGearIcon />,
   close: <CloseIcon />,
+  lizard: <LizardIcon />,
+  bird: <BirdIcon />,
+  rodent: <RodentIcon />,
+  spider: <SpiderIcon />,
+  duck: <DuckIcon />,
+  hedgehog: <HedgehogIcon />,
+  horse: <HorseIcon />,
 };
 
 interface IconProps {

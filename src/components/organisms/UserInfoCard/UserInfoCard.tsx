@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { axiosWithAuth } from "../../../utils/axiosAuth";
 import { useParams } from "react-router-dom";
 import { Icon } from "../../atoms/Icon/Icon";
@@ -9,8 +9,8 @@ import { UserDataType } from "../../../types/userDataType";
 import { UserFollowType } from "../../../types/userFollowType";
 import { Loader } from "../../atoms/Loader/Loader";
 import { useNavigate } from "react-router-dom";
-import * as styles from "./styles";
 import { FollowModal } from "../../molecules/FollowModal/FollowModal";
+import * as styles from "./styles";
 
 export const UserInfoCard: React.FC = () => {
   const { id: profileId } = useParams();
@@ -19,8 +19,9 @@ export const UserInfoCard: React.FC = () => {
   const [userFollowers, setUserFollowers] = useState<UserFollowType>();
   const [userFollowing, setUserFollowing] = useState<UserFollowType>();
   const [isLoading, setIsLoading] = useState(false);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openModal, setOpenModal] = useState<
+    "followers" | "following" | "none"
+  >("none");
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,6 +46,39 @@ export const UserInfoCard: React.FC = () => {
     navigate("settings");
   };
 
+  const parsedBirthday = useMemo(() => {
+    if (userData?.user_birthday) {
+      const birthday = new Date(userData?.user_birthday);
+      return birthday.toLocaleDateString();
+    } else {
+      return;
+    }
+  }, [userData?.user_birthday]);
+
+  const renderModal = () => {
+    if (openModal === "followers" && userFollowers) {
+      return (
+        <FollowModal
+          title="Followers"
+          handleClose={() => setOpenModal("none")}
+          users={userFollowers}
+        />
+      );
+    }
+    if (openModal === "following" && userFollowing) {
+      return (
+        <FollowModal
+          title="Following"
+          handleClose={() => setOpenModal("none")}
+          users={userFollowing}
+        />
+      );
+    } else {
+      return;
+    }
+  };
+
+  // handle error case here as well (&& !error)
   if (!userData || !userFollowers || !userFollowing || isLoading) {
     return (
       <styles.UserInfoCard>
@@ -58,13 +92,7 @@ export const UserInfoCard: React.FC = () => {
 
   return (
     <styles.UserInfoCard>
-      {isModalOpen && (
-        <FollowModal
-          title="Following"
-          handleClose={() => setIsModalOpen(false)}
-          users={userFollowing}
-        />
-      )}
+      {renderModal()}
       <styles.ProfileAvatar>
         <Icon name="hamster" width={100} />
       </styles.ProfileAvatar>
@@ -96,9 +124,7 @@ export const UserInfoCard: React.FC = () => {
               <HStack $spacing={4} $width="auto">
                 <Icon name="balloon" width={28} />
                 <Text $weight="medium" $size="sm" $color="gray2">
-                  {userData.user_birthday
-                    ? userData.user_birthday
-                    : "No birthday..."}
+                  {parsedBirthday ? parsedBirthday : "No birthday..."}
                 </Text>
               </HStack>
               <HStack $spacing={4} $width="auto">
@@ -109,11 +135,11 @@ export const UserInfoCard: React.FC = () => {
               </HStack>
             </HStack>
             <HStack $spacing={8}>
-              <styles.FollowButton onClick={() => setIsModalOpen(true)}>
+              <styles.FollowButton onClick={() => setOpenModal("following")}>
                 <styles.FollowCount>{userFollowing.length}</styles.FollowCount>{" "}
                 <styles.FollowDesc>Following</styles.FollowDesc>
               </styles.FollowButton>
-              <styles.FollowButton>
+              <styles.FollowButton onClick={() => setOpenModal("followers")}>
                 <styles.FollowCount>{userFollowers.length}</styles.FollowCount>{" "}
                 <styles.FollowDesc>Followers</styles.FollowDesc>
               </styles.FollowButton>
