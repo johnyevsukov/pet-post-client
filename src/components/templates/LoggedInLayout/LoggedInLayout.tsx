@@ -48,6 +48,16 @@ export const LoggedInLayout: React.FC = () => {
             </styles.NavLink>
           </styles.NavListItem>
           <styles.NavListItem>
+            <styles.NavLink to="">
+              <HStack $spacing={8}>
+                <Icon name="navGear" width={32} />
+                <Text $weight="bold" $size="lg">
+                  Settings
+                </Text>
+              </HStack>
+            </styles.NavLink>
+          </styles.NavListItem>
+          <styles.NavListItem>
             <styles.NavButton onClick={handleLogout}>
               <HStack $spacing={8}>
                 <Icon name="door" width={32} />

@@ -12,6 +12,7 @@ export const HStack = styled.div<{
     $justifyContent ? $justifyContent : "flex-start"};
   width: ${({ $width }) => ($width ? $width : "100%")};
   margin-top: ${({ $marginTop }) => ($marginTop ? `${$marginTop}px` : null)};
+  flex-wrap: wrap;
 
   > * {
     margin-right: ${({ $spacing }) => `${$spacing}px`};

@@ -15,13 +15,16 @@ import { ProfileIcon } from "../icons/ProfileIcon";
 import { NewsPaperIcon } from "../icons/NewspaperIcon";
 import { DoorIcon } from "../icons/DoorIcon";
 import { TagIcon } from "../icons/TagIcon";
-
-import * as styles from "./styles";
 import { RedFlagIcon } from "../icons/RedFlagIcon";
 import { WarningIcon } from "../icons/WarningIcon";
 import { BalloonIcon } from "../icons/BalloonIcon";
 import { MailIcon } from "../icons/MailIcon";
 import { LocationIcon } from "../icons/LocationIcon";
+import { GearIcon } from "../icons/GearIcon";
+import { NavGearIcon } from "../icons/NavGearIcon";
+import { CloseIcon } from "../icons/CloseIcon";
+
+import * as styles from "./styles";
 
 export type IconType =
   | "hamster"
@@ -44,7 +47,10 @@ export type IconType =
   | "tag"
   | "balloon"
   | "mail"
-  | "location";
+  | "location"
+  | "gear"
+  | "navGear"
+  | "close";
 
 const IconMap = {
   hamster: <HamsterIcon />,
@@ -68,6 +74,9 @@ const IconMap = {
   balloon: <BalloonIcon />,
   mail: <MailIcon />,
   location: <LocationIcon />,
+  gear: <GearIcon />,
+  navGear: <NavGearIcon />,
+  close: <CloseIcon />,
 };
 
 interface IconProps {

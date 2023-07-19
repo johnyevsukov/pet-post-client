@@ -7,8 +7,9 @@ import { HStack } from "../../atoms/HStack/HStack";
 export const Wrapper = styled.div`
   display: flex;
   width: 100%;
-  min-height: 100svh;
+  height: 100svh;
   background: ${colors.offWhite};
+  overflow: hidden;
 `;
 
 export const SideNav = styled.nav`
