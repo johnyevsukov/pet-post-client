@@ -94,7 +94,10 @@ export const UserInfoCard: React.FC = () => {
     <styles.UserInfoCard>
       {renderModal()}
       <styles.ProfileAvatar>
-        <Icon name="hamster" width={100} />
+        <Icon
+          name={userData.user_avatar ? userData.user_avatar : "profile"}
+          width={100}
+        />
       </styles.ProfileAvatar>
       <styles.SettingsButton onClick={handleSettingsClick}>
         <Icon name="gear" width={32} />

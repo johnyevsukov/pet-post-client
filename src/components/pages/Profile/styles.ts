@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../../colors";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -17,4 +18,25 @@ export const Content = styled.div`
   @media (min-width: 768px) {
     border: none;
   }
+`;
+
+export const PostCard = styled.div`
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  padding: 16px;
+`;
+
+export const PostCardTopWrapper = styled.div``;
+
+export const IconWrapper = styled.div`
+  border: 3px solid white;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  border-radius: 50%;
+  padding: 8px;
+  background: ${colors.blue3};
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
