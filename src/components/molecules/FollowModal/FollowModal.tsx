@@ -6,6 +6,7 @@ import { Text } from "../../atoms/Text/Text";
 import * as styles from "./styles";
 import { VStack } from "../../atoms/VStack/VStack";
 import { useNavigate } from "react-router-dom";
+import { Avatar } from "../Avatar/Avatar";
 
 interface FollowModalProps {
   title: "Followers" | "Following";
@@ -36,11 +37,12 @@ export const FollowModal: React.FC<FollowModalProps> = ({
                   <Text $weight="bold">{user.username}</Text>
                   <Icon name="tag" width={24} />
                 </HStack>
-                <styles.IconWrapper>
-                  <Icon
+                <styles.AvatarWrapper>
+                  <Avatar
                     name={user.user_avatar ? user.user_avatar : "profile"}
+                    size="md"
                   />
-                </styles.IconWrapper>
+                </styles.AvatarWrapper>
               </VStack>
               {user.user_species && (
                 <styles.SpeciesTextWrapper>

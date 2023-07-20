@@ -15,6 +15,7 @@ export type colorType =
   | "gray2"
   | "textBlack"
   | "offWhite"
+  | "pureWhite"
   | "blue1"
   | "blue2"
   | "blue3"
@@ -38,7 +39,7 @@ export const colors = {
   gray2: "#585858",
   textBlack: "#333333",
   offWhite: "#F5F5F5",
-  /* ---------- */
+  pureWhite: "#ffffff",
   blue1: "#c2e6ff",
   blue2: "#7ac5fa",
   blue3: "#36acff",

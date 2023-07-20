@@ -15,15 +15,10 @@ export const UserInfoTopBlock = styled.div`
   background: ${colors.blue3};
 `;
 
-export const ProfileAvatar = styled.div`
+export const AvatarWrapper = styled.div`
   position: absolute;
   top: 90px;
   left: 16px;
-  border: 4px solid #fff;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  border-radius: 50%;
-  padding: 6px;
-  background: ${colors.blue3};
 `;
 
 export const UserInfo = styled.div`

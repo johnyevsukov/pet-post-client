@@ -11,6 +11,7 @@ import { Loader } from "../../atoms/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { FollowModal } from "../../molecules/FollowModal/FollowModal";
 import * as styles from "./styles";
+import { Avatar } from "../../molecules/Avatar/Avatar";
 
 export const UserInfoCard: React.FC = () => {
   const { id: profileId } = useParams();
@@ -93,12 +94,12 @@ export const UserInfoCard: React.FC = () => {
   return (
     <styles.UserInfoCard>
       {renderModal()}
-      <styles.ProfileAvatar>
-        <Icon
+      <styles.AvatarWrapper>
+        <Avatar
           name={userData.user_avatar ? userData.user_avatar : "profile"}
-          width={100}
+          size="lg"
         />
-      </styles.ProfileAvatar>
+      </styles.AvatarWrapper>
       <styles.SettingsButton onClick={handleSettingsClick}>
         <Icon name="gear" width={32} />
       </styles.SettingsButton>

@@ -9,6 +9,7 @@ import { HStack } from "../../atoms/HStack/HStack";
 import { timeAgo } from "../../../utils/timeAgo";
 import { VStack } from "../../atoms/VStack/VStack";
 import { Icon } from "../../atoms/Icon/Icon";
+import { Avatar } from "../../molecules/Avatar/Avatar";
 
 export const Profile: React.FC = () => {
   const { id: profileId } = useParams();
@@ -36,9 +37,9 @@ export const Profile: React.FC = () => {
           posts.map((post) => {
             return (
               <styles.PostCard>
-                <styles.IconWrapper>
-                  <Icon name="hamster" width={24} />
-                </styles.IconWrapper>
+                <styles.AvatarWrapper>
+                  <Avatar name="hamster" size="sm" />
+                </styles.AvatarWrapper>
 
                 <VStack $spacing={6} $padding={"0 0 0 54px"}>
                   <HStack $spacing={6}>
@@ -52,10 +53,10 @@ export const Profile: React.FC = () => {
                   <Text>{post.post_text}</Text>
                   <HStack $spacing={6}>
                     <Text $weight="bold" $size="xs">
-                      Paw
+                      Paw: 0
                     </Text>
                     <Text $weight="bold" $size="xs">
-                      Comment
+                      Comment: 0
                     </Text>
                   </HStack>
                 </VStack>

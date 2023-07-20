@@ -53,14 +53,9 @@ export const UserTileButton = styled.button`
   }
 `;
 
-export const IconWrapper = styled.div`
-  border: 3px solid white;
+export const AvatarWrapper = styled.div`
   align-self: center;
   display: block;
-  border-radius: 50%;
-  padding: 8px;
-  background: ${colors.blue3};
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
 export const SpeciesTextWrapper = styled.div`
