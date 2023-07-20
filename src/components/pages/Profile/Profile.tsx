@@ -10,6 +10,7 @@ import { timeAgo } from "../../../utils/timeAgo";
 import { VStack } from "../../atoms/VStack/VStack";
 import { Icon } from "../../atoms/Icon/Icon";
 import { Avatar } from "../../molecules/Avatar/Avatar";
+import { PostCard } from "../../organisms/PostCard/PostCard";
 
 export const Profile: React.FC = () => {
   const { id: profileId } = useParams();
@@ -35,33 +36,7 @@ export const Profile: React.FC = () => {
         <UserInfoCard />
         {posts ? (
           posts.map((post) => {
-            return (
-              <styles.PostCard>
-                <styles.AvatarWrapper>
-                  <Avatar name="hamster" size="sm" />
-                </styles.AvatarWrapper>
-
-                <VStack $spacing={6} $padding={"0 0 0 54px"}>
-                  <HStack $spacing={6}>
-                    <Text $weight="bold" $size="sm">
-                      {post.username}
-                    </Text>
-                    <Text $weight="medium" $size="sm" $color="gray1">
-                      {timeAgo(post.created_at)}
-                    </Text>
-                  </HStack>
-                  <Text>{post.post_text}</Text>
-                  <HStack $spacing={6}>
-                    <Text $weight="bold" $size="xs">
-                      Paw: 0
-                    </Text>
-                    <Text $weight="bold" $size="xs">
-                      Comment: 0
-                    </Text>
-                  </HStack>
-                </VStack>
-              </styles.PostCard>
-            );
+            return <PostCard key={post.post_id} post={post} />;
           })
         ) : (
           <>load</>
