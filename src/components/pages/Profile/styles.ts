@@ -12,7 +12,6 @@ export const Content = styled.div`
   width: 100%;
   max-width: 682px;
   margin: 0 auto;
-  border: 1px solid red;
 
   @media (min-width: 768px) {
     border: none;

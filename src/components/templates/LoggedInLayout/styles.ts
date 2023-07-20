@@ -17,6 +17,11 @@ export const SideNav = styled.nav`
   width: 250px;
   min-width: 250px;
   overflow: hidden;
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
 `;
 
 export const NavList = styled(VStack).attrs({
