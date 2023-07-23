@@ -9,6 +9,19 @@ export const Wrapper = styled.div`
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   padding: 16px;
+  background: ${colors.pureWhite};
+`;
+
+export const LoaderCard = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  padding: 16px;
+  background: ${colors.pureWhite};
+  height: 100px;
+  min-height: 100px;
 `;
 
 export const TextLink = styled(Link)`
@@ -40,6 +53,7 @@ export const TextButton = styled.button<{ $isLiked: boolean }>`
   border: none;
   padding: 0;
   cursor: pointer;
+  min-width: 47px;
 
   &:hover,
   &:focus {

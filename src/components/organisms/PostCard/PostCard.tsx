@@ -12,6 +12,7 @@ import { axiosWithAuth } from "../../../utils/axiosAuth";
 import { LikeType } from "../../../types/likeType";
 import { CommentType } from "../../../types/commentType";
 import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
+import { Loader } from "../../atoms/Loader/Loader";
 
 interface PostCardProps {
   post: PostType;
@@ -75,7 +76,11 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
   // handle error case here as well (&& !error)
   if (isLoading || !likes || !comments) {
-    return <>load</>;
+    return (
+      <styles.LoaderCard>
+        <Loader />
+      </styles.LoaderCard>
+    );
   }
 
   return (
@@ -95,12 +100,12 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
           </HStack>
           <Text>{post.post_text}</Text>
         </VStack>
-        <HStack $spacing={6}>
+        <HStack $spacing={12}>
           <styles.TextButton $isLiked={isLiked} onClick={handleLike}>
-            Paw: {likes.length}
+            paws: {likes.length}
           </styles.TextButton>
           <styles.TextButton $isLiked={false}>
-            Comment: {comments.length}
+            comments: {comments.length}
           </styles.TextButton>
         </HStack>
       </VStack>

@@ -4,14 +4,6 @@ import { colors } from "../../../colors";
 import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
 
-export const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100svh;
-  background: ${colors.offWhite};
-  overflow: hidden;
-`;
-
 export const SideNav = styled.nav`
   border-right: 1px solid ${colors.gray1};
   width: 250px;

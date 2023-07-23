@@ -5,9 +5,10 @@ export const HStack = styled.div<{
   $width?: string;
   $marginTop?: number;
   $justifyContent?: string;
+  $alignItems?: string;
 }>`
   display: flex;
-  align-items: center;
+  align-items: ${({ $alignItems }) => ($alignItems ? $alignItems : "center")};
   justify-content: ${({ $justifyContent }) =>
     $justifyContent ? $justifyContent : "flex-start"};
   width: ${({ $width }) => ($width ? $width : "100%")};

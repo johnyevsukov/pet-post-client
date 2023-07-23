@@ -7,7 +7,7 @@ export const UserInfoCard = styled.div`
   border-radius: 15px;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  /* background: #fff; */
+  background: ${colors.pureWhite};
 `;
 
 export const UserInfoTopBlock = styled.div`

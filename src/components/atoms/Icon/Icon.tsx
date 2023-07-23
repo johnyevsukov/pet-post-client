@@ -65,8 +65,6 @@ export type IconType =
   | "hedgehog"
   | "horse";
 
-// need: lizard, bird, rodent, spider, duck, hedgehog, horse
-
 const IconMap = {
   hamster: <HamsterIcon />,
   cat: <CatIcon />,

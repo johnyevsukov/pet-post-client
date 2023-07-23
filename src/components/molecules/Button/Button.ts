@@ -15,12 +15,12 @@ const buttonSizeCss = {
   sm: css`
     ${fontSizeCss.sm}
     padding: 5px 10px;
-    font-weight: ${fontWeights.medium};
+    font-weight: ${fontWeights.bold};
   `,
   md: css`
     ${fontSizeCss.md}
     padding: 8px 13px;
-    font-weight: ${fontWeights.medium};
+    font-weight: ${fontWeights.bold};
   `,
   lg: css`
     ${fontSizeCss.lg}
@@ -123,12 +123,14 @@ export const Button = styled.button<{
   $size?: "sm" | "md" | "lg";
   $variant?: "black" | "purple" | "blue" | "white" | "textWhite" | "textBlue";
   $width?: string;
+  $padding?: string;
 }>`
   ${baseButtonCss}
   ${({ $size }) => ($size ? buttonSizeCss[$size] : buttonSizeCss.lg)};
   ${({ $variant }) =>
     $variant ? buttonVariantCss[$variant] : buttonVariantCss.black};
   width: ${({ $width }) => ($width ? $width : "auto")};
+  padding: ${({ $padding }) => ($padding ? $padding : null)};
 `;
 
 export const LinkButton = styled(Link)<{

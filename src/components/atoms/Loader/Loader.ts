@@ -9,13 +9,13 @@ const spin = keyframes`
     transform: rotate(360deg);
   }`;
 
-export const Loader = styled.div`
+export const Loader = styled.div<{ $width?: number }>`
   border: 10px solid ${colors.offWhite};
   border-top: 10px solid ${colors.blue3};
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  min-height: 48px;
+  width: ${({ $width }) => ($width ? `${$width}px` : "48px")};
+  height: ${({ $width }) => ($width ? `${$width}px` : "48px")};
+  min-width: ${({ $width }) => ($width ? `${$width}px` : "48px")};
+  min-height: ${({ $width }) => ($width ? `${$width}px` : "48px")};
   animation: ${spin} 1s linear infinite;
 `;

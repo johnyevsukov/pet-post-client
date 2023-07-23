@@ -14,11 +14,12 @@ import * as styles from "./styles";
 import { Avatar } from "../../molecules/Avatar/Avatar";
 
 export const UserInfoCard: React.FC = () => {
-  const { id: profileId } = useParams();
   const navigate = useNavigate();
+  const { id: profileId } = useParams();
   const [userData, setUserData] = useState<UserDataType>();
   const [userFollowers, setUserFollowers] = useState<UserFollowType>();
   const [userFollowing, setUserFollowing] = useState<UserFollowType>();
+  const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState<
     "followers" | "following" | "none"
@@ -39,7 +40,8 @@ export const UserInfoCard: React.FC = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err);
+        setError(err);
+        console.warn(err);
       });
   }, [profileId]);
 
@@ -79,8 +81,23 @@ export const UserInfoCard: React.FC = () => {
     }
   };
 
-  // handle error case here as well (&& !error)
-  if (!userData || !userFollowers || !userFollowing || isLoading) {
+  if (!isLoading && error) {
+    return (
+      <styles.UserInfoCard>
+        <styles.UserInfoTopBlock />
+        <styles.LoaderWrapper>
+          <HStack $spacing={8} $justifyContent="center">
+            <Text $color="red4" $weight="bold">
+              Error loading user
+            </Text>
+            <Icon name="warning" />
+          </HStack>
+        </styles.LoaderWrapper>
+      </styles.UserInfoCard>
+    );
+  }
+
+  if (!userData || !userFollowers || !userFollowing) {
     return (
       <styles.UserInfoCard>
         <styles.UserInfoTopBlock />

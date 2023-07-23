@@ -22,6 +22,10 @@ export const ModalCard = styled.div`
   padding: 16px 16px 16px;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  // work on this
+  width: 100%;
+  max-width: 532px;
+  margin: 0 8px;
 `;
 
 export const TopWrapper = styled.div`
