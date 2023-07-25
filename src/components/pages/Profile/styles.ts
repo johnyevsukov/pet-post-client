@@ -1,32 +1,25 @@
 import styled from "styled-components";
+import { onDesktop } from "../../../utils/onDesktop";
 import { colors } from "../../../colors";
 
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  overflow-y: scroll;
   width: 100%;
   padding: 16px;
-  overflow-y: scroll;
-  /* margin-top: calc(45px); */
-  margin-top: calc(45px);
+  margin-top: 45px;
 
-  @media (min-width: 768px) {
-    // nav height + spacing
-    /* margin-top: calc(45px + 16px); */
-
-    padding-top: calc(45px);
+  ${onDesktop`
+    padding-top: 45px;
     margin-top: 32px;
-  }
+  `}
 `;
 
 export const Content = styled.div`
   width: 100%;
   max-width: 682px;
   margin: 0 auto;
-
-  @media (min-width: 768px) {
-    border: none;
-  }
 `;
 
 export const AvatarWrapper = styled.div`
