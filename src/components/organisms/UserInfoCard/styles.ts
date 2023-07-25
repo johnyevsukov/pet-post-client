@@ -84,3 +84,45 @@ export const FollowDesc = styled.span`
   font-weight: ${fontWeights.medium};
   color: ${colors.gray2};
 `;
+
+export const FollowUserButton = styled.button`
+  position: absolute;
+  right: 16px;
+  top: 166px;
+  border: 3px solid ${colors.blue4};
+  border-radius: 24px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  ${fontSizeCss.md}
+  padding: 8px 13px;
+  font-weight: ${fontWeights.bold};
+  background: ${colors.pureWhite};
+  color: ${colors.blue4};
+
+  &:hover,
+  &:focus {
+    background: ${colors.blue1};
+  }
+`;
+
+export const UnfollowUserButton = styled.button`
+  position: absolute;
+  right: 16px;
+  top: 166px;
+  border: 3px solid ${colors.red3};
+  border-radius: 24px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  ${fontSizeCss.md}
+  padding: 8px 13px;
+  font-weight: ${fontWeights.bold};
+  background: ${colors.pureWhite};
+  color: ${colors.red3};
+
+  &:hover,
+  &:focus {
+    background: ${colors.red1};
+  }
+`;

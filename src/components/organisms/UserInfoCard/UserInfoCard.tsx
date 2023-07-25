@@ -6,19 +6,20 @@ import { Text } from "../../atoms/Text/Text";
 import { HStack } from "../../atoms/HStack/HStack";
 import { VStack } from "../../atoms/VStack/VStack";
 import { UserDataType } from "../../../types/userDataType";
-import { UserFollowType } from "../../../types/userFollowType";
 import { Loader } from "../../atoms/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { FollowModal } from "../../molecules/FollowModal/FollowModal";
 import * as styles from "./styles";
 import { Avatar } from "../../molecules/Avatar/Avatar";
+import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
 
 export const UserInfoCard: React.FC = () => {
   const navigate = useNavigate();
+  const [currentUserId] = useCurrentUserId();
   const { id: profileId } = useParams();
   const [userData, setUserData] = useState<UserDataType>();
-  const [userFollowers, setUserFollowers] = useState<UserFollowType>();
-  const [userFollowing, setUserFollowing] = useState<UserFollowType>();
+  const [userFollowers, setUserFollowers] = useState<UserDataType[]>([]);
+  const [userFollowing, setUserFollowing] = useState<UserDataType[]>([]);
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState<
@@ -35,8 +36,8 @@ export const UserInfoCard: React.FC = () => {
       .then(async ([res1, res2, res3]) => {
         setIsLoading(false);
         setUserData(res1.data);
-        setUserFollowers(res2.data);
-        setUserFollowing(res3.data);
+        setUserFollowing(res2.data);
+        setUserFollowers(res3.data);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -47,6 +48,29 @@ export const UserInfoCard: React.FC = () => {
 
   const handleSettingsClick = () => {
     navigate("settings");
+  };
+
+  const handleFollow = () => {
+    axiosWithAuth()
+      .post(`users/${currentUserId}/follow`, { following_id: profileId })
+      .then((res) => {
+        console.log("here: ", res.data);
+        setUserFollowers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleUnfollow = () => {
+    axiosWithAuth()
+      .delete(`users/${currentUserId}/unfollow/${profileId}`)
+      .then((res) => {
+        setUserFollowers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const parsedBirthday = useMemo(() => {
@@ -78,6 +102,33 @@ export const UserInfoCard: React.FC = () => {
       );
     } else {
       return;
+    }
+  };
+
+  const renderSideButton = () => {
+    // fix for strict
+    if (currentUserId == profileId) {
+      return (
+        <styles.SettingsButton onClick={handleSettingsClick}>
+          <Icon name="gear" width={32} />
+        </styles.SettingsButton>
+      );
+      //STREICT EQUALITY
+    } else if (
+      !userFollowers?.filter((follower) => follower.user_id == currentUserId)
+        .length
+    ) {
+      return (
+        <styles.FollowUserButton onClick={handleFollow}>
+          Follow
+        </styles.FollowUserButton>
+      );
+    } else {
+      return (
+        <styles.UnfollowUserButton onClick={handleUnfollow}>
+          Unfollow
+        </styles.UnfollowUserButton>
+      );
     }
   };
 
@@ -117,9 +168,7 @@ export const UserInfoCard: React.FC = () => {
           size="lg"
         />
       </styles.AvatarWrapper>
-      <styles.SettingsButton onClick={handleSettingsClick}>
-        <Icon name="gear" width={32} />
-      </styles.SettingsButton>
+      {renderSideButton()}
       <styles.UserInfoTopBlock />
       <styles.UserInfo>
         <VStack $spacing={12}>

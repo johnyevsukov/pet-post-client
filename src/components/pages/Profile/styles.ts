@@ -7,11 +7,15 @@ export const Wrapper = styled.div`
   width: 100%;
   padding: 16px;
   overflow-y: scroll;
+  /* margin-top: calc(45px); */
   margin-top: calc(45px);
 
   @media (min-width: 768px) {
     // nav height + spacing
-    margin-top: calc(45px + 16px);
+    /* margin-top: calc(45px + 16px); */
+
+    padding-top: calc(45px);
+    margin-top: 32px;
   }
 `;
 

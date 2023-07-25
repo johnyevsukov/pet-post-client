@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 
 import { PostType } from "../../../types/postType";
 import { Text } from "../../atoms/Text/Text";
@@ -13,16 +13,36 @@ import { LikeType } from "../../../types/likeType";
 import { CommentType } from "../../../types/commentType";
 import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
 import { Loader } from "../../atoms/Loader/Loader";
+import { Icon } from "../../atoms/Icon/Icon";
+import { NewCommentCard } from "../../organisms/NewCommentCard/NewCommentCard";
+import { useParams } from "react-router-dom";
+import { CommentCard } from "../CommentCard/CommentCard";
 
 interface PostCardProps {
   post: PostType;
+  handleDeletePost: (post: PostType) => void;
 }
 
-export const PostCard: React.FC<PostCardProps> = ({ post }) => {
+export const PostCard: React.FC<PostCardProps> = ({
+  post,
+  handleDeletePost,
+}) => {
   const [currentUserId] = useCurrentUserId();
+  const { id: profileId } = useParams();
   const [likes, setLikes] = useState<LikeType[]>();
-  const [comments, setComments] = useState<CommentType[]>();
+  const [comments, setComments] = useState<CommentType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+
+  const handleNewComment = useCallback((comment: CommentType) => {
+    setComments((comments) => [comment, ...comments]);
+  }, []);
+
+  const handleDeleteComment = useCallback((comment: CommentType) => {
+    setComments((comments) =>
+      comments.filter((c) => c.comment_id !== comment.comment_id)
+    );
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -74,6 +94,17 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
     }
   };
 
+  const handleDelete = () => {
+    axiosWithAuth()
+      .delete(`posts/${post.post_id}`)
+      .then(() => {
+        handleDeletePost(post);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   // handle error case here as well (&& !error)
   if (isLoading || !likes || !comments) {
     return (
@@ -88,6 +119,10 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
       <styles.AvatarWrapper>
         <Avatar name="hamster" size="sm" />
       </styles.AvatarWrapper>
+      {/* strict */}
+      {currentUserId == post.user_id && (
+        <styles.DeleteButton onClick={handleDelete}>Delete</styles.DeleteButton>
+      )}
       <VStack $spacing={10} $padding={"0 0 0 54px"}>
         <VStack $spacing={6}>
           <HStack $spacing={6}>
@@ -104,11 +139,41 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
           <styles.TextButton $isLiked={isLiked} onClick={handleLike}>
             paws: {likes.length}
           </styles.TextButton>
-          <styles.TextButton $isLiked={false}>
+          <styles.TextButton
+            $isLiked={false}
+            onClick={() => setShowComments((s) => !s)}
+          >
             comments: {comments.length}
           </styles.TextButton>
         </HStack>
       </VStack>
+      {showComments && (
+        <styles.CommentsWrapper>
+          <styles.CommentConnectorLine />
+          <NewCommentCard
+            postId={post.post_id}
+            postUsername={post.username}
+            handleNewComment={handleNewComment}
+          />
+          {comments.map((comment) => {
+            return (
+              <>
+                <styles.CommentConnectorLine />
+                <CommentCard
+                  comment={comment}
+                  handleDeleteComment={handleDeleteComment}
+                />
+              </>
+            );
+          })}
+          <styles.CollapseCommentsButton
+            onClick={() => setShowComments(false)}
+            aria-label="collapse comments"
+          >
+            <Icon name="curvedUpArrow" width={24} />
+          </styles.CollapseCommentsButton>
+        </styles.CommentsWrapper>
+      )}
     </styles.Wrapper>
   );
 };
