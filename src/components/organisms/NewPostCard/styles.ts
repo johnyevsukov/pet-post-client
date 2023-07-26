@@ -2,15 +2,25 @@ import styled from "styled-components";
 import { colors } from "../../../colors";
 import { fontSizeCss, fontWeights } from "../../atoms/Text/Text";
 
-export const Wrapper = styled.div`
+export const Card = styled.div`
+  position: relative;
   border-radius: 15px;
+  background: ${colors.pureWhite};
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   padding: 16px;
-  background: ${colors.pureWhite};
-
-  position: relative;
 `;
 
+export const Form = styled.form`
+  flex: 1;
+`;
+
+export const HiddenLabel = styled.label`
+  position: absolute;
+  opacity: 0;
+  top: 0;
+`;
+
+// TO DO: Systematize this handle error state
 export const TextAreaInput = styled.textarea<{ $error: boolean }>`
   flex: 1;
   min-height: 60px;
@@ -40,16 +50,4 @@ export const TextAreaInput = styled.textarea<{ $error: boolean }>`
     background: ${colors.pureWhite};
     outline: 2px solid ${colors.blue3};
   }
-`;
-
-export const ButtonWrapper = styled.div``;
-
-export const Form = styled.form`
-  flex: 1;
-`;
-
-export const HiddenLabel = styled.label`
-  position: absolute;
-  opacity: 0;
-  top: 0;
 `;

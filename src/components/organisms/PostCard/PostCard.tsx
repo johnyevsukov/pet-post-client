@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { axiosWithAuth } from "../../../utils/axiosAuth";
 import { timeAgo } from "../../../utils/timeAgo";
 import { useUserPermissions } from "../../../hooks/useUserPermissions";
 import { usePostLikesComments } from "../../../hooks/usePostLikesComments";
@@ -39,18 +38,6 @@ export const PostCard: React.FC<PostCardProps> = ({
   } = usePostLikesComments(post);
   const [hasEditPermissions] = useUserPermissions();
   const [showComments, setShowComments] = useState(false);
-
-  // TO DO: Move this to useUserPosts hook
-  const handleDelete = () => {
-    axiosWithAuth()
-      .delete(`posts/${post.post_id}`)
-      .then(() => {
-        handleDeletePost(post);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const renderComments = () => {
     if (!isLoading && error) {
@@ -106,8 +93,9 @@ export const PostCard: React.FC<PostCardProps> = ({
 
   return (
     <styles.Card>
+      {/* TO DO: Avatar should come from userData. */}
       <styles.AvatarWrapper>
-        <Avatar name="hamster" size="sm" />
+        <Avatar name="defaultAvatar" size="sm" />
       </styles.AvatarWrapper>
       {/* TO DO: This should be margin not padding. This should just use flex not absolute. */}
       <VStack $spacing={10} $padding={"0 0 0 54px"}>
@@ -140,7 +128,9 @@ export const PostCard: React.FC<PostCardProps> = ({
         </HStack>
       </VStack>
       {hasEditPermissions && (
-        <styles.DeleteButton onClick={handleDelete}>Delete</styles.DeleteButton>
+        <styles.DeleteButton onClick={() => handleDeletePost(post)}>
+          Delete
+        </styles.DeleteButton>
       )}
       {showComments && (
         <styles.CommentsWrapper>{renderComments()}</styles.CommentsWrapper>

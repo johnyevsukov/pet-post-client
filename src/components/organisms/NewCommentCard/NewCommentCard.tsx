@@ -1,15 +1,21 @@
-import React from "react";
-import * as styles from "./styles";
+// TO DO: Rename this file to have "form" in it (as well as new post card)?
+
+import React, { useState } from "react";
+
+import { axiosWithAuth } from "../../../utils/axiosAuth";
+import { useFormik } from "formik";
+import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
+
+import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
 import { Button } from "../../molecules/Button/Button";
-import { VStack } from "../../atoms/VStack/VStack";
-import { useFormik } from "formik";
-import { Text } from "../../atoms/Text/Text";
-import { axiosWithAuth } from "../../../utils/axiosAuth";
 import { Loader } from "../../atoms/Loader/Loader";
-import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
-import * as yup from "yup";
+import { Text } from "../../atoms/Text/Text";
+
 import { CommentType } from "../../../types/commentType";
+import { commentSchema } from "../../../schemas/commentSchema";
+
+import * as styles from "./styles";
 
 interface NewCommentCardProps {
   postId: number;
@@ -23,6 +29,7 @@ export const NewCommentCard: React.FC<NewCommentCardProps> = ({
   handleNewComment,
 }) => {
   const [currentUserId] = useCurrentUserId();
+  const [error, setError] = useState();
 
   // handle error here
   const onSubmit = () => {
@@ -38,7 +45,8 @@ export const NewCommentCard: React.FC<NewCommentCardProps> = ({
       })
       .catch((err) => {
         setSubmitting(false);
-        console.log(err);
+        setError(err);
+        console.warn(err);
       });
   };
 
@@ -63,19 +71,19 @@ export const NewCommentCard: React.FC<NewCommentCardProps> = ({
   });
 
   return (
-    <styles.Wrapper>
+    <styles.Card>
       <styles.Form onSubmit={handleSubmit}>
         <VStack $spacing={8}>
           <styles.HiddenLabel htmlFor="post_text">Post</styles.HiddenLabel>
           <styles.TextAreaInput
             id="comment_text"
             name="comment_text"
-            autoFocus
             placeholder={`Say something to ${postUsername}...`}
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.comment_text}
             $error={!!(errors.comment_text && touched.comment_text)}
+            autoFocus
           />
           <HStack $spacing={8} $justifyContent="space-between">
             {isSubmitting ? (
@@ -102,13 +110,6 @@ export const NewCommentCard: React.FC<NewCommentCardProps> = ({
           </HStack>
         </VStack>
       </styles.Form>
-    </styles.Wrapper>
+    </styles.Card>
   );
 };
-
-export const commentSchema = yup.object().shape({
-  comment_text: yup
-    .string()
-    .required("Comment must contain at least one character.")
-    .max(100, "Comment cannot exceed 100 characters."),
-});

@@ -20,13 +20,24 @@ export const usePostLikesComments = (post: PostType) => {
     setComments((comments) => [newComment, ...comments]);
   }, []);
 
-  const handleDeleteComment = useCallback((deletedComment: CommentType) => {
-    setComments((comments) =>
-      comments.filter(
-        (comment) => comment.comment_id !== deletedComment.comment_id
-      )
-    );
-  }, []);
+  const handleDeleteComment = (commentToDelete: CommentType) => {
+    setIsLoading(true);
+    axiosWithAuth()
+      .delete(`comments/${commentToDelete.comment_id}`)
+      .then(() => {
+        setIsLoading(false);
+        setComments((comments) =>
+          comments.filter(
+            (comment) => comment.comment_id !== commentToDelete.comment_id
+          )
+        );
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
+        console.warn(err);
+      });
+  };
 
   // TO DO: Handle loading / errors here or  -debounce-
   const handleToggleLike = () => {

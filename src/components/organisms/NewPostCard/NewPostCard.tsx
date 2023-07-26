@@ -1,22 +1,33 @@
-import React from "react";
-import * as styles from "./styles";
-import { HStack } from "../../atoms/HStack/HStack";
-import { Avatar } from "../../molecules/Avatar/Avatar";
-import { Button } from "../../molecules/Button/Button";
-import { VStack } from "../../atoms/VStack/VStack";
-import { useFormik } from "formik";
-import { Text } from "../../atoms/Text/Text";
+import React, { useState } from "react";
+
 import { axiosWithAuth } from "../../../utils/axiosAuth";
+import { useFormik } from "formik";
+
+import { Avatar } from "../../molecules/Avatar/Avatar";
+import { VStack } from "../../atoms/VStack/VStack";
+import { HStack } from "../../atoms/HStack/HStack";
+import { Button } from "../../molecules/Button/Button";
+import { Text } from "../../atoms/Text/Text";
 import { Loader } from "../../atoms/Loader/Loader";
+
 import { PostType } from "../../../types/postType";
-import * as yup from "yup";
+import { postSchema } from "../../../schemas/postSchema";
+
+import * as styles from "./styles";
+import { UserDataType } from "../../../types/userDataType";
 
 interface NewPostCardProps {
+  userAvatar: UserDataType["user_avatar"];
   handleNewPost: (post: PostType) => void;
 }
 
-export const NewPostCard: React.FC<NewPostCardProps> = ({ handleNewPost }) => {
-  // handle error here
+export const NewPostCard: React.FC<NewPostCardProps> = ({
+  userAvatar,
+  handleNewPost,
+}) => {
+  // TO DO: Handle error posting state
+  const [error, setError] = useState();
+
   const onSubmit = () => {
     axiosWithAuth()
       .post("posts", { post_text: values.post_text })
@@ -27,7 +38,8 @@ export const NewPostCard: React.FC<NewPostCardProps> = ({ handleNewPost }) => {
       })
       .catch((err) => {
         setSubmitting(false);
-        console.log(err);
+        setError(err);
+        console.warn(err);
       });
   };
 
@@ -51,9 +63,10 @@ export const NewPostCard: React.FC<NewPostCardProps> = ({ handleNewPost }) => {
   });
 
   return (
-    <styles.Wrapper>
+    <styles.Card>
       <HStack $spacing={8} $alignItems="flex-start">
-        <Avatar name="hamster" size="sm" />
+        {/* TO DO: clean this up */}
+        <Avatar name={userAvatar ? userAvatar : "defaultAvatar"} size="sm" />
         <styles.Form onSubmit={handleSubmit}>
           <VStack $spacing={16}>
             <styles.HiddenLabel htmlFor="post_text">Post</styles.HiddenLabel>
@@ -92,13 +105,6 @@ export const NewPostCard: React.FC<NewPostCardProps> = ({ handleNewPost }) => {
           </VStack>
         </styles.Form>
       </HStack>
-    </styles.Wrapper>
+    </styles.Card>
   );
 };
-
-export const postSchema = yup.object().shape({
-  post_text: yup
-    .string()
-    .required("Post must contain at least one character.")
-    .max(200, "Post cannot exceed 200 characters."),
-});

@@ -9,17 +9,26 @@ export const useUserPosts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
-  // TO DO: add create and delete post api operations here
-
   const handleNewPost = useCallback((newPost: PostType) => {
     setPosts((posts) => [newPost, ...posts]);
   }, []);
 
-  const handleDeletePost = useCallback((deletedPost: PostType) => {
-    setPosts((posts) =>
-      posts.filter((post) => post.post_id !== deletedPost.post_id)
-    );
-  }, []);
+  const handleDeletePost = (postToDelete: PostType) => {
+    setIsLoading(true);
+    axiosWithAuth()
+      .delete(`posts/${postToDelete.post_id}`)
+      .then(() => {
+        setIsLoading(false);
+        setPosts((posts) =>
+          posts.filter((post) => post.post_id !== postToDelete.post_id)
+        );
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
+        console.warn(err);
+      });
+  };
 
   useEffect(() => {
     setIsLoading(true);

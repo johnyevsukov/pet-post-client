@@ -2,14 +2,26 @@ import styled from "styled-components";
 import { colors } from "../../../colors";
 import { fontSizeCss, fontWeights } from "../../atoms/Text/Text";
 
-export const Wrapper = styled.div`
-  border-radius: 15px;
-  padding: 12px;
-  background: ${colors.offWhite};
+// TO DO: All very similar to new post card. Clean up.
 
+export const Card = styled.div`
   position: relative;
+  border-radius: 15px;
+  background: ${colors.offWhite};
+  padding: 12px;
 `;
 
+export const Form = styled.form`
+  flex: 1;
+`;
+
+export const HiddenLabel = styled.label`
+  position: absolute;
+  opacity: 0;
+  top: 0;
+`;
+
+// TO DO: Systematize this
 export const TextAreaInput = styled.textarea<{ $error: boolean }>`
   flex: 1;
   min-height: 60px;
@@ -39,16 +51,4 @@ export const TextAreaInput = styled.textarea<{ $error: boolean }>`
     background: ${colors.pureWhite};
     outline: 2px solid ${colors.blue3};
   }
-`;
-
-export const ButtonWrapper = styled.div``;
-
-export const Form = styled.form`
-  flex: 1;
-`;
-
-export const HiddenLabel = styled.label`
-  position: absolute;
-  opacity: 0;
-  top: 0;
 `;

@@ -66,7 +66,13 @@ export const Profile: React.FC = () => {
         <SearchBar desktopWidth={containerWidth} />
         <VStack $spacing={16}>
           <UserInfoCard />
-          {hasEditPermissions && <NewPostCard handleNewPost={handleNewPost} />}
+          {hasEditPermissions && (
+            // TO DO: need user data passed here
+            <NewPostCard
+              userAvatar="defaultAvatar"
+              handleNewPost={handleNewPost}
+            />
+          )}
           {renderPosts()}
         </VStack>
       </styles.Content>
