@@ -9,6 +9,8 @@ export const useUserPosts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
+  // TO DO: add create and delete post api operations here
+
   const handleNewPost = useCallback((newPost: PostType) => {
     setPosts((posts) => [newPost, ...posts]);
   }, []);

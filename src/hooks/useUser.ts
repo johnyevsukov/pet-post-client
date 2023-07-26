@@ -1,3 +1,13 @@
+/**
+ * Not ideal to fetch all
+ * user follower and following
+ * data along with user info.
+ * More ideal to fetch a count for
+ * each and fetch full follower/following
+ * data when opening the follower/following modals.
+ * Here for lack of a stronger API.
+ */
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosAuth";

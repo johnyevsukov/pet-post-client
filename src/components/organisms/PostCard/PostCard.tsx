@@ -1,22 +1,22 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useState } from "react";
+
+import { axiosWithAuth } from "../../../utils/axiosAuth";
+import { timeAgo } from "../../../utils/timeAgo";
+import { useUserPermissions } from "../../../hooks/useUserPermissions";
+import { usePostLikesComments } from "../../../hooks/usePostLikesComments";
+
+import { NewCommentCard } from "../../organisms/NewCommentCard/NewCommentCard";
+import { CommentCard } from "../CommentCard/CommentCard";
+import { Avatar } from "../../molecules/Avatar/Avatar";
+import { VStack } from "../../atoms/VStack/VStack";
+import { HStack } from "../../atoms/HStack/HStack";
+import { Text } from "../../atoms/Text/Text";
+import { Icon } from "../../atoms/Icon/Icon";
+import { Loader } from "../../atoms/Loader/Loader";
 
 import { PostType } from "../../../types/postType";
-import { Text } from "../../atoms/Text/Text";
-import * as styles from "./styles";
-import { HStack } from "../../atoms/HStack/HStack";
-import { timeAgo } from "../../../utils/timeAgo";
-import { VStack } from "../../atoms/VStack/VStack";
 
-import { Avatar } from "../../molecules/Avatar/Avatar";
-import { axiosWithAuth } from "../../../utils/axiosAuth";
-import { LikeType } from "../../../types/likeType";
-import { CommentType } from "../../../types/commentType";
-import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
-import { Loader } from "../../atoms/Loader/Loader";
-import { Icon } from "../../atoms/Icon/Icon";
-import { NewCommentCard } from "../../organisms/NewCommentCard/NewCommentCard";
-import { useParams } from "react-router-dom";
-import { CommentCard } from "../CommentCard/CommentCard";
+import * as styles from "./styles";
 
 interface PostCardProps {
   post: PostType;
@@ -27,73 +27,20 @@ export const PostCard: React.FC<PostCardProps> = ({
   post,
   handleDeletePost,
 }) => {
-  const [currentUserId] = useCurrentUserId();
-  const { id: profileId } = useParams();
-  const [likes, setLikes] = useState<LikeType[]>();
-  const [comments, setComments] = useState<CommentType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    likes,
+    comments,
+    isLoading,
+    error,
+    isLiked,
+    handleToggleLike,
+    handleNewComment,
+    handleDeleteComment,
+  } = usePostLikesComments(post);
+  const [hasEditPermissions] = useUserPermissions();
   const [showComments, setShowComments] = useState(false);
 
-  const handleNewComment = useCallback((comment: CommentType) => {
-    setComments((comments) => [comment, ...comments]);
-  }, []);
-
-  const handleDeleteComment = useCallback((comment: CommentType) => {
-    setComments((comments) =>
-      comments.filter((c) => c.comment_id !== comment.comment_id)
-    );
-  }, []);
-
-  useEffect(() => {
-    setIsLoading(true);
-    Promise.all([
-      axiosWithAuth().get(`posts/${post.post_id}/likes`),
-      axiosWithAuth().get(`posts/${post.post_id}/comments`),
-    ])
-      .then(async ([res1, res2]) => {
-        console.log("likes: ", res1.data);
-        console.log("comments: ", res2.data);
-        setIsLoading(false);
-        setLikes(res1.data);
-        setComments(res2.data);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-      });
-  }, [post.post_id]);
-
-  const isLiked = useMemo(() => {
-    return !!likes?.filter((like) => like.user_id === currentUserId).length;
-  }, [currentUserId, likes]);
-
-  // Handle loading / errors here
-  const handleLike = () => {
-    if (!isLiked) {
-      axiosWithAuth()
-        .post(`posts/${post.post_id}/likes`, {
-          user_id: localStorage.getItem("user_id"),
-        })
-        .then((res) => {
-          setLikes(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      axiosWithAuth()
-        .delete(
-          `posts/${localStorage.getItem("user_id")}/unlike/${post.post_id}`
-        )
-        .then((res) => {
-          setLikes(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-
+  // TO DO: Move this to useUserPosts hook
   const handleDelete = () => {
     axiosWithAuth()
       .delete(`posts/${post.post_id}`)
@@ -105,50 +52,30 @@ export const PostCard: React.FC<PostCardProps> = ({
       });
   };
 
-  // handle error case here as well (&& !error)
-  if (isLoading || !likes || !comments) {
-    return (
-      <styles.LoaderCard>
-        <Loader />
-      </styles.LoaderCard>
-    );
-  }
-
-  return (
-    <styles.Wrapper>
-      <styles.AvatarWrapper>
-        <Avatar name="hamster" size="sm" />
-      </styles.AvatarWrapper>
-      {/* strict */}
-      {currentUserId == post.user_id && (
-        <styles.DeleteButton onClick={handleDelete}>Delete</styles.DeleteButton>
-      )}
-      <VStack $spacing={10} $padding={"0 0 0 54px"}>
-        <VStack $spacing={6}>
-          <HStack $spacing={6}>
-            <styles.TextLink to={`/profile/${post.user_id}`}>
-              {post.username}
-            </styles.TextLink>
-            <Text $weight="medium" $size="sm" $color="gray1">
-              {timeAgo(post.created_at)}
-            </Text>
-          </HStack>
-          <Text>{post.post_text}</Text>
-        </VStack>
-        <HStack $spacing={12}>
-          <styles.TextButton $isLiked={isLiked} onClick={handleLike}>
-            paws: {likes.length}
-          </styles.TextButton>
-          <styles.TextButton
-            $isLiked={false}
-            onClick={() => setShowComments((s) => !s)}
-          >
-            comments: {comments.length}
-          </styles.TextButton>
-        </HStack>
-      </VStack>
-      {showComments && (
-        <styles.CommentsWrapper>
+  const renderComments = () => {
+    if (!isLoading && error) {
+      return (
+        <>
+          <styles.CommentConnectorLine />
+          <styles.LoaderErrorCard>
+            <HStack $spacing={8} $justifyContent="center">
+              <Text $color="red4" $weight="bold" $size="sm">
+                Error loading comments
+              </Text>
+              <Icon name="warning" width={32} />
+            </HStack>
+          </styles.LoaderErrorCard>
+        </>
+      );
+    } else if (!comments || !likes) {
+      return (
+        <styles.LoaderErrorCard>
+          <Loader />
+        </styles.LoaderErrorCard>
+      );
+    } else {
+      return (
+        <>
           <styles.CommentConnectorLine />
           <NewCommentCard
             postId={post.post_id}
@@ -172,8 +99,52 @@ export const PostCard: React.FC<PostCardProps> = ({
           >
             <Icon name="curvedUpArrow" width={24} />
           </styles.CollapseCommentsButton>
-        </styles.CommentsWrapper>
+        </>
+      );
+    }
+  };
+
+  return (
+    <styles.Card>
+      <styles.AvatarWrapper>
+        <Avatar name="hamster" size="sm" />
+      </styles.AvatarWrapper>
+      {/* TO DO: This should be margin not padding. This should just use flex not absolute. */}
+      <VStack $spacing={10} $padding={"0 0 0 54px"}>
+        <VStack $spacing={6}>
+          <HStack $spacing={6}>
+            <styles.TextLink to={`/profile/${post.user_id}`}>
+              {post.username}
+            </styles.TextLink>
+            <Text $weight="medium" $size="sm" $color="gray1">
+              {timeAgo(post.created_at)}
+            </Text>
+          </HStack>
+          <Text>{post.post_text}</Text>
+        </VStack>
+        <HStack $spacing={12}>
+          <styles.TextButton
+            $isLiked={isLiked}
+            onClick={handleToggleLike}
+            aria-label="toggle like"
+          >
+            paws: {likes ? likes.length : 0}
+          </styles.TextButton>
+          <styles.TextButton
+            $isLiked={false}
+            onClick={() => setShowComments((state) => !state)}
+            aria-label="toggle expand collapse comments"
+          >
+            comments: {comments ? comments.length : 0}
+          </styles.TextButton>
+        </HStack>
+      </VStack>
+      {hasEditPermissions && (
+        <styles.DeleteButton onClick={handleDelete}>Delete</styles.DeleteButton>
       )}
-    </styles.Wrapper>
+      {showComments && (
+        <styles.CommentsWrapper>{renderComments()}</styles.CommentsWrapper>
+      )}
+    </styles.Card>
   );
 };

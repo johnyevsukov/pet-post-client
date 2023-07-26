@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../../colors";
 import { fontSizeCss, fontWeights } from "../../atoms/Text/Text";
 
+// TO DO: Make reusable card component
 export const Card = styled.div`
   position: relative;
   overflow: hidden;
