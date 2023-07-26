@@ -2,15 +2,15 @@ import styled from "styled-components";
 import { colors } from "../../../colors";
 import { fontSizeCss, fontWeights } from "../../atoms/Text/Text";
 
-export const UserInfoCard = styled.div`
+export const Card = styled.div`
   position: relative;
-  border-radius: 15px;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 15px;
   background: ${colors.pureWhite};
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
-export const UserInfoTopBlock = styled.div`
+export const BlueTopBlock = styled.div`
   height: 150px;
   background: ${colors.blue3};
 `;
@@ -21,17 +21,17 @@ export const AvatarWrapper = styled.div`
   left: 16px;
 `;
 
-export const UserInfo = styled.div`
+export const UserInfoWrapper = styled.div`
   margin-top: 76px;
   padding: 0 16px 16px;
 `;
 
+// TO DO: Add this to system Button file
 export const SettingsButton = styled.button`
   position: absolute;
   right: 16px;
   top: 166px;
   border: 3px solid ${colors.blue4};
-
   border-radius: 50%;
   padding: 2px;
   cursor: pointer;
@@ -51,13 +51,8 @@ export const SettingsButton = styled.button`
   }
 `;
 
-export const LoaderWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-`;
-
+// TO DO: Add this to system Button file
+// Better sort out font family issue
 export const FollowButton = styled.button`
   padding: 0;
   cursor: pointer;
@@ -79,12 +74,13 @@ export const FollowCount = styled.span`
   color: ${colors.textBlack};
 `;
 
-export const FollowDesc = styled.span`
+export const FollowDescription = styled.span`
   ${fontSizeCss.sm}
   font-weight: ${fontWeights.medium};
   color: ${colors.gray2};
 `;
 
+// TO DO: Add this to system Button file
 export const FollowUserButton = styled.button`
   position: absolute;
   right: 16px;
@@ -106,6 +102,7 @@ export const FollowUserButton = styled.button`
   }
 `;
 
+// TO DO: Add this to system Button file
 export const UnfollowUserButton = styled.button`
   position: absolute;
   right: 16px;
