@@ -127,10 +127,15 @@ export const PostCard: React.FC<PostCardProps> = ({
           </styles.TextButton>
         </HStack>
       </VStack>
+      {/* TO DO: Make this a menu with three dot toggle button */}
+      {/* TO DO: confirm delete step */}
       {hasEditPermissions && (
-        <styles.DeleteButton onClick={() => handleDeletePost(post)}>
-          Delete
-        </styles.DeleteButton>
+        <styles.EditDeleteButtonsWrapper $spacing={6}>
+          <styles.DeleteButton onClick={() => handleDeletePost(post)}>
+            Delete
+          </styles.DeleteButton>
+          <styles.EditButton onClick={() => ""}>Edit</styles.EditButton>
+        </styles.EditDeleteButtonsWrapper>
       )}
       {showComments && (
         <styles.CommentsWrapper>{renderComments()}</styles.CommentsWrapper>

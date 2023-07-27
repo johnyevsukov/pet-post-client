@@ -38,6 +38,7 @@ export const Profile: React.FC = () => {
         </styles.LoaderErrorCard>
       );
     } else if (!posts) {
+      // Check if this is rendering properly
       return (
         <styles.LoaderErrorCard>
           <Loader />
@@ -60,6 +61,7 @@ export const Profile: React.FC = () => {
     }
   };
 
+  // TO DO: Move this wrapper to logged in layout? perhaps serach bar too.
   return (
     <styles.Wrapper>
       <styles.Content ref={containerRef}>

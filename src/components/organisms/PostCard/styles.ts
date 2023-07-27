@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { colors } from "../../../colors";
 import { fontSizeCss, fontWeights } from "../../atoms/Text/Text";
+import { VStack } from "../../atoms/VStack/VStack";
 
 export const Card = styled.div`
   position: relative;
@@ -93,11 +94,15 @@ export const CollapseCommentsButton = styled.button`
   }
 `;
 
-// TO DO: Systematize this. Defining new buttons all over the place is no good.
-export const DeleteButton = styled.button`
+export const EditDeleteButtonsWrapper = styled(VStack)`
   position: absolute;
+  width: auto;
   right: 16px;
   top: 16px;
+`;
+
+// TO DO: Systematize this. Defining new buttons all over the place is no good.
+export const DeleteButton = styled.button`
   background: none;
   padding: 3px 8px;
   border: 2px solid ${colors.red3};
@@ -114,7 +119,19 @@ export const DeleteButton = styled.button`
   }
 `;
 
-export const DeleteCommentButton = styled(DeleteButton)`
-  right: 8px;
-  top: 8px;
+export const EditButton = styled.button`
+  background: none;
+  padding: 3px 8px;
+  border: 2px solid ${colors.orange3};
+  border-radius: 15px;
+  font-weight: ${fontWeights.bold};
+  color: ${colors.orange3};
+  ${fontSizeCss.xs}
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background: ${colors.orange1};
+  }
 `;

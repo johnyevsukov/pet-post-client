@@ -19,7 +19,11 @@ export type colorType =
   | "blue1"
   | "blue2"
   | "blue3"
-  | "blue4";
+  | "blue4"
+  | "orange1"
+  | "orange2"
+  | "orange3"
+  | "orange4";
 
 export const colors = {
   purple1: "#ebe1fc",
@@ -34,6 +38,10 @@ export const colors = {
   red2: "#ffaaa6",
   red3: "#ff7a7a",
   red4: "#fc4e4e",
+  orange1: "#faf3e6",
+  orange2: "#ffd7a6",
+  orange3: "#ffc17a",
+  orange4: "#fc4e4e",
   yellow1: "#f8ff7a",
   gray1: "#a3a3a3",
   gray2: "#585858",

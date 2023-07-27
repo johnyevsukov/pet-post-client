@@ -1,6 +1,6 @@
 import React from "react";
 
-export const RodentIcon: React.FC = () => {
+export const GerbilIcon: React.FC = () => {
   return (
     <svg id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
       <g id="color">

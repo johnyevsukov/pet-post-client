@@ -24,7 +24,7 @@ import { GearIcon } from "../icons/GearIcon";
 import { NavGearIcon } from "../icons/NavGearIcon";
 import { CloseIcon } from "../icons/CloseIcon";
 import { LizardIcon } from "../icons/LizardIcon";
-import { RodentIcon } from "../icons/RodentIcon";
+import { GerbilIcon } from "../icons/GerbilIcon";
 import { SpiderIcon } from "../icons/SpiderIcon";
 import { DuckIcon } from "../icons/DuckIcon";
 import { HedgehogIcon } from "../icons/HedgehogIcon";
@@ -61,7 +61,7 @@ export type IconType =
   | "close"
   | "lizard"
   | "bird"
-  | "rodent"
+  | "gerbil"
   | "spider"
   | "duck"
   | "hedgehog"
@@ -96,7 +96,7 @@ const IconMap = {
   close: <CloseIcon />,
   lizard: <LizardIcon />,
   bird: <BirdIcon />,
-  rodent: <RodentIcon />,
+  gerbil: <GerbilIcon />,
   spider: <SpiderIcon />,
   duck: <DuckIcon />,
   hedgehog: <HedgehogIcon />,

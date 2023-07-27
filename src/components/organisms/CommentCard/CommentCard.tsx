@@ -22,12 +22,17 @@ export const CommentCard: React.FC<CommentCardProps> = ({
 }) => {
   const [hasEditPermissions] = useUserPermissions();
 
+  // TO DO: isLoading state from parent
+
   return (
     <styles.Card>
       {hasEditPermissions && (
-        <styles.DeleteButton onClick={() => handleDeleteComment(comment)}>
-          Delete
-        </styles.DeleteButton>
+        <styles.EditDeleteButtonsWrapper $spacing={6}>
+          <styles.DeleteButton onClick={() => handleDeleteComment(comment)}>
+            Delete
+          </styles.DeleteButton>
+          <styles.EditButton onClick={() => ""}>Edit</styles.EditButton>
+        </styles.EditDeleteButtonsWrapper>
       )}
       <VStack $spacing={6}>
         <HStack $spacing={6}>
