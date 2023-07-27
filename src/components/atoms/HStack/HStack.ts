@@ -8,6 +8,7 @@ export const HStack = styled.div<{
   $marginTop?: number;
   $justifyContent?: string;
   $alignItems?: string;
+  $wrap?: boolean;
 }>`
   display: flex;
   align-items: ${({ $alignItems }) => ($alignItems ? $alignItems : "center")};
@@ -16,7 +17,7 @@ export const HStack = styled.div<{
   width: ${({ $width }) => ($width ? $width : "100%")};
   margin-top: ${({ $marginTop }) => ($marginTop ? `${$marginTop}px` : null)};
   padding: ${({ $padding }) => ($padding ? `${$padding}px` : null)};
-  flex-wrap: wrap;
+  flex-wrap: ${({ $wrap }) => ($wrap ? "wrap" : "nowrap")};
 
   > * {
     margin-right: ${({ $spacing }) => `${$spacing}px`};

@@ -32,6 +32,8 @@ import { HorseIcon } from "../icons/HorseIcon";
 import { BirdIcon } from "../icons/BirdIcon";
 import { CurvedUpArrowIcon } from "../icons/CurvedUpArrowIcon";
 import { DefaultAvatarIcon } from "../icons/DefaultAvatarIcon";
+import { LeftArrowIcon } from "../icons/LeftArrowIcon";
+import { CheckIcon } from "../icons/CheckIcon";
 import * as styles from "./styles";
 
 export type IconType =
@@ -67,7 +69,9 @@ export type IconType =
   | "hedgehog"
   | "horse"
   | "curvedUpArrow"
-  | "defaultAvatar";
+  | "defaultAvatar"
+  | "leftArrow"
+  | "check";
 
 const IconMap = {
   hamster: <HamsterIcon />,
@@ -103,6 +107,8 @@ const IconMap = {
   horse: <HorseIcon />,
   curvedUpArrow: <CurvedUpArrowIcon />,
   defaultAvatar: <DefaultAvatarIcon />,
+  leftArrow: <LeftArrowIcon />,
+  check: <CheckIcon />,
 };
 
 interface IconProps {

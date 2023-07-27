@@ -146,7 +146,7 @@ export const UserInfoCard: React.FC = () => {
                   ? userData.user_species
                   : "No species..."}
               </Text>
-              <HStack $spacing={12}>
+              <HStack $spacing={12} $wrap>
                 <HStack $spacing={4} $width="auto">
                   <Icon name="location" width={28} />
                   <Text $weight="medium" $size="sm" $color="gray2">

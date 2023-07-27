@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "react-select";
-import { styles } from "./styles";
+import { selectStyles } from "./selectStyles";
+import * as styles from "./styles";
+import { VStack } from "../../atoms/VStack/VStack";
 
 interface SelectFieldProps {
   id: string;
@@ -9,6 +11,7 @@ interface SelectFieldProps {
   options: any;
   onChange: any;
   value: any;
+  label: string;
 }
 
 export const SelectField: React.FC<SelectFieldProps> = ({
@@ -18,17 +21,21 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   options,
   onChange,
   value,
+  label,
 }) => {
   return (
-    <Select
-      id={id}
-      name={name}
-      placeholder={placeholder}
-      options={options}
-      onChange={onChange}
-      styles={styles}
-      isSearchable={false}
-      value={value}
-    />
+    <VStack $spacing={8}>
+      <styles.Label>{label}</styles.Label>
+      <Select
+        id={id}
+        name={name}
+        placeholder={placeholder}
+        options={options}
+        onChange={onChange}
+        styles={selectStyles}
+        isSearchable={false}
+        value={value}
+      />
+    </VStack>
   );
 };

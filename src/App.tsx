@@ -5,7 +5,7 @@ import { Login } from "./components/pages/Login/Login";
 import { Signup } from "./components/pages/Signup/Signup";
 import { Profile } from "./components/pages/Profile/Profile";
 import { NotFound } from "./components/pages/NotFound/NotFound";
-import { ProfileSettings } from "./components/pages/ProfileSettings/ProfileSettings";
+import { Settings } from "./components/pages/Settings/Settings";
 import { LoggedInLayout } from "./components/templates/LoggedInLayout/LoggedInLayout";
 import { ProtectedRoute } from "./components/organisms/ProtectedRoute/ProtectedRoute";
 
@@ -29,7 +29,7 @@ function App() {
             path="settings"
             element={
               <ProtectedRoute>
-                <ProfileSettings />
+                <Settings />
               </ProtectedRoute>
             }
           />
