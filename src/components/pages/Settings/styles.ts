@@ -3,20 +3,6 @@ import { colors } from "../../../colors";
 import { HStack } from "../../atoms/HStack/HStack";
 import { onDesktop } from "../../../utils/onDesktop";
 
-export const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  overflow-y: scroll;
-  width: 100%;
-  padding: 16px;
-`;
-
-export const Content = styled.div`
-  width: 100%;
-  max-width: 682px;
-  margin: 0 auto;
-`;
-
 export const SettingsCard = styled.div`
   position: relative;
   border-radius: 15px;

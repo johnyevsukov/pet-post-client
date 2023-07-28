@@ -4,13 +4,17 @@ import { VStack } from "../../atoms/VStack/VStack";
 
 interface SearchBarProps {
   desktopWidth: number;
+  handleToggleMobileNav: () => void;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ desktopWidth }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({
+  desktopWidth,
+  handleToggleMobileNav,
+}) => {
   return (
     <styles.Wrapper $desktopWidth={desktopWidth}>
       <styles.Content>
-        <styles.HamburgerButton>
+        <styles.HamburgerButton onClick={handleToggleMobileNav}>
           <VStack $spacing={4}>
             <styles.HamburgerLine />
             <styles.HamburgerLine />

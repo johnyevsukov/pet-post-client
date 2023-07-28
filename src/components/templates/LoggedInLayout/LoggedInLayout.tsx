@@ -1,20 +1,36 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
+import { Outlet } from "react-router-dom";
+
+import { useElementDimensions } from "../../../hooks/useElementDimensions";
+
+import { SideNav } from "../../organisms/SideNav/SideNav";
+import { MobileNav } from "../../organisms/MobileNav/MobileNav";
+import { SearchBar } from "../../organisms/SearchBar/SearchBar";
 
 import * as styles from "./styles";
-import { HStack } from "../../atoms/HStack/HStack";
-import { Text } from "../../atoms/Text/Text";
-import { Icon } from "../../atoms/Icon/Icon";
-import { Button } from "../../molecules/Button/Button";
-import { useNavigate } from "react-router-dom";
-import { Outlet } from "react-router-dom";
-import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
-import { SideNav } from "../../organisms/SideNav/SideNav";
 
 export const LoggedInLayout: React.FC = () => {
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const handleToggleMobileNav = useCallback(() => {
+    setIsMobileNavOpen((state) => !state);
+  }, []);
+
+  const containerRef = useRef(null);
+  const { width: containerWidth } = useElementDimensions(containerRef);
+
   return (
-    <styles.Wrapper>
+    <styles.LayoutWrapper>
       <SideNav />
-      <Outlet />
-    </styles.Wrapper>
+      <MobileNav isOpen={isMobileNavOpen} />
+      <styles.ContentWrapper>
+        <styles.Content ref={containerRef}>
+          <SearchBar
+            desktopWidth={containerWidth}
+            handleToggleMobileNav={handleToggleMobileNav}
+          />
+          <Outlet />
+        </styles.Content>
+      </styles.ContentWrapper>
+    </styles.LayoutWrapper>
   );
 };

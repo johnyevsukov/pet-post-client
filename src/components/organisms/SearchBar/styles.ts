@@ -47,7 +47,9 @@ export const HamburgerButton = styled.button`
 `;
 
 export const HamburgerLine = styled.div`
+  min-height: 3px;
   height: 3px;
+  min-width: 100%;
   width: 100%;
   background: white;
 `;

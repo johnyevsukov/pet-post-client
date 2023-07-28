@@ -1,13 +1,11 @@
-import React, { useRef } from "react";
+import React from "react";
 
-import { useElementDimensions } from "../../../hooks/useElementDimensions";
 import { useUserPermissions } from "../../../hooks/useUserPermissions";
 import { useUserPosts } from "../../../hooks/useUserPosts";
 
 import { UserInfoCard } from "../../organisms/UserInfoCard/UserInfoCard";
 import { PostCard } from "../../organisms/PostCard/PostCard";
 import { NewPostCard } from "../../organisms/NewPostCard/NewPostCard";
-import { SearchBar } from "../../organisms/SearchBar/SearchBar";
 import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
 import { Text } from "../../atoms/Text/Text";
@@ -21,9 +19,6 @@ export const Profile: React.FC = () => {
   const [hasEditPermissions] = useUserPermissions();
   const { posts, isLoading, error, handleNewPost, handleDeletePost } =
     useUserPosts();
-
-  const containerRef = useRef(null);
-  const { width: containerWidth } = useElementDimensions(containerRef);
 
   const renderPosts = () => {
     if (!isLoading && error) {
@@ -61,23 +56,14 @@ export const Profile: React.FC = () => {
     }
   };
 
-  // TO DO: Move this wrapper to logged in layout? perhaps serach bar too.
   return (
-    <styles.Wrapper>
-      <styles.Content ref={containerRef}>
-        <SearchBar desktopWidth={containerWidth} />
-        <VStack $spacing={16}>
-          <UserInfoCard />
-          {hasEditPermissions && (
-            // TO DO: need user data passed here
-            <NewPostCard
-              userAvatar="defaultAvatar"
-              handleNewPost={handleNewPost}
-            />
-          )}
-          {renderPosts()}
-        </VStack>
-      </styles.Content>
-    </styles.Wrapper>
+    <VStack $spacing={16}>
+      <UserInfoCard />
+      {hasEditPermissions && (
+        // TO DO: need user data passed here
+        <NewPostCard userAvatar="defaultAvatar" handleNewPost={handleNewPost} />
+      )}
+      {renderPosts()}
+    </VStack>
   );
 };

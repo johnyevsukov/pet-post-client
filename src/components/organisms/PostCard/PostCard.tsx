@@ -38,6 +38,8 @@ export const PostCard: React.FC<PostCardProps> = ({
   } = usePostLikesComments(post);
   const [hasEditPermissions] = useUserPermissions();
   const [showComments, setShowComments] = useState(false);
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const renderComments = () => {
     if (!isLoading && error) {
@@ -130,15 +132,33 @@ export const PostCard: React.FC<PostCardProps> = ({
       {/* TO DO: Make this a menu with three dot toggle button */}
       {/* TO DO: confirm delete step */}
       {hasEditPermissions && (
-        <styles.EditDeleteButtonsWrapper $spacing={6}>
-          <styles.DeleteButton onClick={() => handleDeletePost(post)}>
-            Delete
-          </styles.DeleteButton>
-          <styles.EditButton onClick={() => ""}>Edit</styles.EditButton>
+        <styles.EditDeleteButtonsWrapper>
+          <styles.MoreButton
+            onClick={() => setIsMoreMenuOpen((state) => !state)}
+          >
+            <HStack $spacing={3}>
+              <styles.MoreDot />
+              <styles.MoreDot />
+              <styles.MoreDot />
+            </HStack>
+          </styles.MoreButton>
         </styles.EditDeleteButtonsWrapper>
       )}
       {showComments && (
         <styles.CommentsWrapper>{renderComments()}</styles.CommentsWrapper>
+      )}
+      {isMoreMenuOpen && (
+        <styles.MoreMenuCard>
+          <HStack $spacing={4}>
+            <styles.EditTextButton onClick={() => setIsEditing(true)}>
+              Edit
+            </styles.EditTextButton>
+            <styles.MoreBreakLine />
+            <styles.DeleteTextButton onClick={() => handleDeletePost(post)}>
+              Delete
+            </styles.DeleteTextButton>
+          </HStack>
+        </styles.MoreMenuCard>
       )}
     </styles.Card>
   );
