@@ -57,7 +57,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     <styles.Wrapper $desktopWidth={desktopWidth}>
       <styles.Content>
         <styles.HamburgerButton onClick={handleToggleMobileNav}>
-          <VStack $spacing={4}>
+          <VStack $spacing={6}>
             <styles.HamburgerLine />
             <styles.HamburgerLine />
             <styles.HamburgerLine />

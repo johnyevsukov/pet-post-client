@@ -43,17 +43,17 @@ export const Content = styled.div`
 `;
 
 export const HamburgerButton = styled.button`
-  height: 35px;
+  /* height: 35px;
   width: 35px;
   min-height: 35px;
-  min-width: 35px;
+  min-width: 35px; */
   border: none;
   background: none;
   border-radius: 6px;
-  display: block;
   transition: all 0.1s ease-in-out;
   cursor: pointer;
   margin-right: 8px;
+  padding: 8px;
 
   &:hover,
   &:focus {
@@ -68,8 +68,8 @@ export const HamburgerButton = styled.button`
 export const HamburgerLine = styled.div`
   min-height: 3px;
   height: 3px;
-  min-width: 100%;
-  width: 100%;
+  min-width: 25px;
+  width: 25px;
   background: white;
 `;
 
