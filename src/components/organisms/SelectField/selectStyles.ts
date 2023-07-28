@@ -12,7 +12,7 @@ export const selectStyles = {
     ...baseStyles,
     border: "none",
     borderRadius: state.menuIsOpen ? "36px 36px 0 0" : "36px",
-    padding: "2px 6px",
+    padding: "4px 8px",
     background: `${colors.blue3}`,
     cursor: "pointer",
     boxShadow: state.menuIsOpen
@@ -22,22 +22,13 @@ export const selectStyles = {
     "&:hover": {
       background: `${colors.blue2}`,
     },
-
-    "@media (min-width: 768px)": {
-      padding: "4px 8px",
-    },
   }),
   placeholder: (baseStyles: any, state: any) => ({
     ...baseStyles,
     color: `${colors.pureWhite}`,
-    fontSize: "18px",
-    lineHeight: "20px",
+    fontSize: "22px",
+    lineHeight: "24px",
     fontWeight: `${fontWeights.bold}`,
-
-    "@media (min-width: 768px)": {
-      fontSize: "22px",
-      lineHeight: "24px",
-    },
   }),
   menu: (baseStyles: any, state: any) => ({
     ...baseStyles,
@@ -56,20 +47,15 @@ export const selectStyles = {
     width: "100%",
     border: 0,
     outline: 0,
-    fontSize: "18px",
-    lineHeight: "20px",
+    fontSize: "22px",
+    lineHeight: "24px",
     fontWeight: `${fontWeights.bold}`,
     padding: "10px 0",
     borderTop: `2px solid ${colors.pureWhite}`,
-
-    "@media (min-width: 768px)": {
-      fontSize: "22px",
-      lineHeight: "24px",
-    },
   }),
   option: (baseStyles: any, state: any) => ({
     ...baseStyles,
-    marginTop: "2px",
+    marginTop: "4px",
     width: "100%",
     cursor: "pointer",
     color: `${colors.pureWhite}`,
@@ -80,10 +66,6 @@ export const selectStyles = {
     },
     "&:first-of-type": {
       marginTop: "0px",
-    },
-
-    "@media (min-width: 768px)": {
-      marginTop: "4px",
     },
   }),
   dropdownIndicator: (baseStyles: any, state: any) => ({
@@ -101,15 +83,10 @@ export const selectStyles = {
   }),
   singleValue: (baseStyles: any, state: any) => ({
     ...baseStyles,
-    fontSize: "18px",
-    lineHeight: "20px",
+    fontSize: "22px",
+    lineHeight: "24px",
     color: `${colors.offWhite}`,
     fontWeight: `${fontWeights.bold}`,
-
-    "@media (min-width: 768px)": {
-      fontSize: "22px",
-      lineHeight: "24px",
-    },
   }),
   indicatorSeparator: () => ({ display: "none" }),
 };

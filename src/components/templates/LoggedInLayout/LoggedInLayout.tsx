@@ -24,6 +24,7 @@ export const LoggedInLayout: React.FC = () => {
       <MobileNav isOpen={isMobileNavOpen} />
       <styles.ContentWrapper>
         <styles.Content ref={containerRef}>
+          {/* some sort of blur content on scroll effect here? */}
           <SearchBar
             desktopWidth={containerWidth}
             handleToggleMobileNav={handleToggleMobileNav}

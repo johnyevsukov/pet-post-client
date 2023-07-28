@@ -34,6 +34,7 @@ import { CurvedUpArrowIcon } from "../icons/CurvedUpArrowIcon";
 import { DefaultAvatarIcon } from "../icons/DefaultAvatarIcon";
 import { LeftArrowIcon } from "../icons/LeftArrowIcon";
 import { CheckIcon } from "../icons/CheckIcon";
+import { MagnifyingGlassIcon } from "../icons/MagnifyingGlassIcon";
 import * as styles from "./styles";
 
 export type IconType =
@@ -71,7 +72,8 @@ export type IconType =
   | "curvedUpArrow"
   | "defaultAvatar"
   | "leftArrow"
-  | "check";
+  | "check"
+  | "magnifyingGlass";
 
 const IconMap = {
   hamster: <HamsterIcon />,
@@ -109,6 +111,7 @@ const IconMap = {
   defaultAvatar: <DefaultAvatarIcon />,
   leftArrow: <LeftArrowIcon />,
   check: <CheckIcon />,
+  magnifyingGlass: <MagnifyingGlassIcon />,
 };
 
 interface IconProps {

@@ -37,6 +37,7 @@ export const SettingsButton = styled.button`
   padding: 2px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  background: ${colors.pureWhite};
 
   svg {
     transition: all 0.1s ease-in-out;
