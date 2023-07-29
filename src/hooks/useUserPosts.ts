@@ -35,6 +35,7 @@ export const useUserPosts = () => {
     axiosWithAuth()
       .get(`users/${profileId}/posts`)
       .then((res) => {
+        console.log("res: ", res);
         setIsLoading(false);
         setPosts(res.data);
       })

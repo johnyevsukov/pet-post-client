@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
 import { useElementDimensions } from "../../../hooks/useElementDimensions";
@@ -18,6 +18,16 @@ export const LoggedInLayout: React.FC = () => {
   const containerRef = useRef(null);
   const { width: containerWidth } = useElementDimensions(containerRef);
 
+  useEffect(() => {
+    const handleWindowResize = () => {
+      window.innerWidth > 767 && setIsMobileNavOpen(false);
+    };
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   return (
     <styles.LayoutWrapper>
       <SideNav />
@@ -27,6 +37,7 @@ export const LoggedInLayout: React.FC = () => {
           {/* some sort of blur content on scroll effect here? */}
           <SearchBar
             desktopWidth={containerWidth}
+            isMobileNavOpen={isMobileNavOpen}
             handleToggleMobileNav={handleToggleMobileNav}
           />
           <Outlet />

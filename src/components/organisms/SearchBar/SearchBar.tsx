@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import * as styles from "./styles";
 import { VStack } from "../../atoms/VStack/VStack";
 import { Icon } from "../../atoms/Icon/Icon";
@@ -9,11 +9,13 @@ import { FlexBox } from "../../atoms/FlexBox/FlexBox";
 
 interface SearchBarProps {
   desktopWidth: number;
+  isMobileNavOpen: boolean;
   handleToggleMobileNav: () => void;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   desktopWidth,
+  isMobileNavOpen,
   handleToggleMobileNav,
 }) => {
   const [inputValue, setInputValue] = useState("");
@@ -63,7 +65,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             <styles.HamburgerLine />
           </VStack>
         </styles.HamburgerButton>
-        <styles.InputWrapper>
+        <styles.InputWrapper $isMobileNavOpen={isMobileNavOpen}>
           <styles.IconWrapper>
             <Icon name="magnifyingGlass" width={25} />
           </styles.IconWrapper>

@@ -5,7 +5,6 @@ import { Text } from "../../atoms/Text/Text";
 import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
 import { Button } from "../../molecules/Button/Button";
 import { useNavigate } from "react-router-dom";
-import { VStack } from "../../atoms/VStack/VStack";
 import * as styles from "./styles";
 
 export const SideNav: React.FC = () => {
@@ -47,7 +46,7 @@ export const SideNav: React.FC = () => {
           </styles.NavLink>
         </styles.NavListItem>
         <styles.NavListItem>
-          <styles.NavLink to="">
+          <styles.NavLink to={`/profile/${currentUserId}/settings`}>
             <HStack $spacing={8}>
               <Icon name="navGear" width={32} />
               <Text $weight="bold" $size="lg">

@@ -4,6 +4,8 @@ import { colors } from "../../../colors";
 export const ScreenOverlay = styled.div`
   z-index: 10;
   position: fixed;
+  // TO DO: Fix this. Something adding 16px magin bottom here.
+  margin: 0;
   top: 0;
   bottom: 0;
   left: 0;
@@ -19,7 +21,7 @@ export const ModalCard = styled.div`
   top: 50%;
   left: 50%;
   background: ${colors.offWhite};
-  padding: 16px 16px 16px;
+  padding: 16px;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   // work on this

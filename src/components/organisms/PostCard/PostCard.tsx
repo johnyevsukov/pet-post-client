@@ -39,7 +39,9 @@ export const PostCard: React.FC<PostCardProps> = ({
   const [hasEditPermissions] = useUserPermissions();
   const [showComments, setShowComments] = useState(false);
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
+
+  console.log("post: ", post);
 
   const renderComments = () => {
     if (!isLoading && error) {
@@ -95,9 +97,8 @@ export const PostCard: React.FC<PostCardProps> = ({
 
   return (
     <styles.Card>
-      {/* TO DO: Avatar should come from userData. */}
       <styles.AvatarWrapper>
-        <Avatar name="defaultAvatar" size="sm" />
+        <Avatar name={post.user_avatar || "defaultAvatar"} size="sm" />
       </styles.AvatarWrapper>
       {/* TO DO: This should be margin not padding. This should just use flex not absolute. */}
       <VStack $spacing={10} $padding={"0 0 0 54px"}>
@@ -129,7 +130,6 @@ export const PostCard: React.FC<PostCardProps> = ({
           </styles.TextButton>
         </HStack>
       </VStack>
-      {/* TO DO: Make this a menu with three dot toggle button */}
       {/* TO DO: confirm delete step */}
       {hasEditPermissions && (
         <styles.EditDeleteButtonsWrapper>
@@ -149,7 +149,11 @@ export const PostCard: React.FC<PostCardProps> = ({
       )}
       {isMoreMenuOpen && (
         <styles.MoreMenuCard>
-          <HStack $spacing={4}>
+          <styles.DeleteTextButton onClick={() => handleDeletePost(post)}>
+            Delete
+          </styles.DeleteTextButton>
+          {/* TO DO: Edit state */}
+          {/* <HStack $spacing={4}>
             <styles.EditTextButton onClick={() => setIsEditing(true)}>
               Edit
             </styles.EditTextButton>
@@ -157,7 +161,7 @@ export const PostCard: React.FC<PostCardProps> = ({
             <styles.DeleteTextButton onClick={() => handleDeletePost(post)}>
               Delete
             </styles.DeleteTextButton>
-          </HStack>
+          </HStack> */}
         </styles.MoreMenuCard>
       )}
     </styles.Card>

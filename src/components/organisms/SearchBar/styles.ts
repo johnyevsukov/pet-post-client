@@ -43,10 +43,6 @@ export const Content = styled.div`
 `;
 
 export const HamburgerButton = styled.button`
-  /* height: 35px;
-  width: 35px;
-  min-height: 35px;
-  min-width: 35px; */
   border: none;
   background: none;
   border-radius: 6px;
@@ -68,16 +64,17 @@ export const HamburgerButton = styled.button`
 export const HamburgerLine = styled.div`
   min-height: 3px;
   height: 3px;
-  min-width: 25px;
   width: 25px;
-  background: white;
+  min-width: 25px;
+  background: ${colors.pureWhite};
 `;
 
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.div<{ $isMobileNavOpen: boolean }>`
   position: relative;
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
+  display: ${({ $isMobileNavOpen }) => ($isMobileNavOpen ? "none" : "block")};
 `;
 
 export const SearchInput = styled.input<{ $isSearchMenuOpen: boolean }>`
@@ -113,7 +110,7 @@ export const SearchResults = styled.div`
   height: auto;
   max-height: 195px;
   overflow-y: scroll;
-  width: 306px;
+  width: calc(100% + 6px);
   background: ${colors.pureWhite};
   border-radius: 0 0 15px 15px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;

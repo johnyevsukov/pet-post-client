@@ -32,8 +32,7 @@ export const Profile: React.FC = () => {
           </HStack>
         </styles.LoaderErrorCard>
       );
-    } else if (!posts) {
-      // Check if this is rendering properly
+    } else if (!posts.length && isLoading) {
       return (
         <styles.LoaderErrorCard>
           <Loader />
@@ -57,7 +56,7 @@ export const Profile: React.FC = () => {
   };
 
   return (
-    <VStack $spacing={16}>
+    <VStack $spacing={16} $padding="0 0 16px">
       <UserInfoCard />
       {hasEditPermissions && (
         // TO DO: need user data passed here

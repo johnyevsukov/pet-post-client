@@ -6,14 +6,14 @@ export const LayoutWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 100svh;
-  background: ${colors.offWhite};
   overflow: hidden;
+  background: ${colors.offWhite};
 `;
 
 export const ContentWrapper = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
+  width: 100%;
   overflow-y: scroll;
   padding: 0 16px;
   margin-top: 45px;
@@ -24,8 +24,7 @@ export const ContentWrapper = styled.div`
   `}
 `;
 
-// Main tag instead?
-export const Content = styled.div`
+export const Content = styled.main`
   width: 100%;
   max-width: 682px;
   margin: 0 auto;

@@ -31,6 +31,7 @@ export const AvatarWrapper = styled.div`
 export const LoaderErrorCard = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100px;
   min-height: 100px;
   border-radius: 15px;

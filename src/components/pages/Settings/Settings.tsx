@@ -96,7 +96,7 @@ export const Settings: React.FC = () => {
   const [currentUserId] = useCurrentUserId();
   const { userData, isLoading, error } = useUser();
   const [successfullySubmitted, setSuccessfullySubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState();
+  const [submitError, setSubmitError] = useState("");
 
   const birthday = useMemo(() => {
     if (userData?.user_birthday) {
@@ -107,6 +107,8 @@ export const Settings: React.FC = () => {
     }
   }, [userData?.user_birthday]);
 
+  console.log("birthday: ", birthday);
+
   const onSubmit = () => {
     axiosWithAuth()
       .put(`users/${currentUserId}`, values)
@@ -116,8 +118,10 @@ export const Settings: React.FC = () => {
       })
       .catch((err) => {
         setSubmitting(false);
-        setSubmitError(err);
-        console.warn("err", err);
+        //TO DO: API does not support this error. Add it.
+        setSubmitError("Username taken.");
+        console.log("here: ", err);
+        console.warn("err", err.data);
       });
   };
 
@@ -145,115 +149,127 @@ export const Settings: React.FC = () => {
     enableReinitialize: true,
   });
 
+  console.log("val birthday: ", values.user_birthday);
+
   if (!isLoading && error) {
     return <>error</>;
   }
 
   if (!userData) {
-    return <>loading</>;
+    return (
+      <styles.Wrapper>
+        <styles.LoaderCard>
+          <Loader />
+        </styles.LoaderCard>
+      </styles.Wrapper>
+    );
   }
 
   return (
-    <styles.SettingsCard>
-      <VStack $spacing={24}>
-        <HStack $spacing={6} $justifyContent="space-between">
-          <styles.BackButton onClick={() => navigate(-1)}>
-            <Icon name="leftArrow" width={32} />
-          </styles.BackButton>
-          <HStack $spacing={6} $width="auto">
-            <Text $weight="bold" $size="lg">
-              Account Settings
-            </Text>
-            <Icon name="gear" width={48} />
+    <styles.Wrapper>
+      <styles.SettingsCard>
+        <VStack $spacing={24}>
+          <HStack $spacing={6} $justifyContent="space-between">
+            <styles.BackButton onClick={() => navigate(-1)}>
+              <Icon name="leftArrow" width={32} />
+            </styles.BackButton>
+            <HStack $spacing={6} $width="auto">
+              <Text $weight="bold" $size="lg">
+                Account Settings
+              </Text>
+              <Icon name="gear" width={48} />
+            </HStack>
           </HStack>
-        </HStack>
-        <styles.AvatarFormWrapper>
-          {/* <HStack $spacing={24} $alignItems="flex-start"> */}
-          <Avatar name={values.user_avatar || "defaultAvatar"} size="lg" />
-          <styles.Form onSubmit={handleSubmit}>
-            <VStack $spacing={16}>
-              <SettingsInput
-                id="username"
-                name="username"
-                label="Username"
-                type="text"
-                placeholder="My username..."
-                value={values.username}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                touched={touched.username}
-                error={errors.username}
-              />
-              <SettingsInput
-                id="user_species"
-                name="user_species"
-                label="Species"
-                type="text"
-                placeholder="e.g. dwarf hamster"
-                value={values.user_species}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                touched={touched.user_species}
-                error={errors.user_species}
-              />
-              <SettingsInput
-                id="user_birthday"
-                name="user_birthday"
-                label="Birthday"
-                type="date"
-                placeholder="e.g. dwarf hamster"
-                value={values.user_birthday}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                touched={touched.user_birthday}
-                error={errors.user_birthday}
-              />
-              <SelectField
-                id="user_avatar"
-                name="user_avatar"
-                placeholder="Avatar..."
-                options={avatar}
-                onChange={(selectedValue: any) =>
-                  setFieldValue("user_avatar", selectedValue.value)
-                }
-                value={avatar.filter((a) => a.value === values.user_avatar)}
-                label="Avatar"
-              />
-              <SelectField
-                id="user_location"
-                name="user_location"
-                placeholder="Location..."
-                options={locations}
-                onChange={(selectedValue: any) =>
-                  setFieldValue("user_location", selectedValue.value)
-                }
-                value={locations.filter(
-                  (s) => s.value === values.user_location
-                )}
-                label="Location"
-              />
-              <styles.ButtonWrapper $spacing={6}>
-                {isSubmitting ? (
-                  <Loader $width={48} />
-                ) : (
-                  <VStack $spacing={12}>
-                    {/* TO DO: sort out button width */}
-                    <div>
-                      <Button $variant="blue" type="submit" disabled={!isValid}>
-                        Save
-                      </Button>
-                    </div>
-                    {/* TO DO: better css / display for errors */}
-                    {submitError && (
-                      <HStack $spacing={6}>
-                        <Text $weight="medium" $color="red3">
-                          {submitError}
-                        </Text>
-                        <Icon name="warning" width={22} />
-                      </HStack>
-                    )}
-                    {/* TO DO: handle better */}
-                    {/* {errors.username && (
+          <styles.AvatarFormWrapper>
+            <Avatar name={values.user_avatar || "defaultAvatar"} size="lg" />
+            <styles.Form onSubmit={handleSubmit}>
+              <VStack $spacing={16}>
+                <SettingsInput
+                  id="username"
+                  name="username"
+                  label="Username"
+                  type="text"
+                  placeholder="My username..."
+                  value={values.username}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  touched={touched.username}
+                  error={errors.username}
+                />
+                <SettingsInput
+                  id="user_species"
+                  name="user_species"
+                  label="Species"
+                  type="text"
+                  placeholder="e.g. dwarf hamster"
+                  value={values.user_species}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  touched={touched.user_species}
+                  error={errors.user_species}
+                />
+                <SettingsInput
+                  id="user_birthday"
+                  name="user_birthday"
+                  label="Birthday"
+                  type="date"
+                  placeholder="e.g. dwarf hamster"
+                  value={values.user_birthday}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  touched={touched.user_birthday}
+                  error={errors.user_birthday}
+                />
+                <SelectField
+                  id="user_avatar"
+                  name="user_avatar"
+                  placeholder="Avatar..."
+                  options={avatar}
+                  onChange={(selectedValue: any) =>
+                    setFieldValue("user_avatar", selectedValue.value)
+                  }
+                  value={avatar.filter((a) => a.value === values.user_avatar)}
+                  label="Avatar"
+                />
+                <SelectField
+                  id="user_location"
+                  name="user_location"
+                  placeholder="Location..."
+                  options={locations}
+                  onChange={(selectedValue: any) =>
+                    setFieldValue("user_location", selectedValue.value)
+                  }
+                  value={locations.filter(
+                    (s) => s.value === values.user_location
+                  )}
+                  label="Location"
+                />
+                <styles.ButtonWrapper $spacing={6}>
+                  {isSubmitting ? (
+                    <Loader $width={48} />
+                  ) : (
+                    <VStack $spacing={12}>
+                      {/* TO DO: sort out button width */}
+                      <div>
+                        <Button
+                          $variant="blue"
+                          type="submit"
+                          disabled={!isValid}
+                        >
+                          Save
+                        </Button>
+                      </div>
+                      {/* TO DO: better css / display for errors */}
+                      {submitError && (
+                        <HStack $spacing={6}>
+                          <Text $weight="medium" $color="red3">
+                            {submitError}
+                          </Text>
+                          <Icon name="warning" width={22} />
+                        </HStack>
+                      )}
+                      {/* TO DO: handle better */}
+                      {/* {errors.username && (
                           <HStack $spacing={6}>
                             <Text $weight="medium" $color="red3">
                               {errors.username}
@@ -269,14 +285,15 @@ export const Settings: React.FC = () => {
                             <Icon name="warning" width={22} />
                           </HStack>
                         )} */}
-                  </VStack>
-                )}
-                {successfullySubmitted && <Icon name="check" />}
-              </styles.ButtonWrapper>
-            </VStack>
-          </styles.Form>
-        </styles.AvatarFormWrapper>
-      </VStack>
-    </styles.SettingsCard>
+                    </VStack>
+                  )}
+                  {successfullySubmitted && <Icon name="check" />}
+                </styles.ButtonWrapper>
+              </VStack>
+            </styles.Form>
+          </styles.AvatarFormWrapper>
+        </VStack>
+      </styles.SettingsCard>
+    </styles.Wrapper>
   );
 };

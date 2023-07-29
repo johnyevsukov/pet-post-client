@@ -3,12 +3,23 @@ import { colors } from "../../../colors";
 import { HStack } from "../../atoms/HStack/HStack";
 import { onDesktop } from "../../../utils/onDesktop";
 
+export const Wrapper = styled.div`
+  padding: 0 0 16px;
+`;
+
 export const SettingsCard = styled.div`
   position: relative;
   border-radius: 15px;
   background: ${colors.pureWhite};
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   padding: 16px;
+`;
+
+export const LoaderCard = styled(SettingsCard)`
+  min-height: 604px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Form = styled.form`
