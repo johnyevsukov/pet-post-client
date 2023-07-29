@@ -1,13 +1,11 @@
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
-import { colors } from "../../../colors";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   grid-gap: 18px;
   align-items: start;
-  width: 500px;
+  width: auto;
   height: 300px;
   overflow-y: scroll;
   padding: 16px 8px;

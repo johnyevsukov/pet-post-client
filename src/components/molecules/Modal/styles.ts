@@ -12,14 +12,14 @@ export const ScreenOverlay = styled.div`
   right: 0;
   background: black;
   background: rgb(000, 000, 000, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
 `;
 
 export const ModalCard = styled.div`
   z-index: 100;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
   background: ${colors.offWhite};
   padding: 16px;
   border-radius: 15px;
@@ -27,7 +27,6 @@ export const ModalCard = styled.div`
   // work on this
   width: 100%;
   max-width: 532px;
-  margin: 0 8px;
 `;
 
 export const TopWrapper = styled.div`
