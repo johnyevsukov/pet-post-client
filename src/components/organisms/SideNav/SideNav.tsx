@@ -26,7 +26,7 @@ export const SideNav: React.FC = () => {
       </styles.IconLogoWrapper>
       <styles.NavList $spacing={6}>
         <styles.NavListItem>
-          <styles.NavLink to="">
+          <styles.NavLink to="/feed">
             <HStack $spacing={8}>
               <Icon name="newspaper" width={32} />
               <Text $weight="bold" $size="lg">

@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Home } from "./components/pages/Home/Home";
 import { Login } from "./components/pages/Login/Login";
 import { Signup } from "./components/pages/Signup/Signup";
+import { Feed } from "./components/pages/Feed/Feed";
 import { Profile } from "./components/pages/Profile/Profile";
 import { NotFound } from "./components/pages/NotFound/NotFound";
 import { Settings } from "./components/pages/Settings/Settings";
@@ -16,6 +17,14 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route element={<LoggedInLayout />}>
+        <Route
+          path="/feed"
+          element={
+            <ProtectedRoute>
+              <Feed />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/profile/:id">
           <Route
             index
