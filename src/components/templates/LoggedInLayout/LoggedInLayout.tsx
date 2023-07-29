@@ -15,23 +15,30 @@ export const LoggedInLayout: React.FC = () => {
     setIsMobileNavOpen((state) => !state);
   }, []);
 
+  const handleCloseMobileNav = useCallback(() => {
+    setIsMobileNavOpen(false);
+  }, []);
+
   const containerRef = useRef(null);
   const { width: containerWidth } = useElementDimensions(containerRef);
 
   useEffect(() => {
     const handleWindowResize = () => {
-      window.innerWidth > 767 && setIsMobileNavOpen(false);
+      window.innerWidth > 767 && handleCloseMobileNav();
     };
     window.addEventListener("resize", handleWindowResize);
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
-  }, []);
+  }, [handleCloseMobileNav]);
 
   return (
     <styles.LayoutWrapper>
       <SideNav />
-      <MobileNav isOpen={isMobileNavOpen} />
+      <MobileNav
+        isOpen={isMobileNavOpen}
+        handleCloseMobileNav={handleCloseMobileNav}
+      />
       <styles.ContentWrapper>
         <styles.Content ref={containerRef}>
           {/* some sort of blur content on scroll effect here? */}
