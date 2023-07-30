@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useUserPermissions } from "../../../hooks/useUserPermissions";
-import { useUserPosts } from "../../../hooks/useUserPosts";
+import { useProfilePosts } from "../../../hooks/useProfilePosts";
 
 import { UserInfoCard } from "../../organisms/UserInfoCard/UserInfoCard";
 import { PostCard } from "../../organisms/PostCard/PostCard";
@@ -18,7 +18,7 @@ import * as styles from "./styles";
 export const Profile: React.FC = () => {
   const [hasEditPermissions] = useUserPermissions();
   const { posts, isLoading, error, handleNewPost, handleDeletePost } =
-    useUserPosts();
+    useProfilePosts();
 
   const renderPosts = () => {
     if (!isLoading && error) {
@@ -58,10 +58,7 @@ export const Profile: React.FC = () => {
   return (
     <VStack $spacing={16} $padding="0 0 16px">
       <UserInfoCard />
-      {hasEditPermissions && (
-        // TO DO: need user data passed here
-        <NewPostCard userAvatar="defaultAvatar" handleNewPost={handleNewPost} />
-      )}
+      {hasEditPermissions && <NewPostCard handleNewPost={handleNewPost} />}
       {renderPosts()}
     </VStack>
   );

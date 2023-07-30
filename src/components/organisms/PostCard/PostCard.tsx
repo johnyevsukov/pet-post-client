@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import { timeAgo } from "../../../utils/timeAgo";
-import { useUserPermissions } from "../../../hooks/useUserPermissions";
-import { usePostLikesComments } from "../../../hooks/usePostLikesComments";
+import { usePost } from "../../../hooks/usePost";
 
 import { NewCommentCard } from "../../organisms/NewCommentCard/NewCommentCard";
 import { CommentCard } from "../CommentCard/CommentCard";
@@ -27,19 +26,19 @@ export const PostCard: React.FC<PostCardProps> = ({
   handleDeletePost,
 }) => {
   const {
+    userData,
     likes,
     comments,
     isLoading,
     error,
     isLiked,
+    hasEditPermissions,
     handleToggleLike,
     handleNewComment,
     handleDeleteComment,
-  } = usePostLikesComments(post);
-  const [hasEditPermissions] = useUserPermissions();
+  } = usePost(post);
   const [showComments, setShowComments] = useState(false);
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
-  // const [isEditing, setIsEditing] = useState(false);
 
   console.log("post: ", post);
 
@@ -58,7 +57,7 @@ export const PostCard: React.FC<PostCardProps> = ({
           </styles.LoaderErrorCard>
         </>
       );
-    } else if (!comments || !likes) {
+    } else if (!userData || !comments || !likes) {
       return (
         <styles.LoaderErrorCard>
           <Loader />
@@ -98,7 +97,10 @@ export const PostCard: React.FC<PostCardProps> = ({
   return (
     <styles.Card>
       <styles.AvatarWrapper>
-        <Avatar name={post.user_avatar || "defaultAvatar"} size="sm" />
+        <Avatar
+          name={post.user_avatar || userData?.user_avatar || "defaultAvatar"}
+          size="sm"
+        />
       </styles.AvatarWrapper>
       {/* TO DO: This should be margin not padding. This should just use flex not absolute. */}
       <VStack $spacing={10} $padding={"0 0 0 54px"}>
@@ -153,15 +155,6 @@ export const PostCard: React.FC<PostCardProps> = ({
             Delete
           </styles.DeleteTextButton>
           {/* TO DO: Edit state */}
-          {/* <HStack $spacing={4}>
-            <styles.EditTextButton onClick={() => setIsEditing(true)}>
-              Edit
-            </styles.EditTextButton>
-            <styles.MoreBreakLine />
-            <styles.DeleteTextButton onClick={() => handleDeletePost(post)}>
-              Delete
-            </styles.DeleteTextButton>
-          </HStack> */}
         </styles.MoreMenuCard>
       )}
     </styles.Card>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { axiosWithAuth } from "../../../utils/axiosAuth";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import { useFormik } from "formik";
 
 import { Avatar } from "../../molecules/Avatar/Avatar";
@@ -14,19 +15,15 @@ import { PostType } from "../../../types/postType";
 import { postSchema } from "../../../schemas/postSchema";
 
 import * as styles from "./styles";
-import { UserDataType } from "../../../types/userDataType";
 
 interface NewPostCardProps {
-  userAvatar: UserDataType["user_avatar"];
   handleNewPost: (post: PostType) => void;
 }
 
-export const NewPostCard: React.FC<NewPostCardProps> = ({
-  userAvatar,
-  handleNewPost,
-}) => {
+export const NewPostCard: React.FC<NewPostCardProps> = ({ handleNewPost }) => {
+  const { userData, isLoading, error } = useCurrentUser();
   // TO DO: Handle error posting state
-  const [error, setError] = useState();
+  // const [error, setError] = useState();
 
   const onSubmit = () => {
     axiosWithAuth()
@@ -38,7 +35,7 @@ export const NewPostCard: React.FC<NewPostCardProps> = ({
       })
       .catch((err) => {
         setSubmitting(false);
-        setError(err);
+        // setError(err);
         console.warn(err);
       });
   };
@@ -65,8 +62,7 @@ export const NewPostCard: React.FC<NewPostCardProps> = ({
   return (
     <styles.Card>
       <HStack $spacing={8} $alignItems="flex-start">
-        {/* TO DO: clean this up */}
-        <Avatar name={userAvatar ? userAvatar : "defaultAvatar"} size="sm" />
+        <Avatar name={userData?.user_avatar || "defaultAvatar"} size="sm" />
         <styles.Form onSubmit={handleSubmit}>
           <VStack $spacing={16}>
             <styles.HiddenLabel htmlFor="post_text">Post</styles.HiddenLabel>

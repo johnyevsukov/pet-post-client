@@ -9,6 +9,8 @@ export const Card = styled.div`
   border-radius: 15px;
   background: ${colors.pureWhite};
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  // Prevent content jump on load
+  min-height: 384px;
 `;
 
 export const BlueTopBlock = styled.div`
