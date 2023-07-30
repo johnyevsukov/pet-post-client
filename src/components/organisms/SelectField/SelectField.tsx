@@ -1,8 +1,10 @@
 import React from "react";
+
 import Select from "react-select";
+import { VStack } from "../../atoms/VStack/VStack";
+
 import { selectStyles } from "./selectStyles";
 import * as styles from "./styles";
-import { VStack } from "../../atoms/VStack/VStack";
 
 interface SelectFieldProps {
   id: string;

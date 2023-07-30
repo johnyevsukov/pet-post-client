@@ -5,22 +5,22 @@ import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
 import { onDesktop } from "../../../utils/onDesktop";
 
-export const SideNav = styled.nav<{ $isOpen: boolean }>`
-  border-right: 1px solid ${colors.gray1};
-  z-index: 1000;
-  overflow-y: scroll;
+export const Nav = styled.nav<{ $isOpen: boolean }>`
   position: fixed;
   top: 45px;
   right: 0;
   left: 0;
   bottom: 0;
-  background: ${colors.offWhite};
+  z-index: 1000;
+  overflow-y: scroll;
   padding: 0 16px;
+  background: ${colors.offWhite};
+  border-right: 1px solid ${colors.gray1};
   display: ${({ $isOpen }) => ($isOpen ? "static" : "none")};
 
-  @media (min-width: 768px) {
+  ${onDesktop`
     display: none;
-  }
+  `}
 `;
 
 export const NavList = styled(VStack).attrs({
@@ -36,7 +36,7 @@ export const NavListItem = styled.li`
   list-style: none;
 `;
 
-const sharedCss = css`
+const sharedNavItemCss = css`
   padding: 6px 16px;
   border-radius: 15px;
   transition: all 0.1s ease-in-out;
@@ -50,7 +50,7 @@ const sharedCss = css`
 export const NavLink = styled(Link)`
   text-decoration: none;
   display: block;
-  ${sharedCss}
+  ${sharedNavItemCss}
 `;
 
 export const NavButton = styled.button`
@@ -58,7 +58,7 @@ export const NavButton = styled.button`
   background: none;
   width: 100%;
   cursor: pointer;
-  ${sharedCss}
+  ${sharedNavItemCss}
 `;
 
 export const IconLogoWrapper = styled(HStack)`
@@ -68,11 +68,8 @@ export const IconLogoWrapper = styled(HStack)`
   padding: 6px 0 6px 16px;
 `;
 
-export const ButtonWrapper = styled.div`
+export const ButtonNavListItem = styled(NavListItem)`
+  width: 100%;
   max-width: 217px;
   margin-top: 26px;
-
-  ${onDesktop`
-    max-width: none;
-  `}
 `;

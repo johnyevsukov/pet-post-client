@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { colors } from "../../../colors";
 import { fontSizeCss, fontWeights } from "../../atoms/Text/Text";
-import { VStack } from "../../atoms/VStack/VStack";
 
 // TO DO: Systematize this
 export const Card = styled.div`
@@ -26,44 +25,56 @@ export const TextLink = styled(Link)`
 `;
 
 // TO DO: Systematize this
-export const EditDeleteButtonsWrapper = styled(VStack)`
+export const MoreButtonWrapper = styled.div`
   position: absolute;
   width: auto;
   right: 8px;
   top: 8px;
 `;
 
-// TO DO: Systematize this. Defining new buttons all over the place is no good.
-export const DeleteButton = styled.button`
+export const MoreButton = styled.button`
   background: none;
-  padding: 3px 8px;
-  border: 2px solid ${colors.red3};
+  border: none;
   border-radius: 15px;
-  font-weight: ${fontWeights.bold};
-  color: ${colors.red3};
-  ${fontSizeCss.xs}
-  cursor: pointer;
+  padding: 8px 12px;
   transition: all 0.1s ease-in-out;
+  background: ${colors.offWhite};
+  cursor: pointer;
 
   &:hover,
   &:focus {
-    background: ${colors.red1};
+    background: ${colors.pureWhite};
   }
 `;
 
-export const EditButton = styled.button`
+export const MoreDot = styled.div`
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  background: ${colors.gray1};
+`;
+
+export const MoreMenuCard = styled.div`
+  position: absolute;
+  top: -28px;
+  right: 8px;
+  padding: 8px;
+  background: ${colors.pureWhite};
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 12px;
+`;
+
+export const DeleteTextButton = styled.button`
   background: none;
-  padding: 3px 8px;
-  border: 2px solid ${colors.orange3};
-  border-radius: 15px;
+  border: none;
+  padding: 4px 2px;
+  color: ${colors.red3};
   font-weight: ${fontWeights.bold};
-  color: ${colors.orange3};
   ${fontSizeCss.xs}
-  transition: all 0.1s ease-in-out;
   cursor: pointer;
 
   &:hover,
   &:focus {
-    background: ${colors.orange1};
+    text-decoration: underline;
   }
 `;

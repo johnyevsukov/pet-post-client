@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { axiosWithAuth } from "../../../utils/axiosAuth";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";

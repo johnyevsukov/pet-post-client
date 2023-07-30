@@ -40,8 +40,6 @@ export const PostCard: React.FC<PostCardProps> = ({
   const [showComments, setShowComments] = useState(false);
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
 
-  console.log("post: ", post);
-
   const renderComments = () => {
     if (!isLoading && error) {
       return (
@@ -96,6 +94,26 @@ export const PostCard: React.FC<PostCardProps> = ({
 
   return (
     <styles.Card>
+      {hasEditPermissions && (
+        <styles.MoreButtonWrapper>
+          <styles.MoreButton
+            onClick={() => setIsMoreMenuOpen((state) => !state)}
+          >
+            <HStack $spacing={3}>
+              <styles.MoreDot />
+              <styles.MoreDot />
+              <styles.MoreDot />
+            </HStack>
+          </styles.MoreButton>
+        </styles.MoreButtonWrapper>
+      )}
+      {isMoreMenuOpen && (
+        <styles.MoreMenuCard>
+          <styles.DeleteTextButton onClick={() => handleDeletePost(post)}>
+            Delete
+          </styles.DeleteTextButton>
+        </styles.MoreMenuCard>
+      )}
       <styles.AvatarWrapper>
         <Avatar
           name={post.user_avatar || userData?.user_avatar || "defaultAvatar"}
@@ -132,30 +150,8 @@ export const PostCard: React.FC<PostCardProps> = ({
           </styles.TextButton>
         </HStack>
       </VStack>
-      {/* TO DO: confirm delete step */}
-      {hasEditPermissions && (
-        <styles.EditDeleteButtonsWrapper>
-          <styles.MoreButton
-            onClick={() => setIsMoreMenuOpen((state) => !state)}
-          >
-            <HStack $spacing={3}>
-              <styles.MoreDot />
-              <styles.MoreDot />
-              <styles.MoreDot />
-            </HStack>
-          </styles.MoreButton>
-        </styles.EditDeleteButtonsWrapper>
-      )}
       {showComments && (
         <styles.CommentsWrapper>{renderComments()}</styles.CommentsWrapper>
-      )}
-      {isMoreMenuOpen && (
-        <styles.MoreMenuCard>
-          <styles.DeleteTextButton onClick={() => handleDeletePost(post)}>
-            Delete
-          </styles.DeleteTextButton>
-          {/* TO DO: Edit state */}
-        </styles.MoreMenuCard>
       )}
     </styles.Card>
   );

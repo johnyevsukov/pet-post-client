@@ -21,7 +21,6 @@ export const useCurrentUser = () => {
 
   useEffect(() => {
     setIsLoading(true);
-
     axiosWithAuth()
       .get(`users/${currentUserId}`)
       .then((res) => {

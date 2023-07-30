@@ -1,11 +1,14 @@
-import React, { useState, useRef } from "react";
-import * as styles from "./styles";
+import React, { useState } from "react";
+
+import { axiosWithAuth } from "../../../utils/axiosAuth";
+
 import { VStack } from "../../atoms/VStack/VStack";
 import { Icon } from "../../atoms/Icon/Icon";
-import { axiosWithAuth } from "../../../utils/axiosAuth";
 import { Text } from "../../atoms/Text/Text";
 import { Loader } from "../../atoms/Loader/Loader";
 import { FlexBox } from "../../atoms/FlexBox/FlexBox";
+
+import * as styles from "./styles";
 
 interface SearchBarProps {
   desktopWidth: number;
@@ -47,11 +50,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       .then((res) => {
         setIsLoading(false);
         setSearchResults(res.data);
-        console.log(res);
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err);
+        console.warn(err);
       });
   };
 

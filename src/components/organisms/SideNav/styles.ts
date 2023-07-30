@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { colors } from "../../../colors";
 import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
+import { onDesktop } from "../../../utils/onDesktop";
 
-export const SideNav = styled.nav`
+export const Nav = styled.nav`
   border-right: 1px solid ${colors.gray1};
   width: 250px;
   min-width: 250px;
@@ -12,9 +13,9 @@ export const SideNav = styled.nav`
   overflow-y: scroll;
   display: none;
 
-  @media (min-width: 768px) {
+  ${onDesktop`
     display: block;
-  }
+  `}
 `;
 
 export const NavList = styled(VStack).attrs({
@@ -30,7 +31,7 @@ export const NavListItem = styled.li`
   list-style: none;
 `;
 
-const sharedCss = css`
+const sharedNavItemCss = css`
   padding: 6px 16px;
   border-radius: 15px;
   transition: all 0.1s ease-in-out;
@@ -44,7 +45,7 @@ const sharedCss = css`
 export const NavLink = styled(Link)`
   text-decoration: none;
   display: block;
-  ${sharedCss}
+  ${sharedNavItemCss}
 `;
 
 export const NavButton = styled.button`
@@ -52,7 +53,7 @@ export const NavButton = styled.button`
   background: none;
   width: 100%;
   cursor: pointer;
-  ${sharedCss}
+  ${sharedNavItemCss}
 `;
 
 export const IconLogoWrapper = styled(HStack)`
@@ -62,7 +63,6 @@ export const IconLogoWrapper = styled(HStack)`
   padding: 6px 0 6px 16px;
 `;
 
-export const ButtonWrapper = styled.div`
-  width: 100%;
+export const ButtonNavListItem = styled(NavListItem)`
   margin-top: 26px;
 `;

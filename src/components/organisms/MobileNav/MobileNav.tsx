@@ -1,10 +1,12 @@
 import React from "react";
-import { Icon } from "../../atoms/Icon/Icon";
-import { HStack } from "../../atoms/HStack/HStack";
-import { Text } from "../../atoms/Text/Text";
-import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
-import { Button } from "../../molecules/Button/Button";
+
 import { useNavigate } from "react-router-dom";
+import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
+
+import { HStack } from "../../atoms/HStack/HStack";
+import { Icon } from "../../atoms/Icon/Icon";
+import { Text } from "../../atoms/Text/Text";
+
 import * as styles from "./styles";
 
 interface MobileNavProps {
@@ -18,6 +20,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
 }) => {
   const navigate = useNavigate();
   const [currentUserId] = useCurrentUserId();
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user_id");
@@ -25,7 +28,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
   };
 
   return (
-    <styles.SideNav $isOpen={isOpen}>
+    <styles.Nav $isOpen={isOpen}>
       <styles.NavList $spacing={6}>
         <styles.NavListItem>
           <styles.NavLink to="/feed" onClick={handleCloseMobileNav}>
@@ -73,14 +76,14 @@ export const MobileNav: React.FC<MobileNavProps> = ({
             </HStack>
           </styles.NavButton>
         </styles.NavListItem>
-        <styles.NavListItem>
-          <styles.ButtonWrapper>
-            <Button $width="100%" $variant="blue">
-              Post
-            </Button>
-          </styles.ButtonWrapper>
-        </styles.NavListItem>
+
+        {/* TO DO: Add post modal functionality here. */}
+        {/* <styles.ButtonNavListItem>
+          <Button $width="100%" $variant="blue">
+            Post
+          </Button>
+        </styles.ButtonNavListItem> */}
       </styles.NavList>
-    </styles.SideNav>
+    </styles.Nav>
   );
 };

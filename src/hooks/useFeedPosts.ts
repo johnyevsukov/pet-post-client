@@ -35,7 +35,6 @@ export const useFeedPosts = () => {
     axiosWithAuth()
       .get("posts/timeline/feed")
       .then((res) => {
-        console.log("res: ", res);
         setIsLoading(false);
         setPosts(res.data);
       })

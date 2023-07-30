@@ -107,8 +107,6 @@ export const Settings: React.FC = () => {
     }
   }, [userData?.user_birthday]);
 
-  console.log("birthday: ", birthday);
-
   const onSubmit = () => {
     axiosWithAuth()
       .put(`users/${currentUserId}`, values)
@@ -120,7 +118,6 @@ export const Settings: React.FC = () => {
         setSubmitting(false);
         //TO DO: API does not support this error. Add it.
         setSubmitError("Username taken.");
-        console.log("here: ", err);
         console.warn("err", err.data);
       });
   };
@@ -149,13 +146,9 @@ export const Settings: React.FC = () => {
     enableReinitialize: true,
   });
 
-  console.log("val birthday: ", values.user_birthday);
-
   if (!isLoading && error) {
     return <>error</>;
-  }
-
-  if (!userData) {
+  } else if (!userData) {
     return (
       <styles.Wrapper>
         <styles.LoaderCard>
@@ -248,18 +241,10 @@ export const Settings: React.FC = () => {
                   {isSubmitting ? (
                     <Loader $width={48} />
                   ) : (
-                    <VStack $spacing={12}>
-                      {/* TO DO: sort out button width */}
-                      <div>
-                        <Button
-                          $variant="blue"
-                          type="submit"
-                          disabled={!isValid}
-                        >
-                          Save
-                        </Button>
-                      </div>
-                      {/* TO DO: better css / display for errors */}
+                    <VStack $spacing={12} $width="auto">
+                      <Button $variant="blue" type="submit" disabled={!isValid}>
+                        Save
+                      </Button>
                       {submitError && (
                         <HStack $spacing={6}>
                           <Text $weight="medium" $color="red3">
@@ -268,6 +253,7 @@ export const Settings: React.FC = () => {
                           <Icon name="warning" width={22} />
                         </HStack>
                       )}
+
                       {/* TO DO: handle better */}
                       {/* {errors.username && (
                           <HStack $spacing={6}>

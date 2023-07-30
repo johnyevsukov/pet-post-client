@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { timeAgo } from "../../../utils/timeAgo";
-import { useUserPermissions } from "../../../hooks/useUserPermissions";
+import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
 
 import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
@@ -20,19 +20,30 @@ export const CommentCard: React.FC<CommentCardProps> = ({
   comment,
   handleDeleteComment,
 }) => {
-  const [hasEditPermissions] = useUserPermissions();
-
-  // TO DO: isLoading state from parent
+  const [currentUserId] = useCurrentUserId();
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
 
   return (
     <styles.Card>
-      {hasEditPermissions && (
-        <styles.EditDeleteButtonsWrapper $spacing={6}>
-          <styles.DeleteButton onClick={() => handleDeleteComment(comment)}>
+      {currentUserId === comment.user_id && (
+        <styles.MoreButtonWrapper>
+          <styles.MoreButton
+            onClick={() => setIsMoreMenuOpen((state) => !state)}
+          >
+            <HStack $spacing={3}>
+              <styles.MoreDot />
+              <styles.MoreDot />
+              <styles.MoreDot />
+            </HStack>
+          </styles.MoreButton>
+        </styles.MoreButtonWrapper>
+      )}
+      {isMoreMenuOpen && (
+        <styles.MoreMenuCard>
+          <styles.DeleteTextButton onClick={() => handleDeleteComment(comment)}>
             Delete
-          </styles.DeleteButton>
-          <styles.EditButton onClick={() => ""}>Edit</styles.EditButton>
-        </styles.EditDeleteButtonsWrapper>
+          </styles.DeleteTextButton>
+        </styles.MoreMenuCard>
       )}
       <VStack $spacing={6}>
         <HStack $spacing={6}>

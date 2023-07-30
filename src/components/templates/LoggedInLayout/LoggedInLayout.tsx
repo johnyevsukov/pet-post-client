@@ -11,6 +11,7 @@ import * as styles from "./styles";
 
 export const LoggedInLayout: React.FC = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
   const handleToggleMobileNav = useCallback(() => {
     setIsMobileNavOpen((state) => !state);
   }, []);
@@ -24,6 +25,7 @@ export const LoggedInLayout: React.FC = () => {
 
   useEffect(() => {
     const handleWindowResize = () => {
+      /* desktop breakpoint */
       window.innerWidth > 767 && handleCloseMobileNav();
     };
     window.addEventListener("resize", handleWindowResize);
@@ -41,7 +43,6 @@ export const LoggedInLayout: React.FC = () => {
       />
       <styles.ContentWrapper>
         <styles.Content ref={containerRef}>
-          {/* some sort of blur content on scroll effect here? */}
           <SearchBar
             desktopWidth={containerWidth}
             isMobileNavOpen={isMobileNavOpen}

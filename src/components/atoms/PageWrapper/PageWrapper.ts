@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../../colors";
+import { onDesktop } from "../../../utils/onDesktop";
 
 export const PageWrapper = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ export const PageWrapper = styled.div`
   min-height: 100svh;
   background: ${colors.blue2};
 
-  @media (min-width: 768px) {
+  ${onDesktop`
     flex-direction: row;
-  }
+  `}
 `;

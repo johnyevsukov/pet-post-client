@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { onDesktop } from "../../../utils/onDesktop";
 import { colorType, colors } from "../../../colors";
 
 export const PageContentColumn = styled.div<{
@@ -13,8 +14,8 @@ export const PageContentColumn = styled.div<{
   padding: 32px 0px;
   flex: 1;
 
-  @media (min-width: 768px) {
+  ${onDesktop`
     align-items: center;
     padding: 0 32px;
-  }
+  `}
 `;

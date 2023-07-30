@@ -1,15 +1,18 @@
 import React from "react";
-import { Icon } from "../../atoms/Icon/Icon";
-import { HStack } from "../../atoms/HStack/HStack";
-import { Text } from "../../atoms/Text/Text";
-import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
-import { Button } from "../../molecules/Button/Button";
+
 import { useNavigate } from "react-router-dom";
+import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
+
+import { HStack } from "../../atoms/HStack/HStack";
+import { Icon } from "../../atoms/Icon/Icon";
+import { Text } from "../../atoms/Text/Text";
+
 import * as styles from "./styles";
 
 export const SideNav: React.FC = () => {
   const navigate = useNavigate();
   const [currentUserId] = useCurrentUserId();
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user_id");
@@ -17,7 +20,7 @@ export const SideNav: React.FC = () => {
   };
 
   return (
-    <styles.SideNav>
+    <styles.Nav>
       <styles.IconLogoWrapper $spacing={12}>
         <Icon name="hamster" width={32} />
         <Text $weight="bold" $color="offWhite" $size="xl">
@@ -65,14 +68,16 @@ export const SideNav: React.FC = () => {
             </HStack>
           </styles.NavButton>
         </styles.NavListItem>
-        <styles.NavListItem>
-          <styles.ButtonWrapper>
+
+        {/* TO DO: Add post modal functionality here. */}
+        {/* <styles.NavListItem>
+          <styles.ButtonNavListItem>
             <Button $width="100%" $variant="blue">
               Post
             </Button>
-          </styles.ButtonWrapper>
-        </styles.NavListItem>
+          </styles.ButtonNavListItem>
+        </styles.NavListItem> */}
       </styles.NavList>
-    </styles.SideNav>
+    </styles.Nav>
   );
 };

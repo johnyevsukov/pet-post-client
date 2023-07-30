@@ -56,9 +56,9 @@ export const HamburgerButton = styled.button`
     background: ${colors.blue2};
   }
 
-  @media (min-width: 768px) {
+  ${onDesktop`
     display: none;
-  }
+  `};
 `;
 
 export const HamburgerLine = styled.div`
