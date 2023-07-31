@@ -28,8 +28,9 @@ export const Input = styled.input<{ $error: boolean }>`
   background: ${colors.pureWhite};
 
   // Needed for annoyance with mobile safari styling
-  min-width: 100%;
-  min-height: 48px;
+  display: block;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
 
   &:hover,
   &:focus {
