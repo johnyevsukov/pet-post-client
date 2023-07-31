@@ -25,6 +25,8 @@ export const Input = styled.input<{ $error: boolean }>`
   outline: ${({ $error }) =>
     $error ? `2px solid ${colors.red3}` : `2px solid ${colors.blue4}`};
   transition: all 0.1s ease-in-out;
+  background: ${colors.pureWhite};
+  min-width: 100%;
 
   &:hover,
   &:focus {
