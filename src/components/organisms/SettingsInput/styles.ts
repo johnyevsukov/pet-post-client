@@ -26,7 +26,10 @@ export const Input = styled.input<{ $error: boolean }>`
     $error ? `2px solid ${colors.red3}` : `2px solid ${colors.blue4}`};
   transition: all 0.1s ease-in-out;
   background: ${colors.pureWhite};
+
+  // Needed for annoyance with mobile safari styling
   min-width: 100%;
+  min-height: 48px;
 
   &:hover,
   &:focus {
