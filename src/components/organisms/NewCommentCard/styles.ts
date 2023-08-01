@@ -2,13 +2,11 @@ import styled from "styled-components";
 import { colors } from "../../../colors";
 import { fontSizeCss, fontWeights } from "../../atoms/Text/Text";
 
-// TO DO: All very similar to new post card. Clean up.
-
 export const Card = styled.div`
   position: relative;
   border-radius: 15px;
-  background: ${colors.offWhite};
   padding: 12px;
+  background: ${colors.offWhite};
 `;
 
 export const Form = styled.form`
@@ -21,7 +19,6 @@ export const HiddenLabel = styled.label`
   top: 0;
 `;
 
-// TO DO: Systematize this
 export const TextAreaInput = styled.textarea<{ $error: boolean }>`
   flex: 1;
   min-height: 60px;

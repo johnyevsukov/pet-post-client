@@ -6,14 +6,14 @@ import { onDesktop } from "../../../utils/onDesktop";
 
 export const Wrapper = styled.div<{ $desktopWidth: number }>`
   position: fixed;
+  height: 45px;
+  min-height: 45px;
   top: 16px;
   z-index: 9;
   left: 0;
   top: 0;
   right: 0;
   background: ${colors.blue3};
-  height: 45px;
-  min-height: 45px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   display: flex;
   align-items: center;
@@ -30,8 +30,8 @@ export const Wrapper = styled.div<{ $desktopWidth: number }>`
 `;
 
 export const Content = styled.div`
-  margin: 0 auto;
   width: 100%;
+  margin: 0 auto;
   max-width: 682px;
   display: flex;
   align-items: center;
@@ -47,9 +47,9 @@ export const HamburgerButton = styled.button`
   background: none;
   border-radius: 6px;
   transition: all 0.1s ease-in-out;
-  cursor: pointer;
   margin-right: 8px;
   padding: 8px;
+  cursor: pointer;
 
   &:hover,
   &:focus {
@@ -78,20 +78,20 @@ export const InputWrapper = styled.div<{ $isMobileNavOpen: boolean }>`
 `;
 
 export const SearchInput = styled.input<{ $isSearchMenuOpen: boolean }>`
+  border: none;
+  outline: none;
   width: 100%;
   height: 30px;
   border-radius: ${({ $isSearchMenuOpen }) =>
     $isSearchMenuOpen ? "12px 12px 0 0" : "12px"};
-  border: none;
-  color: ${colors.textBlack};
-  font-weight: ${fontWeights.bold};
-  ${fontSizeCss.sm};
-  outline: none;
   padding: 0 10px 0 32px;
   transition: all 0.1s ease-in-out;
   background: ${colors.pureWhite};
   outline: ${({ $isSearchMenuOpen }) =>
     $isSearchMenuOpen ? `3px solid ${colors.blue4}` : "none"};
+  color: ${colors.textBlack};
+  font-weight: ${fontWeights.bold};
+  ${fontSizeCss.sm};
 
   &::placeholder {
     color: ${colors.gray1};
@@ -124,12 +124,12 @@ export const SearchResultLink = styled(Link)`
   display: block;
   text-decoration: none;
   width: 100%;
+  padding: 5px 10px;
+  transition: all 0.1s ease-in-out;
   color: ${colors.textBlack};
   font-weight: ${fontWeights.bold};
   ${fontSizeCss.sm};
   cursor: pointer;
-  padding: 5px 10px;
-  transition: all 0.1s ease-in-out;
 
   &:hover,
   &:focus {
@@ -137,7 +137,7 @@ export const SearchResultLink = styled(Link)`
   }
 `;
 
-export const NoResultsWrapper = styled.div`
+export const ErrorNoResultsWrapper = styled.div`
   padding: 5px 10px;
 `;
 

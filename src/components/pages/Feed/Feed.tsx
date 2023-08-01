@@ -19,20 +19,28 @@ export const Feed: React.FC = () => {
   const renderPosts = () => {
     if (!isLoading && error) {
       return (
-        <styles.LoaderErrorCard>
+        <styles.Card>
           <HStack $spacing={8} $justifyContent="center">
             <Text $color="red4" $weight="bold">
               Error loading posts
             </Text>
             <Icon name="warning" />
           </HStack>
-        </styles.LoaderErrorCard>
+        </styles.Card>
       );
     } else if (!posts.length && isLoading) {
       return (
-        <styles.LoaderErrorCard>
+        <styles.Card>
           <Loader />
-        </styles.LoaderErrorCard>
+        </styles.Card>
+      );
+    } else if (!posts.length && !isLoading) {
+      return (
+        <styles.Card>
+          <Text $color="gray1" $weight="medium">
+            No posts yet...
+          </Text>
+        </styles.Card>
       );
     } else {
       return (
@@ -52,11 +60,9 @@ export const Feed: React.FC = () => {
   };
 
   return (
-    <styles.Wrapper>
-      <VStack $spacing={16} $padding="0 0 16px">
-        <NewPostCard handleNewPost={handleNewPost} />
-        {renderPosts()}
-      </VStack>
-    </styles.Wrapper>
+    <VStack $spacing={16} $padding="0 0 16px">
+      <NewPostCard handleNewPost={handleNewPost} />
+      {renderPosts()}
+    </VStack>
   );
 };

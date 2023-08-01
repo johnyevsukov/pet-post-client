@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { axiosWithAuth } from "../../../utils/axiosAuth";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
@@ -10,6 +10,7 @@ import { HStack } from "../../atoms/HStack/HStack";
 import { Button } from "../../molecules/Button/Button";
 import { Text } from "../../atoms/Text/Text";
 import { Loader } from "../../atoms/Loader/Loader";
+import { Icon } from "../../atoms/Icon/Icon";
 
 import { PostType } from "../../../types/postType";
 import { postSchema } from "../../../schemas/postSchema";
@@ -21,9 +22,8 @@ interface NewPostCardProps {
 }
 
 export const NewPostCard: React.FC<NewPostCardProps> = ({ handleNewPost }) => {
-  const { userData, isLoading, error } = useCurrentUser();
-  // TO DO: Handle error posting state
-  // const [error, setError] = useState();
+  const { userData } = useCurrentUser();
+  const [submitError, setSubmitError] = useState<string>();
 
   const onSubmit = () => {
     axiosWithAuth()
@@ -35,7 +35,8 @@ export const NewPostCard: React.FC<NewPostCardProps> = ({ handleNewPost }) => {
       })
       .catch((err) => {
         setSubmitting(false);
-        // setError(err);
+        // TO DO: Handle api error here.
+        setSubmitError("Failed to post.");
         console.warn(err);
       });
   };
@@ -98,6 +99,14 @@ export const NewPostCard: React.FC<NewPostCardProps> = ({ handleNewPost }) => {
                 </Text>
               )}
             </HStack>
+            {submitError && (
+              <HStack $spacing={6}>
+                <Text $size="sm" $weight="medium" $color="red4">
+                  {submitError}
+                </Text>
+                <Icon name="warning" width={20} />
+              </HStack>
+            )}
           </VStack>
         </styles.Form>
       </HStack>

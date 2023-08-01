@@ -1,3 +1,7 @@
+/**
+ * System text component.
+ */
+
 import styled, { css } from "styled-components";
 import { colors, colorType } from "../../../colors";
 
@@ -34,15 +38,22 @@ export const fontSizeCss = {
   `,
 };
 
+const defaults = {
+  size: fontSizeCss.md,
+  weight: fontWeights.regular,
+  align: "left",
+  color: colors.textBlack,
+};
+
 export const Text = styled.p<{
   $size?: "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
   $weight?: "regular" | "medium" | "bold";
   $align?: "center" | "left" | "right";
   $color?: colorType;
 }>`
-  ${({ $size }) => ($size ? fontSizeCss[$size] : fontSizeCss.md)};
+  ${({ $size }) => ($size ? fontSizeCss[$size] : defaults.size)};
   font-weight: ${({ $weight }) =>
-    $weight ? fontWeights[$weight] : fontWeights.regular};
-  color: ${({ $color }) => ($color ? colors[$color] : colors.textBlack)};
-  text-align: ${({ $align }) => ($align ? $align : "left")};
+    $weight ? fontWeights[$weight] : defaults.weight};
+  text-align: ${({ $align }) => ($align ? $align : defaults.align)};
+  color: ${({ $color }) => ($color ? colors[$color] : defaults.color)};
 `;

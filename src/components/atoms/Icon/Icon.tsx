@@ -1,41 +1,47 @@
+/**
+ * System icon component.
+ * Icon SVGs courtesy of
+ * https://openmoji.org/.
+ */
+
 import React from "react";
-import { HamsterIcon } from "../icons/HamsterIcon";
-import { CatIcon } from "../icons/CatIcon";
-import { ChickenIcon } from "../icons/ChickenIcon";
-import { DogIcon } from "../icons/DogIcon";
-import { FishIcon } from "../icons/FishIcon";
-import { FrogIcon } from "../icons/FrogIcon";
-import { MonkeyIcon } from "../icons/MonkeyIcon";
-import { PenguinIcon } from "../icons/PenguinIcon";
-import { PigIcon } from "../icons/PigIcon";
-import { RabbitIcon } from "../icons/RabbitIcon";
-import { SnakeIcon } from "../icons/SnakeIcon";
-import { TurtleIcon } from "../icons/TurtleIcon";
-import { ProfileIcon } from "../icons/ProfileIcon";
-import { NewsPaperIcon } from "../icons/NewspaperIcon";
-import { DoorIcon } from "../icons/DoorIcon";
-import { TagIcon } from "../icons/TagIcon";
-import { RedFlagIcon } from "../icons/RedFlagIcon";
-import { WarningIcon } from "../icons/WarningIcon";
-import { BalloonIcon } from "../icons/BalloonIcon";
-import { MailIcon } from "../icons/MailIcon";
-import { LocationIcon } from "../icons/LocationIcon";
-import { GearIcon } from "../icons/GearIcon";
-import { NavGearIcon } from "../icons/NavGearIcon";
-import { CloseIcon } from "../icons/CloseIcon";
-import { LizardIcon } from "../icons/LizardIcon";
-import { GerbilIcon } from "../icons/GerbilIcon";
-import { SpiderIcon } from "../icons/SpiderIcon";
-import { DuckIcon } from "../icons/DuckIcon";
-import { HedgehogIcon } from "../icons/HedgehogIcon";
-import { HorseIcon } from "../icons/HorseIcon";
-import { BirdIcon } from "../icons/BirdIcon";
-import { CurvedUpArrowIcon } from "../icons/CurvedUpArrowIcon";
-import { DefaultAvatarIcon } from "../icons/DefaultAvatarIcon";
-import { LeftArrowIcon } from "../icons/LeftArrowIcon";
-import { CheckIcon } from "../icons/CheckIcon";
-import { MagnifyingGlassIcon } from "../icons/MagnifyingGlassIcon";
-import { RaccoonIcon } from "../icons/RaccoonIcon";
+import { HamsterIcon } from "./icons/HamsterIcon";
+import { CatIcon } from "./icons/CatIcon";
+import { ChickenIcon } from "./icons/ChickenIcon";
+import { DogIcon } from "./icons/DogIcon";
+import { FishIcon } from "./icons/FishIcon";
+import { FrogIcon } from "./icons/FrogIcon";
+import { MonkeyIcon } from "./icons/MonkeyIcon";
+import { PenguinIcon } from "./icons/PenguinIcon";
+import { PigIcon } from "./icons/PigIcon";
+import { RabbitIcon } from "./icons/RabbitIcon";
+import { SnakeIcon } from "./icons/SnakeIcon";
+import { TurtleIcon } from "./icons/TurtleIcon";
+import { ProfileIcon } from "./icons/ProfileIcon";
+import { NewsPaperIcon } from "./icons/NewspaperIcon";
+import { DoorIcon } from "./icons/DoorIcon";
+import { TagIcon } from "./icons/TagIcon";
+import { RedFlagIcon } from "./icons/RedFlagIcon";
+import { WarningIcon } from "./icons/WarningIcon";
+import { BalloonIcon } from "./icons/BalloonIcon";
+import { MailIcon } from "./icons/MailIcon";
+import { LocationIcon } from "./icons/LocationIcon";
+import { GearIcon } from "./icons/GearIcon";
+import { NavGearIcon } from "./icons/NavGearIcon";
+import { CloseIcon } from "./icons/CloseIcon";
+import { LizardIcon } from "./icons/LizardIcon";
+import { GerbilIcon } from "./icons/GerbilIcon";
+import { SpiderIcon } from "./icons/SpiderIcon";
+import { DuckIcon } from "./icons/DuckIcon";
+import { HedgehogIcon } from "./icons/HedgehogIcon";
+import { HorseIcon } from "./icons/HorseIcon";
+import { BirdIcon } from "./icons/BirdIcon";
+import { CurvedUpArrowIcon } from "./icons/CurvedUpArrowIcon";
+import { DefaultAvatarIcon } from "./icons/DefaultAvatarIcon";
+import { LeftArrowIcon } from "./icons/LeftArrowIcon";
+import { CheckIcon } from "./icons/CheckIcon";
+import { MagnifyingGlassIcon } from "./icons/MagnifyingGlassIcon";
+import { RaccoonIcon } from "./icons/RaccoonIcon";
 import * as styles from "./styles";
 
 export type IconType =

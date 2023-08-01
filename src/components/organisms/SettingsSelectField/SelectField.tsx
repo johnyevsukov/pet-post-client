@@ -6,7 +6,7 @@ import { VStack } from "../../atoms/VStack/VStack";
 import { selectStyles } from "./selectStyles";
 import * as styles from "./styles";
 
-interface SelectFieldProps {
+interface SettingsSelectFieldProps {
   id: string;
   name: string;
   placeholder: string;
@@ -16,7 +16,7 @@ interface SelectFieldProps {
   label: string;
 }
 
-export const SelectField: React.FC<SelectFieldProps> = ({
+export const SettingsSelectField: React.FC<SettingsSelectFieldProps> = ({
   id,
   name,
   placeholder,

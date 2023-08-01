@@ -1,5 +1,3 @@
-// TO DO: Rename this file to have "form" in it (as well as new post card)?
-
 import React, { useState } from "react";
 
 import { axiosWithAuth } from "../../../utils/axiosAuth";
@@ -11,6 +9,7 @@ import { HStack } from "../../atoms/HStack/HStack";
 import { Button } from "../../molecules/Button/Button";
 import { Loader } from "../../atoms/Loader/Loader";
 import { Text } from "../../atoms/Text/Text";
+import { Icon } from "../../atoms/Icon/Icon";
 
 import { CommentType } from "../../../types/commentType";
 import { commentSchema } from "../../../schemas/commentSchema";
@@ -29,9 +28,8 @@ export const NewCommentCard: React.FC<NewCommentCardProps> = ({
   handleNewComment,
 }) => {
   const [currentUserId] = useCurrentUserId();
-  const [error, setError] = useState();
+  const [submitError, setSubmitError] = useState<string>();
 
-  // handle error here
   const onSubmit = () => {
     axiosWithAuth()
       .post(`posts/${postId}/comments`, {
@@ -45,7 +43,8 @@ export const NewCommentCard: React.FC<NewCommentCardProps> = ({
       })
       .catch((err) => {
         setSubmitting(false);
-        setError(err);
+        // TO DO: Handle api error here.
+        setSubmitError("Failed to comment.");
         console.warn(err);
       });
   };
@@ -108,6 +107,14 @@ export const NewCommentCard: React.FC<NewCommentCardProps> = ({
               </Text>
             )}
           </HStack>
+          {submitError && (
+            <HStack $spacing={6}>
+              <Text $size="sm" $weight="medium" $color="red4">
+                {submitError}
+              </Text>
+              <Icon name="warning" width={20} />
+            </HStack>
+          )}
         </VStack>
       </styles.Form>
     </styles.Card>

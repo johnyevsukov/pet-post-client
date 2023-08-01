@@ -1,3 +1,10 @@
+/**
+ * Returns all posts for the user
+ * of the current profile page as
+ * well as new post and delete post
+ * functions.
+ */
+
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosAuth";
@@ -5,6 +12,7 @@ import { PostType } from "../types/postType";
 
 export const useProfilePosts = () => {
   const { id: profileId } = useParams();
+
   const [posts, setPosts] = useState<PostType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -25,12 +33,15 @@ export const useProfilePosts = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        setError(err);
         console.warn(err);
       });
   };
 
   useEffect(() => {
+    if (!profileId) {
+      return;
+    }
+
     setIsLoading(true);
     axiosWithAuth()
       .get(`users/${profileId}/posts`)
@@ -40,7 +51,7 @@ export const useProfilePosts = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        setError(err);
+        setError(err.response.data.message);
         console.warn(err);
       });
   }, [profileId]);

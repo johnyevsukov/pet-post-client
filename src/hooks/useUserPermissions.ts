@@ -1,8 +1,13 @@
 /**
- * Super insecure way
- * to handle auth for edit
- * permisions. Here for
+ * Very insecure. Here for
  * lack of a stronger API.
+ */
+
+/**
+ * Returns has edit permissions
+ * boolean value based on a check
+ * of the current param user id
+ * and current logged in user id.
  */
 
 import { useEffect, useState } from "react";
@@ -12,6 +17,7 @@ import { useCurrentUserId } from "./useCurrentUserId";
 export const useUserPermissions = () => {
   const { id: profileId } = useParams();
   const [currentUserId] = useCurrentUserId();
+
   const [hasEditPermissions, setHasEditPermissions] = useState(false);
 
   useEffect(() => {

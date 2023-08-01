@@ -27,8 +27,11 @@ export const Input = styled.input<{ $error: boolean }>`
   transition: all 0.1s ease-in-out;
   background: ${colors.pureWhite};
 
-  /* Needed for annoyance with mobile safari styling on date inputs.
-  Not a permanent fix.*/
+  /* 
+  * Needed for annoyance with mobile safari 
+  * styling on date inputs.
+  * Not a permanent fix.
+  */
   min-width: calc(100% - 16px);
 
   &:hover,

@@ -1,3 +1,10 @@
+/**
+ * Returns all posts of users who
+ * the logged in user is following
+ * as well as new post and delete post
+ * functions.
+ */
+
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosAuth";
@@ -5,6 +12,7 @@ import { PostType } from "../types/postType";
 
 export const useFeedPosts = () => {
   const { id: profileId } = useParams();
+
   const [posts, setPosts] = useState<PostType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -25,7 +33,6 @@ export const useFeedPosts = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        setError(err);
         console.warn(err);
       });
   };
@@ -40,10 +47,10 @@ export const useFeedPosts = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        setError(err);
+        setError(err.response.data.message);
         console.warn(err);
       });
-  }, [profileId]);
+  }, []);
 
   return { posts, isLoading, error, handleNewPost, handleDeletePost };
 };

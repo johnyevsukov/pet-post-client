@@ -1,3 +1,8 @@
+/**
+ * Returns the width and height
+ * of a given element via its ref.
+ */
+
 import { useState, useEffect } from "react";
 
 export const useElementDimensions = (myRef: any) => {

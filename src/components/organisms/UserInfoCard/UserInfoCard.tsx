@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from "react";
 
+import { format } from "date-fns";
+
 import { useNavigate } from "react-router-dom";
 import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
-import { useUser } from "../../../hooks/useUser";
+import { useProfileUser } from "../../../hooks/useProfileUser";
 import { useUserPermissions } from "../../../hooks/useUserPermissions";
 
 import { FollowModal } from "../../molecules/FollowModal/FollowModal";
@@ -12,6 +14,10 @@ import { HStack } from "../../atoms/HStack/HStack";
 import { FlexBox } from "../../atoms/FlexBox/FlexBox";
 import { Text } from "../../atoms/Text/Text";
 import { Icon } from "../../atoms/Icon/Icon";
+import { AbsoluteRightWrapper } from "../../atoms/AbsoluteWrapper/AbsoluteRightWrapper";
+import { AbsoluteLeftWrapper } from "../../atoms/AbsoluteWrapper/AbsoluteLeftWrapper";
+import { TextButton } from "../../molecules/Button/TextButton";
+import { IconButton } from "../../molecules/Button/IconButton/IconButton";
 import { Loader } from "../../atoms/Loader/Loader";
 
 import * as styles from "./styles";
@@ -28,7 +34,7 @@ export const UserInfoCard: React.FC = () => {
     error,
     handleFollow,
     handleUnfollow,
-  } = useUser();
+  } = useProfileUser();
   const [openModal, setOpenModal] = useState<
     "followers" | "following" | "none"
   >("none");
@@ -36,9 +42,7 @@ export const UserInfoCard: React.FC = () => {
   const birthday = useMemo(() => {
     if (userData?.user_birthday) {
       const birthday = new Date(userData?.user_birthday);
-      return birthday.toLocaleDateString();
-    } else {
-      return;
+      return format(birthday, "MM/dd/yyyy");
     }
   }, [userData?.user_birthday]);
 
@@ -77,22 +81,16 @@ export const UserInfoCard: React.FC = () => {
 
   const renderSideButton = () => {
     if (hasEditPermissions) {
-      return (
-        <styles.SettingsButton onClick={handleSettingsClick}>
-          <Icon name="gear" width={32} />
-        </styles.SettingsButton>
-      );
+      return <IconButton icon="gear" onClick={handleSettingsClick} />;
     } else if (isFollowing) {
       return (
-        <styles.UnfollowUserButton onClick={handleUnfollow}>
+        <styles.UnfollowButton onClick={handleUnfollow}>
           Unfollow
-        </styles.UnfollowUserButton>
+        </styles.UnfollowButton>
       );
     } else {
       return (
-        <styles.FollowUserButton onClick={handleFollow}>
-          Follow
-        </styles.FollowUserButton>
+        <styles.FollowButton onClick={handleFollow}>Follow</styles.FollowButton>
       );
     }
   };
@@ -122,15 +120,16 @@ export const UserInfoCard: React.FC = () => {
     );
   }
 
-  // TO DO: sort out state for no followers or following (open modal)
   return (
     <>
       {renderModal()}
       <styles.Card>
-        <styles.AvatarWrapper>
+        <AbsoluteLeftWrapper $top={90} $left={16}>
           <Avatar name={userData.user_avatar || "defaultAvatar"} size="lg" />
-        </styles.AvatarWrapper>
-        {renderSideButton()}
+        </AbsoluteLeftWrapper>
+        <AbsoluteRightWrapper $top={166} $right={16}>
+          {renderSideButton()}
+        </AbsoluteRightWrapper>
         <styles.BlueTopBlock />
         <styles.UserInfoWrapper>
           <VStack $spacing={12}>
@@ -169,18 +168,18 @@ export const UserInfoCard: React.FC = () => {
                 </HStack>
               </HStack>
               <HStack $spacing={8}>
-                <styles.FollowButton onClick={() => setOpenModal("following")}>
+                <TextButton onClick={() => setOpenModal("following")}>
                   <styles.FollowCount>
                     {userFollowing.length}
                   </styles.FollowCount>{" "}
                   <styles.FollowDescription>Following</styles.FollowDescription>
-                </styles.FollowButton>
-                <styles.FollowButton onClick={() => setOpenModal("followers")}>
+                </TextButton>
+                <TextButton onClick={() => setOpenModal("followers")}>
                   <styles.FollowCount>
                     {userFollowers.length}
                   </styles.FollowCount>{" "}
                   <styles.FollowDescription>Followers</styles.FollowDescription>
-                </styles.FollowButton>
+                </TextButton>
               </HStack>
             </VStack>
           </VStack>

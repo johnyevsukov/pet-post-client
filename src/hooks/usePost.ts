@@ -1,7 +1,14 @@
 /**
- * Not ideal to fetch all
- * data like this.
- * Here for lack of a stronger API.
+ * Ideally this whole hook should
+ * not be necessary. Any needed post
+ * user data should come from api when
+ * initially fetching posts. Likes and comments
+ * should load when opened.
+ */
+
+/**
+ * Returns user data, likes, and comments
+ * for a given post.
  */
 
 import { useEffect, useState, useCallback, useMemo } from "react";
@@ -14,6 +21,7 @@ import { UserDataType } from "../types/userDataType";
 
 export const usePost = (post: PostType) => {
   const [currentUserId] = useCurrentUserId();
+
   const [userData, setUserData] = useState<UserDataType>();
   const [likes, setLikes] = useState<LikeType[]>();
   const [comments, setComments] = useState<CommentType[]>([]);
@@ -46,12 +54,10 @@ export const usePost = (post: PostType) => {
       })
       .catch((err) => {
         setIsLoading(false);
-        setError(err);
         console.warn(err);
       });
   };
 
-  // TO DO: Handle loading / errors here or  -debounce-
   const handleToggleLike = () => {
     if (!isLiked) {
       axiosWithAuth()
@@ -77,6 +83,10 @@ export const usePost = (post: PostType) => {
   };
 
   useEffect(() => {
+    if (!currentUserId) {
+      return;
+    }
+
     setIsLoading(true);
     Promise.all([
       axiosWithAuth().get(`users/${post.user_id}`),
@@ -91,9 +101,10 @@ export const usePost = (post: PostType) => {
       })
       .catch((err) => {
         setIsLoading(false);
-        setError(err);
+        setError(err.response.data.message);
+        console.warn(err);
       });
-  }, [post.user_id, post.post_id]);
+  }, [post.user_id, post.post_id, currentUserId]);
 
   return {
     userData,

@@ -1,8 +1,11 @@
 import React, { useRef, useEffect } from "react";
-import * as styles from "./styles";
-import { Icon } from "../../atoms/Icon/Icon";
-import { Text } from "../../atoms/Text/Text";
+
+import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
+import { Text } from "../../atoms/Text/Text";
+import { IconButton } from "../Button/IconButton/IconButton";
+
+import * as styles from "./styles";
 
 interface ModalProps {
   title: string;
@@ -32,17 +35,15 @@ export const Modal: React.FC<ModalProps> = ({
   return (
     <styles.ScreenOverlay>
       <styles.ModalCard ref={cardRef}>
-        <styles.TopWrapper>
+        <VStack $spacing={16}>
           <HStack $spacing={12} $justifyContent="space-between">
             <Text $weight="bold" $size="lg">
               {title}
             </Text>
-            <styles.CloseButton onClick={handleClose}>
-              <Icon name="close" width={32} />
-            </styles.CloseButton>
+            <IconButton icon="close" onClick={handleClose} />
           </HStack>
-        </styles.TopWrapper>
-        {children}
+          {children}
+        </VStack>
       </styles.ModalCard>
     </styles.ScreenOverlay>
   );

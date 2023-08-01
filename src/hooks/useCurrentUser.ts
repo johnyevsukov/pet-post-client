@@ -1,11 +1,6 @@
 /**
- * Not ideal to fetch all
- * user follower and following
- * data along with user info.
- * More ideal to fetch a count for
- * each and fetch full follower/following
- * data when opening the follower/following modals.
- * Here for lack of a stronger API.
+ * Returns user data for the user
+ * that is currently logged in.
  */
 
 import { useEffect, useState } from "react";
@@ -15,11 +10,16 @@ import { useCurrentUserId } from "./useCurrentUserId";
 
 export const useCurrentUser = () => {
   const [currentUserId] = useCurrentUserId();
+
   const [userData, setUserData] = useState<UserDataType>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
   useEffect(() => {
+    if (!currentUserId) {
+      return;
+    }
+
     setIsLoading(true);
     axiosWithAuth()
       .get(`users/${currentUserId}`)
@@ -29,7 +29,7 @@ export const useCurrentUser = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        setError(err);
+        setError(err.response.data.message);
         console.warn(err);
       });
   }, [currentUserId]);

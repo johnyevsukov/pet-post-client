@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { colors } from "../../../colors";
 import { fontSizeCss, fontWeights } from "../../atoms/Text/Text";
+import { TextButton } from "../../molecules/Button/TextButton";
 
-// TO DO: Systematize this
 export const Card = styled.div`
   position: relative;
   border-radius: 15px;
@@ -11,7 +11,6 @@ export const Card = styled.div`
   background: ${colors.offWhite};
 `;
 
-// TO DO: Systematize this
 export const TextLink = styled(Link)`
   text-decoration: none;
   color: ${colors.textBlack};
@@ -24,12 +23,14 @@ export const TextLink = styled(Link)`
   }
 `;
 
-// TO DO: Systematize this
-export const MoreButtonWrapper = styled.div`
+export const MoreMenuCard = styled.div`
   position: absolute;
-  width: auto;
-  right: 8px;
-  top: 8px;
+  top: 40px;
+  right: 15px;
+  padding: 8px;
+  background: ${colors.pureWhite};
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 12px;
 `;
 
 export const MoreButton = styled.button`
@@ -54,27 +55,9 @@ export const MoreDot = styled.div`
   background: ${colors.gray1};
 `;
 
-export const MoreMenuCard = styled.div`
-  position: absolute;
-  top: -28px;
-  right: 8px;
-  padding: 8px;
-  background: ${colors.pureWhite};
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 12px;
-`;
-
-export const DeleteTextButton = styled.button`
-  background: none;
-  border: none;
+export const DeleteButton = styled(TextButton).attrs({
+  $size: "xs",
+  $color: "red3",
+})`
   padding: 4px 2px;
-  color: ${colors.red3};
-  font-weight: ${fontWeights.bold};
-  ${fontSizeCss.xs}
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
 `;

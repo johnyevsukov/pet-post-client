@@ -14,7 +14,6 @@ import { Loader } from "../../atoms/Loader/Loader";
 
 import * as styles from "./styles";
 
-// TO DO: chnage isLoading to loading
 export const Profile: React.FC = () => {
   const [hasEditPermissions] = useUserPermissions();
   const { posts, isLoading, error, handleNewPost, handleDeletePost } =
@@ -23,20 +22,28 @@ export const Profile: React.FC = () => {
   const renderPosts = () => {
     if (!isLoading && error) {
       return (
-        <styles.LoaderErrorCard>
+        <styles.Card>
           <HStack $spacing={8} $justifyContent="center">
             <Text $color="red4" $weight="bold">
-              Error loading posts
+              Error loading posts.
             </Text>
             <Icon name="warning" />
           </HStack>
-        </styles.LoaderErrorCard>
+        </styles.Card>
       );
     } else if (!posts.length && isLoading) {
       return (
-        <styles.LoaderErrorCard>
+        <styles.Card>
           <Loader />
-        </styles.LoaderErrorCard>
+        </styles.Card>
+      );
+    } else if (!posts.length && !isLoading) {
+      return (
+        <styles.Card>
+          <Text $color="gray1" $weight="medium">
+            No posts yet...
+          </Text>
+        </styles.Card>
       );
     } else {
       return (

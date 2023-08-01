@@ -15,7 +15,7 @@ export const SettingsCard = styled.div`
   padding: 16px;
 `;
 
-export const LoaderCard = styled(SettingsCard)`
+export const LoaderErrorCard = styled(SettingsCard)`
   min-height: 604px;
   display: flex;
   align-items: center;
@@ -41,20 +41,6 @@ export const AvatarFormWrapper = styled.div`
   `}
 `;
 
-export const ButtonWrapper = styled(HStack)`
+export const SubmitButtonWrapper = styled(HStack)`
   margin-top: 8px;
-`;
-
-export const BackButton = styled.button`
-  border: 3px solid ${colors.blue4};
-  border-radius: 50%;
-  padding: 2px;
-  cursor: pointer;
-  background: ${colors.pureWhite};
-  transition: all 0.1s ease-in-out;
-
-  &:hover,
-  &:focus {
-    background: ${colors.blue1};
-  }
 `;

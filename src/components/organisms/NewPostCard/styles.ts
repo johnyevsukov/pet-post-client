@@ -20,14 +20,13 @@ export const HiddenLabel = styled.label`
   top: 0;
 `;
 
-// TO DO: Systematize this handle error state
 export const TextAreaInput = styled.textarea<{ $error: boolean }>`
+  resize: none;
+  border: none;
   flex: 1;
   min-height: 60px;
-  resize: none;
   border-radius: 15px;
   padding: 16px;
-  border: none;
   background: rgba(54, 172, 255, 0.08);
   color: ${colors.textBlack};
   ${fontSizeCss.md}
@@ -38,8 +37,8 @@ export const TextAreaInput = styled.textarea<{ $error: boolean }>`
     sans-serif;
 
   &::placeholder {
-    color: ${colors.gray2};
     ${fontSizeCss.md}
+    color: ${colors.gray2};
     font-weight: ${fontWeights.regular};
   }
 

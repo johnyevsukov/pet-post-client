@@ -11,6 +11,8 @@ import { HStack } from "../../atoms/HStack/HStack";
 import { Text } from "../../atoms/Text/Text";
 import { Icon } from "../../atoms/Icon/Icon";
 import { Loader } from "../../atoms/Loader/Loader";
+import { TextButton } from "../../molecules/Button/TextButton";
+import { IconButton } from "../../molecules/Button/IconButton/IconButton";
 
 import { PostType } from "../../../types/postType";
 
@@ -45,21 +47,21 @@ export const PostCard: React.FC<PostCardProps> = ({
       return (
         <>
           <styles.CommentConnectorLine />
-          <styles.LoaderErrorCard>
+          <styles.CommentLoaderErrorCard>
             <HStack $spacing={8} $justifyContent="center">
               <Text $color="red4" $weight="bold" $size="sm">
                 Error loading comments
               </Text>
               <Icon name="warning" width={32} />
             </HStack>
-          </styles.LoaderErrorCard>
+          </styles.CommentLoaderErrorCard>
         </>
       );
     } else if (!userData || !comments || !likes) {
       return (
-        <styles.LoaderErrorCard>
+        <styles.CommentLoaderErrorCard>
           <Loader />
-        </styles.LoaderErrorCard>
+        </styles.CommentLoaderErrorCard>
       );
     } else {
       return (
@@ -81,12 +83,14 @@ export const PostCard: React.FC<PostCardProps> = ({
               </>
             );
           })}
-          <styles.CollapseCommentsButton
-            onClick={() => setShowComments(false)}
-            aria-label="collapse comments"
-          >
-            <Icon name="curvedUpArrow" width={24} />
-          </styles.CollapseCommentsButton>
+          <styles.CollapseCommentsButtonWrapper>
+            <IconButton
+              icon="curvedUpArrow"
+              iconWidth={24}
+              onClick={() => setShowComments(false)}
+              aria-label="collapse comments"
+            />
+          </styles.CollapseCommentsButtonWrapper>
         </>
       );
     }
@@ -94,8 +98,47 @@ export const PostCard: React.FC<PostCardProps> = ({
 
   return (
     <styles.Card>
-      {hasEditPermissions && (
-        <styles.MoreButtonWrapper>
+      <HStack
+        $spacing={6}
+        $alignItems="flex-start"
+        $justifyContent="space-between"
+      >
+        <HStack $spacing={8} $alignItems="flex-start">
+          <Avatar
+            name={post.user_avatar || userData?.user_avatar || "defaultAvatar"}
+            size="sm"
+          />
+          <VStack $spacing={10}>
+            <VStack $spacing={6}>
+              <HStack $spacing={6}>
+                <styles.TextLink to={`/profile/${post.user_id}`}>
+                  {post.username}
+                </styles.TextLink>
+                <Text $weight="medium" $size="sm" $color="gray1">
+                  {timeAgo(post.created_at)}
+                </Text>
+              </HStack>
+              <Text>{post.post_text}</Text>
+            </VStack>
+            <HStack $spacing={12}>
+              <styles.LikeButton
+                $isLiked={isLiked}
+                onClick={handleToggleLike}
+                aria-label="toggle like"
+              >
+                paws: {likes ? likes.length : 0}
+              </styles.LikeButton>
+              <TextButton
+                $size="xs"
+                onClick={() => setShowComments((state) => !state)}
+                aria-label="toggle expand collapse comments"
+              >
+                comments: {comments ? comments.length : 0}
+              </TextButton>
+            </HStack>
+          </VStack>
+        </HStack>
+        {hasEditPermissions && (
           <styles.MoreButton
             onClick={() => setIsMoreMenuOpen((state) => !state)}
           >
@@ -105,51 +148,15 @@ export const PostCard: React.FC<PostCardProps> = ({
               <styles.MoreDot />
             </HStack>
           </styles.MoreButton>
-        </styles.MoreButtonWrapper>
-      )}
+        )}
+      </HStack>
       {isMoreMenuOpen && (
         <styles.MoreMenuCard>
-          <styles.DeleteTextButton onClick={() => handleDeletePost(post)}>
+          <styles.DeleteButton onClick={() => handleDeletePost(post)}>
             Delete
-          </styles.DeleteTextButton>
+          </styles.DeleteButton>
         </styles.MoreMenuCard>
       )}
-      <styles.AvatarWrapper>
-        <Avatar
-          name={post.user_avatar || userData?.user_avatar || "defaultAvatar"}
-          size="sm"
-        />
-      </styles.AvatarWrapper>
-      {/* TO DO: This should be margin not padding. This should just use flex not absolute. */}
-      <VStack $spacing={10} $padding={"0 0 0 54px"}>
-        <VStack $spacing={6}>
-          <HStack $spacing={6}>
-            <styles.TextLink to={`/profile/${post.user_id}`}>
-              {post.username}
-            </styles.TextLink>
-            <Text $weight="medium" $size="sm" $color="gray1">
-              {timeAgo(post.created_at)}
-            </Text>
-          </HStack>
-          <Text>{post.post_text}</Text>
-        </VStack>
-        <HStack $spacing={12}>
-          <styles.TextButton
-            $isLiked={isLiked}
-            onClick={handleToggleLike}
-            aria-label="toggle like"
-          >
-            paws: {likes ? likes.length : 0}
-          </styles.TextButton>
-          <styles.TextButton
-            $isLiked={false}
-            onClick={() => setShowComments((state) => !state)}
-            aria-label="toggle expand collapse comments"
-          >
-            comments: {comments ? comments.length : 0}
-          </styles.TextButton>
-        </HStack>
-      </VStack>
       {showComments && (
         <styles.CommentsWrapper>{renderComments()}</styles.CommentsWrapper>
       )}

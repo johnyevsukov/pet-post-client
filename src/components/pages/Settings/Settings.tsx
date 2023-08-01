@@ -1,20 +1,25 @@
 import React, { useMemo, useState } from "react";
-import { Text } from "../../atoms/Text/Text";
-import * as styles from "./styles";
-import { Icon } from "../../atoms/Icon/Icon";
+import { axiosWithAuth } from "../../../utils/axiosAuth";
+import { format } from "date-fns";
+
+import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
+import { useNavigate } from "react-router-dom";
+import { useProfileUser } from "../../../hooks/useProfileUser";
+import { useFormik } from "formik";
+
+import { SettingsInput } from "../../organisms/SettingsInput/SettingsInput";
+import { SettingsSelectField } from "../../organisms/SettingsSelectField/SelectField";
+import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
 import { Avatar } from "../../molecules/Avatar/Avatar";
-import { SelectField } from "../../organisms/SelectField/SelectField";
-import { VStack } from "../../atoms/VStack/VStack";
-import { useUser } from "../../../hooks/useUser";
-import { useFormik } from "formik";
-import { SettingsInput } from "../../organisms/SettingsInput/SettingsInput";
+import { Text } from "../../atoms/Text/Text";
+import { Icon } from "../../atoms/Icon/Icon";
 import { Button } from "../../molecules/Button/Button";
-import { axiosWithAuth } from "../../../utils/axiosAuth";
-import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
+import { IconButton } from "../../molecules/Button/IconButton/IconButton";
 import { Loader } from "../../atoms/Loader/Loader";
-import { useNavigate } from "react-router-dom";
+
 import { userSchema } from "../../../schemas/userSchema";
+import * as styles from "./styles";
 
 const avatar = [
   { label: "Default", value: "defaultAvatar" },
@@ -94,31 +99,30 @@ const locations = [
 export const Settings: React.FC = () => {
   const navigate = useNavigate();
   const [currentUserId] = useCurrentUserId();
-  const { userData, isLoading, error } = useUser();
+
+  const { userData, isLoading, error } = useProfileUser();
   const [successfullySubmitted, setSuccessfullySubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
   const birthday = useMemo(() => {
     if (userData?.user_birthday) {
       const birthday = new Date(userData?.user_birthday);
-      return birthday.toISOString().substring(0, 10);
-    } else {
-      return;
+      return format(birthday, "yyyy-MM-dd");
     }
   }, [userData?.user_birthday]);
 
   const onSubmit = () => {
     axiosWithAuth()
       .put(`users/${currentUserId}`, values)
-      .then((res) => {
+      .then(() => {
         setSubmitting(false);
         setSuccessfullySubmitted(true);
       })
       .catch((err) => {
         setSubmitting(false);
-        //TO DO: API does not support this error. Add it.
+        // TO DO: Clean up API error here.
         setSubmitError("Username taken.");
-        console.warn("err", err.data);
+        console.warn(err);
       });
   };
 
@@ -147,13 +151,22 @@ export const Settings: React.FC = () => {
   });
 
   if (!isLoading && error) {
-    return <>error</>;
+    return (
+      <styles.Wrapper>
+        <HStack $spacing={8} $justifyContent="center">
+          <Text $color="red4" $weight="bold">
+            Error loading user information.
+          </Text>
+          <Icon name="warning" />
+        </HStack>
+      </styles.Wrapper>
+    );
   } else if (!userData) {
     return (
       <styles.Wrapper>
-        <styles.LoaderCard>
+        <styles.LoaderErrorCard>
           <Loader />
-        </styles.LoaderCard>
+        </styles.LoaderErrorCard>
       </styles.Wrapper>
     );
   }
@@ -163,9 +176,7 @@ export const Settings: React.FC = () => {
       <styles.SettingsCard>
         <VStack $spacing={24}>
           <HStack $spacing={6} $justifyContent="space-between">
-            <styles.BackButton onClick={() => navigate(-1)}>
-              <Icon name="leftArrow" width={32} />
-            </styles.BackButton>
+            <IconButton icon="leftArrow" onClick={() => navigate(-1)} />
             <HStack $spacing={6} $width="auto">
               <Text $weight="bold" $size="lg">
                 Account Settings
@@ -213,7 +224,7 @@ export const Settings: React.FC = () => {
                   touched={touched.user_birthday}
                   error={errors.user_birthday}
                 />
-                <SelectField
+                <SettingsSelectField
                   id="user_avatar"
                   name="user_avatar"
                   placeholder="Avatar..."
@@ -224,7 +235,7 @@ export const Settings: React.FC = () => {
                   value={avatar.filter((a) => a.value === values.user_avatar)}
                   label="Avatar"
                 />
-                <SelectField
+                <SettingsSelectField
                   id="user_location"
                   name="user_location"
                   placeholder="Location..."
@@ -237,7 +248,7 @@ export const Settings: React.FC = () => {
                   )}
                   label="Location"
                 />
-                <styles.ButtonWrapper $spacing={6}>
+                <styles.SubmitButtonWrapper $spacing={6}>
                   {isSubmitting ? (
                     <Loader $width={48} />
                   ) : (
@@ -253,28 +264,26 @@ export const Settings: React.FC = () => {
                           <Icon name="warning" width={22} />
                         </HStack>
                       )}
-
-                      {/* TO DO: handle better */}
-                      {/* {errors.username && (
-                          <HStack $spacing={6}>
-                            <Text $weight="medium" $color="red3">
-                              {errors.username}
-                            </Text>
-                            <Icon name="warning" width={22} />
-                          </HStack>
-                        )}
-                        {errors.user_birthday && (
-                          <HStack $spacing={6}>
-                            <Text $weight="medium" $color="red3">
-                              {errors.user_birthday}
-                            </Text>
-                            <Icon name="warning" width={22} />
-                          </HStack>
-                        )} */}
                     </VStack>
                   )}
                   {successfullySubmitted && <Icon name="check" />}
-                </styles.ButtonWrapper>
+                </styles.SubmitButtonWrapper>
+                {errors.username && (
+                  <HStack $spacing={6}>
+                    <Text $weight="medium" $color="red3">
+                      {errors.username}
+                    </Text>
+                    <Icon name="warning" width={22} />
+                  </HStack>
+                )}
+                {errors.user_birthday && (
+                  <HStack $spacing={6}>
+                    <Text $weight="medium" $color="red3">
+                      {errors.user_birthday}
+                    </Text>
+                    <Icon name="warning" width={22} />
+                  </HStack>
+                )}
               </VStack>
             </styles.Form>
           </styles.AvatarFormWrapper>

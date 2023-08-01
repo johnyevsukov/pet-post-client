@@ -1,3 +1,7 @@
+/**
+ * System loader component.
+ */
+
 import styled, { keyframes } from "styled-components";
 import { colors } from "../../../colors";
 

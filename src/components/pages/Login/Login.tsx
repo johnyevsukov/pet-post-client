@@ -33,6 +33,7 @@ export const Login: React.FC = () => {
       .catch((err) => {
         setSubmitting(false);
         setError(err.response.data.message);
+        console.warn(err);
       });
   };
 

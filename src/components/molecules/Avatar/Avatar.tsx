@@ -1,6 +1,11 @@
+/**
+ * System avatar component.
+ */
+
 import React from "react";
-import * as styles from "./styles";
 import { Icon, IconType } from "../../atoms/Icon/Icon";
+
+import * as styles from "./styles";
 
 interface AvatarProps {
   name: IconType;

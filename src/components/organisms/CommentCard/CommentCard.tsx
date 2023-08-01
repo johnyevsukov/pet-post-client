@@ -25,8 +25,23 @@ export const CommentCard: React.FC<CommentCardProps> = ({
 
   return (
     <styles.Card>
-      {currentUserId === comment.user_id && (
-        <styles.MoreButtonWrapper>
+      <HStack
+        $spacing={6}
+        $alignItems="flex-start"
+        $justifyContent="space-between"
+      >
+        <VStack $spacing={6}>
+          <HStack $spacing={6}>
+            <styles.TextLink to={`/profile/${comment.user_id}`}>
+              {comment.username}
+            </styles.TextLink>
+            <Text $weight="medium" $size="sm" $color="gray1">
+              {timeAgo(comment.created_at)}
+            </Text>
+          </HStack>
+          <Text>{comment.comment_text}</Text>
+        </VStack>
+        {currentUserId === comment.user_id && (
           <styles.MoreButton
             onClick={() => setIsMoreMenuOpen((state) => !state)}
           >
@@ -36,26 +51,15 @@ export const CommentCard: React.FC<CommentCardProps> = ({
               <styles.MoreDot />
             </HStack>
           </styles.MoreButton>
-        </styles.MoreButtonWrapper>
-      )}
+        )}
+      </HStack>
       {isMoreMenuOpen && (
         <styles.MoreMenuCard>
-          <styles.DeleteTextButton onClick={() => handleDeleteComment(comment)}>
+          <styles.DeleteButton onClick={() => handleDeleteComment(comment)}>
             Delete
-          </styles.DeleteTextButton>
+          </styles.DeleteButton>
         </styles.MoreMenuCard>
       )}
-      <VStack $spacing={6}>
-        <HStack $spacing={6}>
-          <styles.TextLink to={`/profile/${comment.user_id}`}>
-            {comment.username}
-          </styles.TextLink>
-          <Text $weight="medium" $size="sm" $color="gray1">
-            {timeAgo(comment.created_at)}
-          </Text>
-        </HStack>
-        <Text>{comment.comment_text}</Text>
-      </VStack>
     </styles.Card>
   );
 };

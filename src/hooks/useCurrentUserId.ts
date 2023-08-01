@@ -1,3 +1,9 @@
+/**
+ * Returns the user id of
+ * the user that is currenlty
+ * logged in.
+ */
+
 import { useState, useEffect } from "react";
 
 export const useCurrentUserId = () => {
