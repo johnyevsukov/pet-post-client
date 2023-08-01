@@ -54,6 +54,21 @@ const buttonVariantCss = {
       color: ${colors.gray1};
     }
   `,
+  red: css`
+    background: ${colors.red4};
+    color: ${colors.offWhite};
+
+    &:hover,
+    &:focus {
+      background: ${colors.red3};
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background: ${colors.red2};
+      color: ${colors.gray1};
+    }
+  `,
   textBlue: css`
     padding: 0;
     background: none;
@@ -89,7 +104,7 @@ const defaults = {
 
 export const Button = styled.button<{
   $size?: "sm" | "md" | "lg";
-  $variant?: "blue" | "white" | "textBlue";
+  $variant?: "blue" | "white" | "red" | "textBlue";
   $width?: string;
   $padding?: string;
 }>`

@@ -20,6 +20,7 @@ import { Loader } from "../../atoms/Loader/Loader";
 
 import { userSchema } from "../../../schemas/userSchema";
 import * as styles from "./styles";
+import { DeleteAccountModal } from "../../molecules/DeleteAccountModal/DeleteAccountModal";
 
 const avatar = [
   { label: "Default", value: "defaultAvatar" },
@@ -103,6 +104,7 @@ export const Settings: React.FC = () => {
   const { userData, isLoading, error } = useProfileUser();
   const [successfullySubmitted, setSuccessfullySubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const birthday = useMemo(() => {
     if (userData?.user_birthday) {
@@ -174,6 +176,9 @@ export const Settings: React.FC = () => {
   return (
     <styles.Wrapper>
       <styles.SettingsCard>
+        {isDeleteModalOpen && (
+          <DeleteAccountModal handleClose={() => setIsDeleteModalOpen(false)} />
+        )}
         <VStack $spacing={24}>
           <HStack $spacing={6} $justifyContent="space-between">
             <IconButton icon="leftArrow" onClick={() => navigate(-1)} />
@@ -284,6 +289,17 @@ export const Settings: React.FC = () => {
                     <Icon name="warning" width={22} />
                   </HStack>
                 )}
+                <Button
+                  $variant="red"
+                  $size="lg"
+                  $width="100%"
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    setIsDeleteModalOpen(true);
+                  }}
+                >
+                  Delete Account
+                </Button>
               </VStack>
             </styles.Form>
           </styles.AvatarFormWrapper>

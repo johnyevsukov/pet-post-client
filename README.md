@@ -2,6 +2,8 @@
 
 ### [Sign Up](https://pet-post-client.vercel.app/) &larr;
 
+#### New accounts seeded with followers / following for a quicker testing experience 🐹.
+
 - A full stack social media application for pets. Built with React, TypeScript, CSS, and Express.
 - Utilizes the [PetPost API](https://github.com/johnyevsukov/pet-post-api).
 - Hosted on [Vercel](https://vercel.com/).

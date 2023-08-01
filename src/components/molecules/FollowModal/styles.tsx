@@ -12,6 +12,8 @@ export const Wrapper = styled.div`
   padding: 16px 8px;
 `;
 
+// TO DO: Redo these without need for absolute.
+// TO DO: Should be link.
 export const UserTileButton = styled.button`
   display: inline-flex;
   align-items: flex-start;
