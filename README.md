@@ -1,10 +1,12 @@
 ## PetPost
 
-### [Sign Up](https://pet-post-client.vercel.app/) &larr; (New accounts seeded with followers / following for quicker testing experience)
+### [Sign Up](https://pet-post-client.vercel.app/) &larr;
 
 - A full stack social media application for pets. Built with React, TypeScript, CSS, and Express.
 - Utilizes the [PetPost API](https://github.com/johnyevsukov/pet-post-api).
 - Hosted on [Vercel](https://vercel.com/).
+- Demo account login available for quick testing.
+- ⛔ NOTE ⛔ PetPost has no hard securty or auth checks in place. This is purely a personal project for fun. Do not sign up with or share any sensitive information.
 
 ## Screen Shots
 
