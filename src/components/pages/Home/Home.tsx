@@ -1,12 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
 
 import { PageWrapper } from "../../atoms/PageWrapper/PageWrapper";
 import { PageContentColumn } from "../../atoms/PageContentColumn/PageContentColumn";
 import { TitleTypedSubtext } from "../../organisms/TitleTypedSubtext/TitleTypedSubtext";
 import { LinkButton } from "../../molecules/Button/Button";
+import { Button } from "../../molecules/Button/Button";
 import { VStack } from "../../atoms/VStack/VStack";
+import { Loader } from "../../atoms/Loader/Loader";
+import { FlexBox } from "../../atoms/FlexBox/FlexBox";
+import { Icon } from "../../atoms/Icon/Icon";
 
 export const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDemoLogin = () => {
+    setIsLoading(true);
+    axios
+      .post("https://pet-post.herokuapp.com/api/auth/login", {
+        username: "Demo",
+        password: "123",
+      })
+      .then((res) => {
+        setIsLoading(false);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user_id", res.data.user_id);
+        navigate(`/profile/${res.data.user_id}`);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err.response.data.message);
+        console.warn(err);
+      });
+  };
+
   return (
     <PageWrapper>
       <PageContentColumn $mobileAlignItems="flex-end">
@@ -19,6 +50,16 @@ export const Home: React.FC = () => {
       </PageContentColumn>
       <PageContentColumn $mobileAlignItems="flex-start" $background="offWhite">
         <VStack $spacing={20} $width="auto">
+          <FlexBox>
+            {isLoading ? (
+              <Loader $width={25} />
+            ) : (
+              <Button $variant="textBlue" onClick={handleDemoLogin}>
+                Demo
+              </Button>
+            )}
+            {error && <Icon name="warning" width={26} />}
+          </FlexBox>
           <LinkButton $variant="blue" to="signup">
             Sign up
           </LinkButton>
