@@ -8,7 +8,7 @@ import { useProfileUser } from "../../../hooks/useProfileUser";
 import { useFormik } from "formik";
 
 import { SettingsInput } from "../../organisms/SettingsInput/SettingsInput";
-import { SettingsSelectField } from "../../organisms/SettingsSelectField/SelectField";
+import { SelectField } from "../../organisms/SelectField/SelectField";
 import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
 import { Avatar } from "../../molecules/Avatar/Avatar";
@@ -229,7 +229,7 @@ export const Settings: React.FC = () => {
                   touched={touched.user_birthday}
                   error={errors.user_birthday}
                 />
-                <SettingsSelectField
+                <SelectField
                   id="user_avatar"
                   name="user_avatar"
                   placeholder="Avatar..."
@@ -240,7 +240,7 @@ export const Settings: React.FC = () => {
                   value={avatar.filter((a) => a.value === values.user_avatar)}
                   label="Avatar"
                 />
-                <SettingsSelectField
+                <SelectField
                   id="user_location"
                   name="user_location"
                   placeholder="Location..."
