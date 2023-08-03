@@ -13,6 +13,8 @@ import { Loader } from "../../atoms/Loader/Loader";
 import { FlexBox } from "../../atoms/FlexBox/FlexBox";
 import { Icon } from "../../atoms/Icon/Icon";
 
+import * as styles from "./styles";
+
 export const Home: React.FC = () => {
   const navigate = useNavigate();
   const [error, setError] = useState();
@@ -40,6 +42,16 @@ export const Home: React.FC = () => {
 
   return (
     <PageWrapper>
+      <styles.WebsiteBanner>
+        <styles.TextLink
+          as="a"
+          href="https://www.john.engineering/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          My Site
+        </styles.TextLink>
+      </styles.WebsiteBanner>
       <PageContentColumn $mobileAlignItems="flex-end">
         <TitleTypedSubtext
           title="PetPost"
@@ -68,6 +80,13 @@ export const Home: React.FC = () => {
           </LinkButton>
         </VStack>
       </PageContentColumn>
+      <styles.GithubLink
+        href="https://github.com/johnyevsukov/pet-post-client"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="github" width={55} />
+      </styles.GithubLink>
     </PageWrapper>
   );
 };

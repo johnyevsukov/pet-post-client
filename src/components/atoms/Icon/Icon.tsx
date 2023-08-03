@@ -43,6 +43,7 @@ import { CheckIcon } from "./icons/CheckIcon";
 import { MagnifyingGlassIcon } from "./icons/MagnifyingGlassIcon";
 import { RaccoonIcon } from "./icons/RaccoonIcon";
 import { CryingCatIcon } from "./icons/CryingCatIcon";
+import { GithubIcon } from "./icons/GithubIcon";
 import * as styles from "./styles";
 
 export type IconType =
@@ -83,7 +84,8 @@ export type IconType =
   | "check"
   | "magnifyingGlass"
   | "raccoon"
-  | "cryingCat";
+  | "cryingCat"
+  | "github";
 
 const IconMap = {
   hamster: <HamsterIcon />,
@@ -124,6 +126,7 @@ const IconMap = {
   magnifyingGlass: <MagnifyingGlassIcon />,
   raccoon: <RaccoonIcon />,
   cryingCat: <CryingCatIcon />,
+  github: <GithubIcon />,
 };
 
 interface IconProps {
