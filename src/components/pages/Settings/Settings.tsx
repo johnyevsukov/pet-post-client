@@ -1,3 +1,12 @@
+/**
+ * Settings page.
+ * Renders a card form to update user
+ * account info as well as the option to
+ * delete the user account.
+ * Rendered through the LoggedInLayout
+ * template.
+ */
+
 import React, { useMemo, useState } from "react";
 import { axiosWithAuth } from "../../../utils/axiosAuth";
 import { format } from "date-fns";

@@ -1,3 +1,11 @@
+/**
+ * Home page.
+ * Provides the user options to sign up,
+ * log in, or demo PetPost (via a test account).
+ * Also provides links to john.engineering
+ * and the project source code.
+ */
+
 import React, { useState } from "react";
 import axios from "axios";
 

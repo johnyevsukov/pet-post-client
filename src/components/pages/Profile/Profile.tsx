@@ -1,3 +1,13 @@
+/**
+ * Profile page.
+ * Renders an info card populated with
+ * the current user's info, a card to create
+ * a new post, and a feed of all posts
+ * posted by the current user.
+ * Rendered through the LoggedInLayout
+ * template.
+ */
+
 import React from "react";
 
 import { useUserPermissions } from "../../../hooks/useUserPermissions";

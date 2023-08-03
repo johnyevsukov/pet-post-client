@@ -1,3 +1,12 @@
+/**
+ * Feed page.
+ * Renders a card to create
+ * a new post and a feed of all posts
+ * posted by users that the current
+ * user is following. Rendered through
+ * the LoggedInLayout template.
+ */
+
 import React from "react";
 
 import { useFeedPosts } from "../../../hooks/useFeedPosts";
