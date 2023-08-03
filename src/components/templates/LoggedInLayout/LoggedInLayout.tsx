@@ -1,3 +1,12 @@
+/**
+ * Logged in layout template.
+ * Renders the desktop side navigation,
+ * mobile navigation, and search bar.
+ * Profile, Feed, and Settings pages
+ * are rendered through this template via
+ * react-router-dom Outlet.
+ */
+
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
