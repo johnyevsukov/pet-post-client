@@ -11,11 +11,11 @@ import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
 import { VStack } from "../../atoms/VStack/VStack";
 import { HStack } from "../../atoms/HStack/HStack";
 import { Text } from "../../atoms/Text/Text";
+import { AbsoluteRightWrapper } from "../../atoms/AbsoluteWrapper/AbsoluteRightWrapper";
 
 import { CommentType } from "../../../types/commentType";
 
 import * as styles from "./styles";
-import { AbsoluteRightWrapper } from "../../atoms/AbsoluteWrapper/AbsoluteRightWrapper";
 
 interface CommentCardProps {
   comment: CommentType;
