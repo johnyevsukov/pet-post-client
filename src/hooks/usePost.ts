@@ -37,7 +37,7 @@ export const usePost = (post: PostType) => {
   }, [currentUserId, likes]);
 
   const handleNewComment = useCallback((newComment: CommentType) => {
-    setComments((comments) => [newComment, ...comments]);
+    setComments((comments) => [...comments, newComment]);
   }, []);
 
   const handleDeleteComment = (commentToDelete: CommentType) => {
