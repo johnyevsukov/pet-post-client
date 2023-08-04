@@ -3,7 +3,7 @@
  * Used to render post's comments.
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { timeAgo } from "../../../utils/timeAgo";
 import { useCurrentUserId } from "../../../hooks/useCurrentUserId";
@@ -20,14 +20,37 @@ import * as styles from "./styles";
 interface CommentCardProps {
   comment: CommentType;
   handleDeleteComment: (comment: CommentType) => void;
+  currentCommentMenuId: number | undefined;
+  handleToggleMoreMenu: (commentId: number) => void;
 }
 
 export const CommentCard: React.FC<CommentCardProps> = ({
   comment,
   handleDeleteComment,
+  currentCommentMenuId,
+  handleToggleMoreMenu,
 }) => {
   const [currentUserId] = useCurrentUserId();
-  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
+
+  const moreMenuRef = useRef<HTMLDivElement>(null);
+  const moreMenuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        moreMenuRef.current &&
+        !moreMenuRef.current.contains(e.target as Node) &&
+        moreMenuButtonRef.current &&
+        !moreMenuButtonRef.current.contains(e.target as Node)
+      ) {
+        handleToggleMoreMenu(comment.comment_id);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [moreMenuRef, handleToggleMoreMenu, comment.comment_id]);
 
   return (
     <styles.Card>
@@ -45,7 +68,8 @@ export const CommentCard: React.FC<CommentCardProps> = ({
       {currentUserId === comment.user_id && (
         <AbsoluteRightWrapper $top={8} $right={8}>
           <styles.MoreButton
-            onClick={() => setIsMoreMenuOpen((state) => !state)}
+            ref={moreMenuButtonRef}
+            onClick={() => handleToggleMoreMenu(comment.comment_id)}
           >
             <HStack $spacing={3}>
               <styles.MoreDot />
@@ -55,9 +79,9 @@ export const CommentCard: React.FC<CommentCardProps> = ({
           </styles.MoreButton>
         </AbsoluteRightWrapper>
       )}
-      {isMoreMenuOpen && (
+      {currentCommentMenuId === comment.comment_id && (
         <AbsoluteRightWrapper $top={40} $right={15}>
-          <styles.MoreMenuCard>
+          <styles.MoreMenuCard ref={moreMenuRef}>
             <styles.DeleteButton onClick={() => handleDeleteComment(comment)}>
               Delete
             </styles.DeleteButton>

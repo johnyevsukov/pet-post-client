@@ -4,7 +4,7 @@
  * Profile and Feed pages.
  */
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import { timeAgo } from "../../../utils/timeAgo";
 import { usePost } from "../../../hooks/usePost";
@@ -52,6 +52,21 @@ export const PostCard: React.FC<PostCardProps> = ({
   } = usePost(post);
   const [showComments, setShowComments] = useState(false);
 
+  const [currentCommentMoreMenuId, setCurrentCommentMoreMenuId] = useState<
+    number | undefined
+  >();
+
+  const handleToggleCommentMoreMenu = useCallback(
+    (commentId: number) => {
+      if (currentCommentMoreMenuId === commentId) {
+        setCurrentCommentMoreMenuId(undefined);
+      } else {
+        setCurrentCommentMoreMenuId(commentId);
+      }
+    },
+    [currentCommentMoreMenuId]
+  );
+
   const renderComments = () => {
     if (!isLoading && error) {
       return (
@@ -89,6 +104,8 @@ export const PostCard: React.FC<PostCardProps> = ({
                 <CommentCard
                   comment={comment}
                   handleDeleteComment={handleDeleteComment}
+                  currentCommentMenuId={currentCommentMoreMenuId}
+                  handleToggleMoreMenu={handleToggleCommentMoreMenu}
                 />
               </>
             );

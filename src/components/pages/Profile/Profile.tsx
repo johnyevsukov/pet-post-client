@@ -26,11 +26,11 @@ import * as styles from "./styles";
 
 export const Profile: React.FC = () => {
   const [hasEditPermissions] = useUserPermissions();
+  const { posts, isLoading, error, handleNewPost, handleDeletePost } =
+    useProfilePosts();
   const [currentPostMoreMenuId, setCurrentPostMoreMenuId] = useState<
     number | undefined
   >();
-  const { posts, isLoading, error, handleNewPost, handleDeletePost } =
-    useProfilePosts();
 
   const handleTogglePostMoreMenu = useCallback(
     (postId: number) => {
