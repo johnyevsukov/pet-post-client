@@ -20,6 +20,7 @@ export const UserTileButton = styled.button`
   position: relative;
   height: 150px;
   min-height: 150px;
+  max-width: 150px;
   border-radius: 15px;
   padding: 8px;
   background: ${colors.pureWhite};
