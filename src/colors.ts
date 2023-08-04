@@ -1,8 +1,8 @@
 export type colorType =
-  | "purple1"
-  | "purple2"
-  | "purple3"
-  | "purple4"
+  | "blue1"
+  | "blue2"
+  | "blue3"
+  | "blue4"
   | "green1"
   | "green2"
   | "green3"
@@ -10,26 +10,17 @@ export type colorType =
   | "red2"
   | "red3"
   | "red4"
-  | "yellow1"
   | "gray1"
   | "gray2"
-  | "textBlack"
   | "offWhite"
   | "pureWhite"
-  | "blue1"
-  | "blue2"
-  | "blue3"
-  | "blue4"
-  | "orange1"
-  | "orange2"
-  | "orange3"
-  | "orange4";
+  | "textBlack";
 
 export const colors = {
-  purple1: "#ebe1fc",
-  purple2: "#d8c9f0",
-  purple3: "#C3B1E1",
-  purple4: "#a887de",
+  blue1: "#c2e6ff",
+  blue2: "#7ac5fa",
+  blue3: "#36acff",
+  blue4: "#0397ff",
   green1: "#a6ffbe",
   green2: "#7aff9e",
   green3: "#00f325",
@@ -38,18 +29,9 @@ export const colors = {
   red2: "#ffaaa6",
   red3: "#ff7a7a",
   red4: "#fc4e4e",
-  orange1: "#faf3e6",
-  orange2: "#ffd7a6",
-  orange3: "#ffc17a",
-  orange4: "#fc4e4e",
-  yellow1: "#f8ff7a",
   gray1: "#a3a3a3",
   gray2: "#585858",
-  textBlack: "#333333",
   offWhite: "#F5F5F5",
   pureWhite: "#ffffff",
-  blue1: "#c2e6ff",
-  blue2: "#7ac5fa",
-  blue3: "#36acff",
-  blue4: "#0397ff",
+  textBlack: "#333333",
 };
