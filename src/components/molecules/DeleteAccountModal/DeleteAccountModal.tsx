@@ -1,3 +1,13 @@
+/**
+ * Delete account modal.
+ * Used as confirmation step
+ * to delete the user's account
+ * when the "Delete Account" button
+ * is selected from the Settings page.
+ * Rendered within the system
+ * Modal component.
+ */
+
 import React from "react";
 import { axiosWithAuth } from "../../../utils/axiosAuth";
 

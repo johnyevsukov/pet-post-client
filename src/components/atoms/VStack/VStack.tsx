@@ -1,3 +1,11 @@
+/**
+ * VStack component.
+ * Used to space children
+ * vertically with a given
+ * px space between them via
+ * a $spacing prop.
+ */
+
 import styled from "styled-components";
 
 export const VStack = styled.div<{

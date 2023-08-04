@@ -1,3 +1,12 @@
+/**
+ * User info card component.
+ * Renders user info for the current
+ * user profile page. Allows user to follow/unfollow
+ * a user as well as adjust their account settings (when
+ * on their own profile page). Used solely on the
+ * Profile page.
+ */
+
 import React, { useMemo, useState } from "react";
 
 import { format } from "date-fns";

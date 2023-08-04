@@ -1,3 +1,9 @@
+/**
+ * New comment card component.
+ * Renders card to add new comment
+ * to a post.
+ */
+
 import React, { useState } from "react";
 
 import { axiosWithAuth } from "../../../utils/axiosAuth";

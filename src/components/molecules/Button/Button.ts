@@ -1,5 +1,7 @@
 /**
  * System button component.
+ * Styled via $size and $variant
+ * props.
  */
 
 import styled, { css } from "styled-components";

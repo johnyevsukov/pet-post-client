@@ -1,3 +1,13 @@
+/**
+ * Search bar component.
+ * Renders fixed positioned blue bar containing a
+ * search input used for searching for other
+ * PetPost users. Renders hamburger button below
+ * desktop breakpoint(768px) to toggle open/close
+ * the MobileNav. Search input Hidden
+ * when MobileNav is open.
+ */
+
 import React, { useState } from "react";
 
 import { axiosWithAuth } from "../../../utils/axiosAuth";

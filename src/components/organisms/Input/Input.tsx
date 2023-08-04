@@ -1,3 +1,9 @@
+/**
+ * System input component.
+ * Used as text input in Signup
+ * and Login page forms.
+ */
+
 import React from "react";
 
 import { Text } from "../../atoms/Text/Text";

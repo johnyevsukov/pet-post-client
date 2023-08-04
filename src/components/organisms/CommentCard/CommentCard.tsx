@@ -1,3 +1,8 @@
+/**
+ * Comment card component.
+ * Used to render post's comments.
+ */
+
 import React, { useState } from "react";
 
 import { timeAgo } from "../../../utils/timeAgo";

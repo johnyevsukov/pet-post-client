@@ -1,3 +1,11 @@
+/**
+ * Mobile nav component.
+ * Displayed below desktop
+ * breakpoint(768px). Hidden on
+ * Desktop. Opened / closed via hamburger
+ * button in the SearchBar component.
+ */
+
 import React from "react";
 
 import { useNavigate } from "react-router-dom";

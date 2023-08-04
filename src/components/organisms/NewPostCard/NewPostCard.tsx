@@ -1,3 +1,9 @@
+/**
+ * New post card component.
+ * Renders card to create a new post.
+ * Used in the Profile and Feed pages.
+ */
+
 import React, { useState } from "react";
 
 import { axiosWithAuth } from "../../../utils/axiosAuth";

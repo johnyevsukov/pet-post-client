@@ -1,3 +1,9 @@
+/**
+ * Page card form component.
+ * Renders the form used in the
+ * Signup and Login pages.
+ */
+
 import React from "react";
 
 import { Loader } from "../../atoms/Loader/Loader";

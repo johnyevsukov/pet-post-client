@@ -1,5 +1,8 @@
 /**
  * System text component.
+ * Renders text within a p tag,
+ * which can be styled via $size,
+ * $weight, $color, and $align props.
  */
 
 import styled, { css } from "styled-components";

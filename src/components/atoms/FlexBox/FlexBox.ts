@@ -1,3 +1,9 @@
+/**
+ * Flex box component.
+ * Flexed div aligned and
+ * justified center.
+ */
+
 import styled from "styled-components";
 
 export const FlexBox = styled.div<{ $padding?: number }>`

@@ -1,3 +1,11 @@
+/**
+ * HStack component.
+ * Used to space children
+ * horizontally with a given
+ * px space between them via
+ * a $spacing prop.
+ */
+
 import styled from "styled-components";
 
 export const HStack = styled.div<{

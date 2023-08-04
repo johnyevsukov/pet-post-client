@@ -1,3 +1,10 @@
+/**
+ * Side nav component.
+ * Displayed on and above desktop
+ * breakpoint(768px). Hidden on
+ * Mobile.
+ */
+
 import React from "react";
 
 import { useNavigate } from "react-router-dom";

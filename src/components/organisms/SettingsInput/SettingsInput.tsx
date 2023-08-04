@@ -1,3 +1,9 @@
+/**
+ * Settings input component.
+ * Renders input used
+ * in the Settings page.
+ */
+
 import React from "react";
 
 import { VStack } from "../../atoms/VStack/VStack";

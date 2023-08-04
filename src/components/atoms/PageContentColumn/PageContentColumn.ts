@@ -1,3 +1,10 @@
+/**
+ * Page content column.
+ * Used for left or right
+ * page content on the Home,
+ * Signup, and Login pages.
+ */
+
 import styled from "styled-components";
 import { onDesktop } from "../../../utils/onDesktop";
 import { colorType, colors } from "../../../colors";

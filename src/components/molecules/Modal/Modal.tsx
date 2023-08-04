@@ -1,3 +1,10 @@
+/**
+ * System modal component.
+ * Used to display children
+ * within a screen overlay modal.
+ * Darkens page content when opened.
+ */
+
 import React, { useRef, useEffect } from "react";
 
 import { VStack } from "../../atoms/VStack/VStack";

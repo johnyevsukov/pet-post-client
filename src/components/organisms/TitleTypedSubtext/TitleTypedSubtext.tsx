@@ -1,3 +1,10 @@
+/**
+ * Title typed subtext component.
+ * Renders h1 page title and animated
+ * subtext (typing animation). Used in
+ * the Home, Signup, and Login pages.
+ */
+
 import React from "react";
 import { TypeAnimation } from "react-type-animation";
 

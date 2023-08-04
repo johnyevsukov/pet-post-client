@@ -1,3 +1,11 @@
+/**
+ * Follow modal.
+ * Used to display the user's
+ * follower/following users.
+ * Rendered within the system
+ * Modal component.
+ */
+
 import React from "react";
 
 import { useNavigate } from "react-router-dom";

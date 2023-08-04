@@ -1,3 +1,9 @@
+/**
+ * Post card component.
+ * Renders user posts in the
+ * Profile and Feed pages.
+ */
+
 import React, { useState } from "react";
 
 import { timeAgo } from "../../../utils/timeAgo";

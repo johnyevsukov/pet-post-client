@@ -1,3 +1,9 @@
+/**
+ * Select field component.
+ * Renders select input used
+ * in the Settings page.
+ */
+
 import React from "react";
 
 import Select from "react-select";

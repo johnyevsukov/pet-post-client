@@ -1,3 +1,10 @@
+/**
+ * Absolute right wrapper.
+ * Used to position elements
+ * absolutely within a relative parent
+ * using top and right positioning.
+ */
+
 import styled from "styled-components";
 
 export const AbsoluteRightWrapper = styled.div<{

@@ -1,3 +1,11 @@
+/**
+ * Protected route component.
+ * Redirects users to the Login
+ * page if no token is available
+ * in local storage. Otherwise renders
+ * children via react-router-dom Outlet.
+ */
+
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
