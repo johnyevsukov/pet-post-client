@@ -18,7 +18,7 @@ export const CloseIcon: React.FC = () => {
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-miterlimit="10"
-          stroke-width="2"
+          stroke-width="3"
         />
         <line
           x1="54.5"
@@ -30,7 +30,7 @@ export const CloseIcon: React.FC = () => {
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-miterlimit="10"
-          stroke-width="2"
+          stroke-width="3"
         />
       </g>
     </svg>
