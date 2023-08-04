@@ -8,7 +8,7 @@
  * template.
  */
 
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 import { useUserPermissions } from "../../../hooks/useUserPermissions";
 import { useProfilePosts } from "../../../hooks/useProfilePosts";
@@ -26,8 +26,22 @@ import * as styles from "./styles";
 
 export const Profile: React.FC = () => {
   const [hasEditPermissions] = useUserPermissions();
+  const [currentPostMoreMenuId, setCurrentPostMoreMenuId] = useState<
+    number | undefined
+  >();
   const { posts, isLoading, error, handleNewPost, handleDeletePost } =
     useProfilePosts();
+
+  const handleTogglePostMoreMenu = useCallback(
+    (postId: number) => {
+      if (currentPostMoreMenuId === postId) {
+        setCurrentPostMoreMenuId(undefined);
+      } else {
+        setCurrentPostMoreMenuId(postId);
+      }
+    },
+    [currentPostMoreMenuId]
+  );
 
   const renderPosts = () => {
     if (!isLoading && error) {
@@ -64,6 +78,8 @@ export const Profile: React.FC = () => {
                 key={post.post_id}
                 post={post}
                 handleDeletePost={handleDeletePost}
+                currentMoreMenuId={currentPostMoreMenuId}
+                handleToggleMoreMenu={handleTogglePostMoreMenu}
               />
             );
           })}

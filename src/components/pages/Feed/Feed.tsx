@@ -7,7 +7,7 @@
  * the LoggedInLayout template.
  */
 
-import React from "react";
+import React, { useState, useCallback } from "react";
 
 import { useFeedPosts } from "../../../hooks/useFeedPosts";
 
@@ -24,6 +24,20 @@ import * as styles from "./styles";
 export const Feed: React.FC = () => {
   const { posts, isLoading, error, handleNewPost, handleDeletePost } =
     useFeedPosts();
+  const [currentPostMoreMenuId, setCurrentPostMoreMenuId] = useState<
+    number | undefined
+  >();
+
+  const handleTogglePostMoreMenu = useCallback(
+    (postId: number) => {
+      if (currentPostMoreMenuId === postId) {
+        setCurrentPostMoreMenuId(undefined);
+      } else {
+        setCurrentPostMoreMenuId(postId);
+      }
+    },
+    [currentPostMoreMenuId]
+  );
 
   const renderPosts = () => {
     if (!isLoading && error) {
@@ -60,6 +74,8 @@ export const Feed: React.FC = () => {
                 key={post.post_id}
                 post={post}
                 handleDeletePost={handleDeletePost}
+                currentMoreMenuId={currentPostMoreMenuId}
+                handleToggleMoreMenu={handleTogglePostMoreMenu}
               />
             );
           })}

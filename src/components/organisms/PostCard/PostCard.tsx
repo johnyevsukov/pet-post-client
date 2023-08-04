@@ -4,7 +4,7 @@
  * Profile and Feed pages.
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { timeAgo } from "../../../utils/timeAgo";
 import { usePost } from "../../../hooks/usePost";
@@ -28,11 +28,15 @@ import * as styles from "./styles";
 interface PostCardProps {
   post: PostType;
   handleDeletePost: (post: PostType) => void;
+  currentMoreMenuId: number | undefined;
+  handleToggleMoreMenu: (postId: number) => void;
 }
 
 export const PostCard: React.FC<PostCardProps> = ({
   post,
   handleDeletePost,
+  currentMoreMenuId,
+  handleToggleMoreMenu,
 }) => {
   const {
     userData,
@@ -47,7 +51,6 @@ export const PostCard: React.FC<PostCardProps> = ({
     handleDeleteComment,
   } = usePost(post);
   const [showComments, setShowComments] = useState(false);
-  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
 
   const renderComments = () => {
     if (!isLoading && error) {
@@ -103,6 +106,26 @@ export const PostCard: React.FC<PostCardProps> = ({
     }
   };
 
+  const moreMenuRef = useRef<HTMLDivElement>(null);
+  const moreMenuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        moreMenuRef.current &&
+        !moreMenuRef.current.contains(e.target as Node) &&
+        moreMenuButtonRef.current &&
+        !moreMenuButtonRef.current.contains(e.target as Node)
+      ) {
+        handleToggleMoreMenu(post.post_id);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [moreMenuRef, handleToggleMoreMenu, post.post_id]);
+
   return (
     <styles.Card>
       <HStack $spacing={8} $alignItems="flex-start">
@@ -143,7 +166,8 @@ export const PostCard: React.FC<PostCardProps> = ({
       {hasEditPermissions && (
         <AbsoluteRightWrapper $top={8} $right={12}>
           <styles.MoreButton
-            onClick={() => setIsMoreMenuOpen((state) => !state)}
+            ref={moreMenuButtonRef}
+            onClick={() => handleToggleMoreMenu(post.post_id)}
           >
             <HStack $spacing={3}>
               <styles.MoreDot />
@@ -153,9 +177,9 @@ export const PostCard: React.FC<PostCardProps> = ({
           </styles.MoreButton>
         </AbsoluteRightWrapper>
       )}
-      {isMoreMenuOpen && (
+      {currentMoreMenuId === post.post_id && (
         <AbsoluteRightWrapper $top={38} $right={15}>
-          <styles.MoreMenuCard>
+          <styles.MoreMenuCard ref={moreMenuRef}>
             <styles.DeleteButton onClick={() => handleDeletePost(post)}>
               Delete
             </styles.DeleteButton>
