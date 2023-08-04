@@ -24,9 +24,6 @@ export const TextLink = styled(Link)`
 `;
 
 export const MoreMenuCard = styled.div`
-  position: absolute;
-  top: 40px;
-  right: 15px;
   padding: 8px;
   background: ${colors.pureWhite};
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
