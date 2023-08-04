@@ -1,4 +1,4 @@
-## PetPost
+## PetPost (Client)
 
 ### [Sign Up](https://pet-post-client.vercel.app/)
 
