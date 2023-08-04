@@ -6,13 +6,10 @@
  */
 
 import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosAuth";
 import { PostType } from "../types/postType";
 
 export const useFeedPosts = () => {
-  const { id: profileId } = useParams();
-
   const [posts, setPosts] = useState<PostType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
