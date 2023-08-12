@@ -14,6 +14,8 @@ export const PageWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  /* vh fallback for older browser versions */
+  min-height: 100vh;
   min-height: 100svh;
   background: ${colors.blue2};
 

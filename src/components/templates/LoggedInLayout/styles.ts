@@ -5,6 +5,8 @@ import { onDesktop } from "../../../utils/onDesktop";
 export const LayoutWrapper = styled.div`
   display: flex;
   width: 100%;
+  /* vh fallback for older browser versions */
+  min-height: 100vh;
   height: 100svh;
   overflow: hidden;
   background: ${colors.offWhite};
