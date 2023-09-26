@@ -17,6 +17,7 @@
 <img width="1440" alt="Screenshot 2023-08-03 at 11 35 20 PM" src="https://github.com/johnyevsukov/pet-post-client/assets/10480867/cf3dd385-66a0-487b-b190-1d3342e9261f">
 <img width="1437" alt="Screen Shot 2023-07-30 at 1 02 54 AM" src="https://github.com/johnyevsukov/pet-post-client/assets/10480867/64371ede-fb0f-4574-acfe-f3c50a98305f">
 <img width="1439" alt="Screenshot 2023-08-03 at 11 24 01 PM" src="https://github.com/johnyevsukov/pet-post-client/assets/10480867/df0f30d7-d537-4399-b412-8beb94a06d88">
+![Screenshot 2023-09-26 at 7 47 25 PM 2](https://github.com/johnyevsukov/pet-post-client/assets/10480867/20602d5b-a53f-4d58-ad4d-d1b0a552bc7e)
 
 ## Installation and Setup Instructions
 
