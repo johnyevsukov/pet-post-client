@@ -95,6 +95,15 @@ export const Home: React.FC = () => {
       >
         <Icon name="github" width={55} />
       </styles.GithubLink>
+      <styles.FigmaLink
+        href="https://www.figma.com/file/S1QPEz3rVQNjMLCspnZqYz/PetPost?type=design&node-id=0-1&mode=design&t=yD9XkKgQq5gVULbn-0"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <styles.FigmaIconWrapper>
+          <Icon name="figma" width={43} />
+        </styles.FigmaIconWrapper>
+      </styles.FigmaLink>
     </PageWrapper>
   );
 };

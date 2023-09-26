@@ -44,3 +44,11 @@ export const GithubLink = styled.a`
     box-shadow: rgba(0, 0, 0, 0.5) 1.95px 1.95px 2.6px;
   }
 `;
+
+export const FigmaIconWrapper = styled.div`
+  padding: 6px;
+`;
+
+export const FigmaLink = styled(GithubLink)`
+  right: 80px;
+`;
