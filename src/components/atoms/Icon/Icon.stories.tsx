@@ -266,3 +266,10 @@ export const Github: Story = {
     width: 200,
   },
 };
+
+export const Figma: Story = {
+  args: {
+    name: "figma",
+    width: 200,
+  },
+};
